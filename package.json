@@ -1,0 +1,57 @@
+{
+  "name": "annotation",
+  "displayName": "Annotation",
+  "description": "Display Annotation on the Code",
+  "version": "0.0.1",
+  "publisher": "ryu1kn",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "icon": "images/annotation.png",
+  "bugs": {
+    "url": "https://github.com/ryu1kn/vscode-annotation/issues"
+  },
+  "homepage": "https://github.com/ryu1kn/vscode-annotation/blob/master/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ryu1kn/vscode-annotation.git"
+  },
+  "engines": {
+    "vscode": "^1.0.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "vscode",
+    "git",
+    "annotate",
+    "annotation",
+    "blame"
+  ],
+  "activationEvents": [
+    "onCommand:annotation.annotate"
+  ],
+  "main": "./extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "annotation.annotate",
+        "title": "Annotation: Put Annotation along with the code"
+      }
+    ]
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "lint": "eslint .",
+    "test": "mocha test --recursive --ui tdd",
+    "test-mode": "mocha test --recursive --ui tdd --watch"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^2.12.0",
+    "eslint-config-xo": "^0.15.0",
+    "mocha": "^2.5.3",
+    "sinon": "^1.17.4",
+    "sinon-chai": "^2.8.0",
+    "vscode": "^0.11.0"
+  }
+}
