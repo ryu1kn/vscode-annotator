@@ -1,6 +1,7 @@
 .vscode/**
 typings/**
 test/**
+coverage/**
 images/animations/**
 .gitignore
 .editorconfig
