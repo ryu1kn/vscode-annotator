@@ -32,6 +32,17 @@
   ],
   "main": "./extension",
   "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Annotation configurations",
+      "properties": {
+        "annotation.annotationColumnWidth": {
+          "description": "Width of annotation column",
+          "type": "string",
+          "default": "15em"
+        }
+      }
+    },
     "commands": [
       {
         "command": "annotation.annotate",
