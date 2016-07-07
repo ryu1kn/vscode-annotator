@@ -5,6 +5,10 @@ chai.use(require('sinon-chai'));
 global.expect = chai.expect;
 global.sinon = require('sinon');
 
+global.throwError = () => {
+    throw new Error('Should not have been called');
+};
+
 global.stubWithArgs = function () {
     'use strict';
 

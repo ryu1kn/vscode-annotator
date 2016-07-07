@@ -1,9 +1,9 @@
 
-const App = require('../../lib/app');
+// const App = require('../../lib/app');
 
-suite('App', () => {
+// suite('App', () => {
 
-    suite('#annotate', () => {
-    });
+//     suite('#annotate', () => {
+//     });
 
-});
+// });

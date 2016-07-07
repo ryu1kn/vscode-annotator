@@ -4,6 +4,7 @@ globals:
   stubWithArgs: true
   suite: true
   test: true
+  throwError: true
 rules:
   max-len: off
   no-unused-expressions: off
