@@ -58,4 +58,32 @@ suite('GitAnnotationContentBuilder', () => {
             /* eslint-enable indent */
         ].join(''));
     });
+
+    test('it escapes "<" character in the line contents', () => {
+        const annotationCssBuilder = {build: () => 'CSS'};
+        const builder = new GitAnnotationContentBuilder({annotationCssBuilder});
+        const lines = [{
+            filename: 'FILENAME',
+            commitHash: 'COMMIT_HASH',
+            authorTime: 1465725065,
+            authorName: 'AUTHOR_NAME',
+            lineContents: 'TEXT < > < TEXT'
+        }];
+
+        expect(builder.build(lines, 'REPOSITORY_ROOT')).to.eql([
+            /* eslint-disable indent */
+            '<style>CSS</style>',
+            '<body>',
+                '<div class="line">',
+                    '<div class="annotation truncate">',
+                        '<a href="command:annotation.annotateAt?%5B%22COMMIT_HASH%22,%22FILENAME%22,%22REPOSITORY_ROOT%22%5D" class="commit-link">COMMIT</a>',
+                        '&nbsp;',
+                        '<span>2016-06-12 AUTHOR_NAME</span>',
+                    '</div>',
+                    '<pre>TEXT &lt; > &lt; TEXT</pre>',
+                '</div>',
+            '</body>'
+            /* eslint-enable indent */
+        ].join(''));
+    });
 });
