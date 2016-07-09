@@ -8,9 +8,9 @@ suite('GitAnnotationContentBuilder', () => {
         const builder = new GitAnnotationContentBuilder({annotationCssBuilder});
         const lines = [{
             filename: 'FILENAME',
-            commit: 'COMMIT_HASH',
-            'author-time': 1465725065,
-            author: 'AUTHOR_NAME',
+            commitHash: 'COMMIT_HASH',
+            authorTime: 1465725065,
+            authorName: 'AUTHOR_NAME',
             lineContents: 'LINE_CONTENTS'
         }];
 
@@ -36,9 +36,9 @@ suite('GitAnnotationContentBuilder', () => {
         const builder = new GitAnnotationContentBuilder({annotationCssBuilder});
         const lines = [{
             filename: 'FILENAME',
-            commit: '0000000000000000000000000000000000000000',
-            'author-time': 1465725065,
-            author: 'AUTHOR_NAME',
+            commitHash: '0000000000000000000000000000000000000000',
+            authorTime: 1465725065,
+            authorName: 'AUTHOR_NAME',
             lineContents: 'LINE_CONTENTS'
         }];
 
