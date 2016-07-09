@@ -5,7 +5,7 @@ suite('GitAnnotationLoader', () => {
 
     test('it loads git annotation for all lines in the given file', () => {
         const gitCommand = {
-            blame: stubWithArgs(['PATH', 'COMMIT'], 'ANNOTATION_STRING'),
+            blame: stubWithArgs(['PATH', 'HEAD', 'ROOT_PATH'], Promise.resolve('ANNOTATION_STRING')),
             getRepositoryRoot: stubWithArgs(['PATH'], Promise.resolve('ROOT_PATH\n'))
         };
         const gitBlameOutputParser = {
@@ -13,11 +13,26 @@ suite('GitAnnotationLoader', () => {
         };
         const gitAnnotationLoader = new GitAnnotationLoader({gitCommand, gitBlameOutputParser});
 
-        return gitAnnotationLoader.load('PATH', 'COMMIT').then(result => {
+        return gitAnnotationLoader.loadHead('PATH').then(result => {
             expect(result).to.eql({
                 lines: 'ANNOTATION_LIST',
                 repositoryRootPath: 'ROOT_PATH'
             });
+        });
+    });
+
+    test('it loads git annotation at a specific commit', () => {
+        const gitCommand = {
+            blame: stubWithArgs(['PATH', 'COMMIT', 'ROOT_PATH'], Promise.resolve('ANNOTATION_STRING')),
+            getRepositoryRoot: stubWithArgs(['PATH'], Promise.resolve('ROOT_PATH\n'))
+        };
+        const gitBlameOutputParser = {
+            parse: stubWithArgs(['ANNOTATION_STRING'], 'ANNOTATION_LIST')
+        };
+        const gitAnnotationLoader = new GitAnnotationLoader({gitCommand, gitBlameOutputParser});
+
+        return gitAnnotationLoader.loadAt('COMMIT', 'PATH', 'ROOT_PATH').then(result => {
+            expect(result).to.eql('ANNOTATION_LIST');
         });
     });
 
@@ -29,7 +44,7 @@ suite('GitAnnotationLoader', () => {
         const gitBlameOutputParser = {parse: sinon.spy()};
         const gitAnnotationLoader = new GitAnnotationLoader({gitCommand, gitBlameOutputParser});
 
-        return gitAnnotationLoader.load('PATH', 'COMMIT').then(
+        return gitAnnotationLoader.loadAt('PATH').then(
             throwError,
             e => {
                 expect(e).to.be.an('error');

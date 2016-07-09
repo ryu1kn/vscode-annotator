@@ -20,7 +20,7 @@ suite('GitAnnotationContentBuilder', () => {
             '<body>',
                 '<div class="line">',
                     '<div class="annotation truncate">',
-                        '<a href="command:annotation.annotateAt?%5B%22REPOSITORY_ROOT/FILENAME%22,%22COMMIT_HASH%22%5D" class="commit-link">COMMIT</a>',
+                        '<a href="command:annotation.annotateAt?%5B%22COMMIT_HASH%22,%22FILENAME%22,%22REPOSITORY_ROOT%22%5D" class="commit-link">COMMIT</a>',
                         '&nbsp;',
                         '<span>2016-06-12 AUTHOR_NAME</span>',
                     '</div>',
