@@ -19,3 +19,11 @@ global.stubWithArgs = function () {
     }
     return stub;
 };
+
+global.stubReturns = function () {
+    const args = Array.prototype.slice.call(arguments);
+    return args.reduce((stub, arg, index) => {
+        stub.onCall(index).returns(arg);
+        return stub;
+    }, sinon.stub());
+};

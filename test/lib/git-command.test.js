@@ -9,10 +9,10 @@ suite('GitCommand', () => {
             const shellCommandRunner = {run: sinon.stub().returns(Promise.resolve('BLAME'))};
             const gitCommand = new GitCommand({shellCommandRunner});
 
-            return gitCommand.blame('/PATH/TO/FILE', 'COMMIT', 'ROOT_PATH').then(result => {
+            return gitCommand.blame('/PATH/TO/FILE', 'ROOT_PATH').then(result => {
                 expect(result).to.eql('BLAME');
                 expect(shellCommandRunner.run).to.have.been.calledWith(
-                    'git', ['blame', '--line-porcelain', 'COMMIT', '--', '/PATH/TO/FILE'], {cwd: 'ROOT_PATH'}
+                    'git', ['blame', '--line-porcelain', '--', '/PATH/TO/FILE'], {cwd: 'ROOT_PATH'}
                 );
             });
         });
@@ -26,6 +26,18 @@ suite('GitCommand', () => {
             gitCommand.getRepositoryRoot('/PATH/TO/FILE');
             expect(shellCommandRunner.run).to.have.been.calledWith(
                 'git', ['rev-parse', '--show-toplevel'], {cwd: '/PATH/TO'}
+            );
+        });
+    });
+
+    suite('#show', () => {
+
+        test('it shows the contents of a specified file of a specified commit', () => {
+            const shellCommandRunner = {run: sinon.spy()};
+            const gitCommand = new GitCommand({shellCommandRunner});
+            gitCommand.show('COMMIT', '/PATH/TO/FILE', 'ROOT_PATH');
+            expect(shellCommandRunner.run).to.have.been.calledWith(
+                'git', ['show', 'COMMIT:/PATH/TO/FILE'], {cwd: 'ROOT_PATH'}
             );
         });
     });

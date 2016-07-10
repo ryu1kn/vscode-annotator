@@ -41,34 +41,48 @@ suite('App', () => {
         });
     });
 
-    suite('#annotateAt', () => {
+    suite('#takeDiff', () => {
 
-        test("it displays a given file's annotation the given commit as HTML", () => {
+        test('it displays a diff of 2 files', () => {
             const logger = getLogger();
             const vscode = {
                 Uri: {
-                    parse: sinon.stub().returns('URI')
+                    parse: stubReturns('URI_1', 'URI_2')
                 },
                 commands: {
                     executeCommand: sinon.stub().returns(Promise.resolve())
                 }
             };
-            const annotationData = {set: sinon.spy()};
-            const gitAnnotationLoader = {loadAt: sinon.stub().returns(Promise.resolve('BLAME'))};
-            const app = new App({annotationData, gitAnnotationLoader, vscode, logger});
-            return app.annotateAt('COMMIT', 'PATH', 'REPOSITORY_ROOT').then(() => {
-                expect(gitAnnotationLoader.loadAt).to.have.been.calledWith('COMMIT', 'PATH', 'REPOSITORY_ROOT');
-                expect(annotationData.set).to.have.been.calledWith('BLAME');
-                expect(vscode.commands.executeCommand).to.have.been.calledWith('vscode.previewHtml', 'URI');
+            const app = new App({vscode, logger});
+            const lineBlame = {
+                commitHash: 'COMMIT',
+                filename: 'FILENAME',
+                previousCommitHash: 'PREVIOUS_COMMIT',
+                previousFilename: 'PREVIOUS_FILENAME'
+            };
+            return app.takeDiff(lineBlame, 'REPOSITORY_ROOT').then(() => {
+                expect(vscode.commands.executeCommand).to.have.been.calledWith('vscode.diff', 'URI_1', 'URI_2');
+                expect(vscode.Uri.parse.args[0]).to.eql(['annotation:/file/PREVIOUS_FILENAME?commit=PREVIOUS_COMMIT&repositoryRoot=REPOSITORY_ROOT']);
+                expect(vscode.Uri.parse.args[1]).to.eql(['annotation:/file/FILENAME?commit=COMMIT&repositoryRoot=REPOSITORY_ROOT']);
             });
         });
 
         test('it logs an error', () => {
-            const gitAnnotationLoader = {loadAt: sinon.stub().throws(new Error('LOAD_ERROR'))};
+            const vscode = {
+                Uri: {
+                    parse: sinon.stub().throws(new Error('PARSE_ERROR'))
+                }
+            };
             const logger = {error: sinon.spy()};
-            const app = new App({gitAnnotationLoader, logger});
-            return app.annotateAt('PATH', 'COMMIT').then(() => {
-                expect(logger.error.args[0][0]).to.have.string('Error: LOAD_ERROR');
+            const app = new App({vscode, logger});
+            const lineBlame = {
+                commitHash: 'COMMIT',
+                filename: 'FILENAME',
+                previousCommitHash: 'PREVIOUS_COMMIT',
+                previousFilename: 'PREVIOUS_FILENAME'
+            };
+            return app.takeDiff(lineBlame, 'REPOSITORY_ROOT').then(() => {
+                expect(logger.error.args[0][0]).to.have.string('Error: PARSE_ERROR');
             });
         });
     });

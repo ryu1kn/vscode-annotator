@@ -6,5 +6,6 @@ images/animations/**
 .gitignore
 .editorconfig
 .eslintrc.yaml
+.eslintignore
 jsconfig.json
 vsc-extension-quickstart.md
