@@ -5,14 +5,14 @@ suite('GitAnnotationContentProvider', () => {
 
     test('it retrieves annotation data and compose annotation document', () => {
         const annotationData = {get: () => 'ANNOTATION_DATA_BY_LINES'};
-        const gitAnnotationContentBuilder = {
+        const gitAnnotationDocumentBuilder = {
             build: stubWithArgs(
                 ['ANNOTATION_DATA_BY_LINES', 'REPOSITORY_ROOT'],
                 Promise.resolve('ANNOTATION_DOCUMENT')
             )
         };
         const contentProvider = new GitAnnotationContentProvider({
-            annotationData, gitAnnotationContentBuilder
+            annotationData, gitAnnotationDocumentBuilder
         });
         const uri = {
             path: '/annotation',
