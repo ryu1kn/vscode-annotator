@@ -56,7 +56,7 @@ suite('App', () => {
                 previousFilename: 'PREVIOUS_FILENAME'
             };
             return app.takeDiff(lineBlame, 'REPOSITORY_ROOT').then(() => {
-                expect(commands.executeCommand).to.have.been.calledWith('vscode.diff', 'URI_1', 'URI_2');
+                expect(commands.executeCommand).to.have.been.calledWith('vscode.diff', 'URI_1', 'URI_2', 'FILENAME@COMMIT');
                 expect(Uri.parse.args[0]).to.eql(['annotation:/file/PREVIOUS_FILENAME?commit=PREVIOUS_COMMIT&repositoryRoot=REPOSITORY_ROOT']);
                 expect(Uri.parse.args[1]).to.eql(['annotation:/file/FILENAME?commit=COMMIT&repositoryRoot=REPOSITORY_ROOT']);
             });
