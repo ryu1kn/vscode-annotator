@@ -4,8 +4,8 @@ const GitAnnotationDocumentBuilder = require('../../lib/git-annotation-document-
 suite('GitAnnotationDocumentBuilder', () => {
 
     test('it composes annotation HTML document from given annotation data', () => {
-        const annotationCssBuilder = {build: () => 'CSS'};
-        const builder = new GitAnnotationDocumentBuilder({annotationCssBuilder});
+        const annotationStyleBuilder = {build: () => 'CSS'};
+        const builder = new GitAnnotationDocumentBuilder({annotationStyleBuilder});
         const lines = [{
             filename: 'FILENAME',
             commitHash: 'COMMIT_HASH',
@@ -32,8 +32,8 @@ suite('GitAnnotationDocumentBuilder', () => {
     });
 
     test('it does not give a link on a commit hash if the line is not yet committed', () => {
-        const annotationCssBuilder = {build: () => 'CSS'};
-        const builder = new GitAnnotationDocumentBuilder({annotationCssBuilder});
+        const annotationStyleBuilder = {build: () => 'CSS'};
+        const builder = new GitAnnotationDocumentBuilder({annotationStyleBuilder});
         const lines = [{
             filename: 'FILENAME',
             commitHash: '0000000000000000000000000000000000000000',
@@ -60,8 +60,8 @@ suite('GitAnnotationDocumentBuilder', () => {
     });
 
     test('it escapes "<" character in the line contents', () => {
-        const annotationCssBuilder = {build: () => 'CSS'};
-        const builder = new GitAnnotationDocumentBuilder({annotationCssBuilder});
+        const annotationStyleBuilder = {build: () => 'CSS'};
+        const builder = new GitAnnotationDocumentBuilder({annotationStyleBuilder});
         const lines = [{
             filename: 'FILENAME',
             commitHash: 'COMMIT_HASH',

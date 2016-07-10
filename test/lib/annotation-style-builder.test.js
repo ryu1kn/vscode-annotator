@@ -1,7 +1,7 @@
 
-const AnnotationCssBuilder = require('../../lib/annotation-css-builder');
+const AnnotationStyleBuilder = require('../../lib/annotation-style-builder');
 
-suite('AnnotationCssBuilder', () => {
+suite('AnnotationStyleBuilder', () => {
 
     test('it dynamically builds up CSS from user configurations', () => {
         const configStore = {
@@ -20,7 +20,7 @@ suite('AnnotationCssBuilder', () => {
                 return configs[configName];
             }
         };
-        const cssBuilder = new AnnotationCssBuilder({configStore});
+        const cssBuilder = new AnnotationStyleBuilder({configStore});
         expect(cssBuilder.build()).to.eql(`
             * {
                 font-family: FONT_FAMILY;
