@@ -26,7 +26,7 @@ suite('App', () => {
             return app.annotate(editor).then(() => {
                 expect(gitAnnotationLoader.load).to.have.been.calledWith('PATH');
                 expect(annotationData.set).to.have.been.calledWith('BLAME');
-                expect(Uri.parse).to.have.been.calledWith('annotation:/annotation?repositoryRoot=REPOSITORY_ROOT&_ts=DATE');
+                expect(Uri.parse).to.have.been.calledWith('annotator:/annotation?repositoryRoot=REPOSITORY_ROOT&_ts=DATE');
                 expect(commands.executeCommand).to.have.been.calledWith('vscode.previewHtml', 'URI', undefined, 'annotation: FILENAME');
             });
         });
@@ -57,8 +57,8 @@ suite('App', () => {
             };
             return app.takeDiff(lineBlame, 'REPOSITORY_ROOT').then(() => {
                 expect(commands.executeCommand).to.have.been.calledWith('vscode.diff', 'URI_1', 'URI_2', 'FILENAME@COMMIT');
-                expect(Uri.parse.args[0]).to.eql(['annotation:/file/PREVIOUS_FILENAME?commit=PREVIOUS_COMMIT&repositoryRoot=REPOSITORY_ROOT']);
-                expect(Uri.parse.args[1]).to.eql(['annotation:/file/FILENAME?commit=COMMIT&repositoryRoot=REPOSITORY_ROOT']);
+                expect(Uri.parse.args[0]).to.eql(['annotator:/file/PREVIOUS_FILENAME?commit=PREVIOUS_COMMIT&repositoryRoot=REPOSITORY_ROOT']);
+                expect(Uri.parse.args[1]).to.eql(['annotator:/file/FILENAME?commit=COMMIT&repositoryRoot=REPOSITORY_ROOT']);
             });
         });
 

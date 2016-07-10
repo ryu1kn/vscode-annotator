@@ -1,18 +1,18 @@
 {
-  "name": "annotation",
-  "displayName": "Annotation",
+  "name": "annotator",
+  "displayName": "Annotator",
   "description": "Display Annotation on the Code",
   "version": "0.0.1",
   "publisher": "ryu1kn",
   "license": "SEE LICENSE IN LICENSE.txt",
-  "icon": "images/annotation.png",
+  "icon": "images/annotator.png",
   "bugs": {
-    "url": "https://github.com/ryu1kn/vscode-annotation/issues"
+    "url": "https://github.com/ryu1kn/vscode-annotator/issues"
   },
-  "homepage": "https://github.com/ryu1kn/vscode-annotation/blob/master/README.md",
+  "homepage": "https://github.com/ryu1kn/vscode-annotator/blob/master/README.md",
   "repository": {
     "type": "git",
-    "url": "git@github.com:ryu1kn/vscode-annotation.git"
+    "url": "git@github.com:ryu1kn/vscode-annotator.git"
   },
   "engines": {
     "vscode": "^1.0.0"
@@ -28,16 +28,16 @@
     "blame"
   ],
   "activationEvents": [
-    "onCommand:annotation.annotate"
+    "onCommand:annotator.annotate"
   ],
   "main": "./extension",
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "Annotation configurations",
+      "title": "Annotator configurations",
       "properties": {
-        "annotation.annotationColumnWidth": {
-          "description": "Width of annotation column",
+        "annotator.annotationColumnWidth": {
+          "description": "Width of the annotation column",
           "type": "string",
           "default": "15em"
         }
@@ -45,8 +45,8 @@
     },
     "commands": [
       {
-        "command": "annotation.annotate",
-        "title": "Annotation: Put Annotation along with the code"
+        "command": "annotator.annotate",
+        "title": "Annotator: Show Git annotation of the Current File"
       }
     ]
   },
