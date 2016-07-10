@@ -17,12 +17,17 @@ suite('App', () => {
             const getCurrentDateFn = () => 'DATE';
             const gitAnnotationLoader = {load: sinon.stub().returns(Promise.resolve(annotaion))};
             const app = new App({Uri, annotationData, commands, getCurrentDateFn, gitAnnotationLoader, logger});
-            const editor = {document: {uri: {path: 'PATH'}}};
+            const editor = {
+                document: {
+                    uri: {path: 'PATH'},
+                    fileName: 'FILENAME'
+                }
+            };
             return app.annotate(editor).then(() => {
                 expect(gitAnnotationLoader.load).to.have.been.calledWith('PATH');
                 expect(annotationData.set).to.have.been.calledWith('BLAME');
                 expect(Uri.parse).to.have.been.calledWith('annotation:/annotation?repositoryRoot=REPOSITORY_ROOT&_ts=DATE');
-                expect(commands.executeCommand).to.have.been.calledWith('vscode.previewHtml', 'URI');
+                expect(commands.executeCommand).to.have.been.calledWith('vscode.previewHtml', 'URI', undefined, 'annotation: FILENAME');
             });
         });
 
