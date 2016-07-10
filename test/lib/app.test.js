@@ -62,6 +62,22 @@ suite('App', () => {
             });
         });
 
+        test('it points to an empty file if filePath is not given', () => {
+            const logger = getLogger();
+            const Uri = {parse: stubReturns('URI_1', 'URI_2')};
+            const commands = {executeCommand: sinon.stub().returns(Promise.resolve())};
+            const app = new App({Uri, commands, logger});
+            const lineBlame = {
+                commitHash: 'COMMIT',
+                filename: 'FILENAME'
+            };
+            return app.takeDiff(lineBlame, 'REPOSITORY_ROOT').then(() => {
+                expect(commands.executeCommand).to.have.been.calledWith('vscode.diff', 'URI_1', 'URI_2', 'FILENAME@COMMIT');
+                expect(Uri.parse.args[0]).to.eql(['annotator:/emptyfile']);
+                expect(Uri.parse.args[1]).to.eql(['annotator:/file/FILENAME?commit=COMMIT&repositoryRoot=REPOSITORY_ROOT']);
+            });
+        });
+
         test('it logs an error', () => {
             const Uri = {parse: sinon.stub().throws(new Error('PARSE_ERROR'))};
             const logger = {error: sinon.spy()};

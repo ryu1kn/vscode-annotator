@@ -39,4 +39,11 @@ suite('GitAnnotationContentProvider', () => {
             expect(document).to.eql('FILE_CONTENTS');
         });
     });
+
+    test('it returns an empty string if it is requested an empty file', () => {
+        const contentProvider = new GitAnnotationContentProvider({});
+        const uri = {path: '/emptyfile'};
+        const document = contentProvider.provideTextDocumentContent(uri);
+        expect(document).to.eql('');
+    });
 });
