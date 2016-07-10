@@ -24,7 +24,7 @@ suite('AnnotationStyleBuilder', () => {
         expect(cssBuilder.build()).to.eql(`
             * {
                 font-family: FONT_FAMILY;
-                font-size: 10;
+                font-size: 10px;
                 line-height: 1.5;
                 margin: 0;
             }
