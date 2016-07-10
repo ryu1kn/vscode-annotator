@@ -20,18 +20,18 @@ suite('App', () => {
                 repositoryRootPath: 'REPOSITORY_ROOT'
             };
             const annotationData = {set: sinon.spy()};
-            const gitAnnotationLoader = {loadHead: sinon.stub().returns(Promise.resolve(annotaion))};
+            const gitAnnotationLoader = {load: sinon.stub().returns(Promise.resolve(annotaion))};
             const app = new App({annotationData, gitAnnotationLoader, vscode, logger});
             const editor = {document: {uri: {path: 'PATH'}}};
             return app.annotate(editor).then(() => {
-                expect(gitAnnotationLoader.loadHead).to.have.been.calledWith('PATH');
+                expect(gitAnnotationLoader.load).to.have.been.calledWith('PATH');
                 expect(annotationData.set).to.have.been.calledWith('BLAME');
                 expect(vscode.commands.executeCommand).to.have.been.calledWith('vscode.previewHtml', 'URI');
             });
         });
 
         test('it logs an error', () => {
-            const gitAnnotationLoader = {loadHead: sinon.stub().throws(new Error('LOAD_ERROR'))};
+            const gitAnnotationLoader = {load: sinon.stub().throws(new Error('LOAD_ERROR'))};
             const logger = {error: sinon.spy()};
             const editor = {document: {uri: {path: 'PATH'}}};
             const app = new App({gitAnnotationLoader, logger});

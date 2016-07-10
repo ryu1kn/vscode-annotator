@@ -13,7 +13,7 @@ suite('GitAnnotationLoader', () => {
         };
         const gitAnnotationLoader = new GitAnnotationLoader({gitCommand, gitBlameOutputParser});
 
-        return gitAnnotationLoader.loadHead('PATH').then(result => {
+        return gitAnnotationLoader.load('PATH').then(result => {
             expect(result).to.eql({
                 lines: 'ANNOTATION_LIST',
                 repositoryRootPath: 'ROOT_PATH'
