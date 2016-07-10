@@ -7,26 +7,20 @@ suite('App', () => {
 
         test("it displays a given file's annotation as HTML", () => {
             const logger = getLogger();
-            const vscode = {
-                Uri: {
-                    parse: sinon.stub().returns('URI')
-                },
-                commands: {
-                    executeCommand: sinon.stub().returns(Promise.resolve())
-                }
-            };
+            const Uri = {parse: sinon.stub().returns('URI')};
+            const commands = {executeCommand: sinon.stub().returns(Promise.resolve())};
             const annotaion = {
                 lines: 'BLAME',
                 repositoryRootPath: 'REPOSITORY_ROOT'
             };
             const annotationData = {set: sinon.spy()};
             const gitAnnotationLoader = {load: sinon.stub().returns(Promise.resolve(annotaion))};
-            const app = new App({annotationData, gitAnnotationLoader, vscode, logger});
+            const app = new App({Uri, annotationData, commands, gitAnnotationLoader, logger});
             const editor = {document: {uri: {path: 'PATH'}}};
             return app.annotate(editor).then(() => {
                 expect(gitAnnotationLoader.load).to.have.been.calledWith('PATH');
                 expect(annotationData.set).to.have.been.calledWith('BLAME');
-                expect(vscode.commands.executeCommand).to.have.been.calledWith('vscode.previewHtml', 'URI');
+                expect(commands.executeCommand).to.have.been.calledWith('vscode.previewHtml', 'URI');
             });
         });
 
@@ -45,15 +39,9 @@ suite('App', () => {
 
         test('it displays a diff of 2 files', () => {
             const logger = getLogger();
-            const vscode = {
-                Uri: {
-                    parse: stubReturns('URI_1', 'URI_2')
-                },
-                commands: {
-                    executeCommand: sinon.stub().returns(Promise.resolve())
-                }
-            };
-            const app = new App({vscode, logger});
+            const Uri = {parse: stubReturns('URI_1', 'URI_2')};
+            const commands = {executeCommand: sinon.stub().returns(Promise.resolve())};
+            const app = new App({Uri, commands, logger});
             const lineBlame = {
                 commitHash: 'COMMIT',
                 filename: 'FILENAME',
@@ -61,20 +49,16 @@ suite('App', () => {
                 previousFilename: 'PREVIOUS_FILENAME'
             };
             return app.takeDiff(lineBlame, 'REPOSITORY_ROOT').then(() => {
-                expect(vscode.commands.executeCommand).to.have.been.calledWith('vscode.diff', 'URI_1', 'URI_2');
-                expect(vscode.Uri.parse.args[0]).to.eql(['annotation:/file/PREVIOUS_FILENAME?commit=PREVIOUS_COMMIT&repositoryRoot=REPOSITORY_ROOT']);
-                expect(vscode.Uri.parse.args[1]).to.eql(['annotation:/file/FILENAME?commit=COMMIT&repositoryRoot=REPOSITORY_ROOT']);
+                expect(commands.executeCommand).to.have.been.calledWith('vscode.diff', 'URI_1', 'URI_2');
+                expect(Uri.parse.args[0]).to.eql(['annotation:/file/PREVIOUS_FILENAME?commit=PREVIOUS_COMMIT&repositoryRoot=REPOSITORY_ROOT']);
+                expect(Uri.parse.args[1]).to.eql(['annotation:/file/FILENAME?commit=COMMIT&repositoryRoot=REPOSITORY_ROOT']);
             });
         });
 
         test('it logs an error', () => {
-            const vscode = {
-                Uri: {
-                    parse: sinon.stub().throws(new Error('PARSE_ERROR'))
-                }
-            };
+            const Uri = {parse: sinon.stub().throws(new Error('PARSE_ERROR'))};
             const logger = {error: sinon.spy()};
-            const app = new App({vscode, logger});
+            const app = new App({Uri, logger});
             const lineBlame = {
                 commitHash: 'COMMIT',
                 filename: 'FILENAME',
