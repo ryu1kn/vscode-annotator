@@ -19,7 +19,7 @@ suite('App', () => {
             const app = new App({Uri, annotationData, commands, getCurrentDateFn, gitAnnotationLoader, logger});
             const editor = {
                 document: {
-                    uri: {path: 'PATH'},
+                    uri: {fsPath: 'PATH'},
                     fileName: 'FILENAME'
                 }
             };
@@ -34,7 +34,7 @@ suite('App', () => {
         test('it logs an error', () => {
             const gitAnnotationLoader = {load: sinon.stub().throws(new Error('LOAD_ERROR'))};
             const logger = {error: sinon.spy()};
-            const editor = {document: {uri: {path: 'PATH'}}};
+            const editor = {document: {uri: {fsPath: 'PATH'}}};
             const app = new App({gitAnnotationLoader, logger});
             return app.annotate(editor).then(() => {
                 expect(logger.error.args[0][0]).to.have.string('Error: LOAD_ERROR');
