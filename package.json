@@ -40,6 +40,11 @@
           "description": "Width of the annotation column",
           "type": "string",
           "default": "15em"
+        },
+        "annotator.annotationFontColor": {
+          "description": "Font color of the annotation",
+          "type": "string",
+          "default": "gray"
         }
       }
     },

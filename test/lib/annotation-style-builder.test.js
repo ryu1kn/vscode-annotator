@@ -15,7 +15,8 @@ suite('AnnotationStyleBuilder', () => {
             },
             getExtensionConfig: configName => {
                 const configs = {
-                    annotationColumnWidth: 'ANNOTATION_COLUMN_WIDTH'
+                    annotationColumnWidth: 'ANNOTATION_COLUMN_WIDTH',
+                    annotationFontColor: 'ANNOTATION_FONT_COLOR'
                 };
                 return configs[configName];
             }
@@ -37,7 +38,7 @@ suite('AnnotationStyleBuilder', () => {
             .annotation {
                 min-width: ANNOTATION_COLUMN_WIDTH;
                 max-width: ANNOTATION_COLUMN_WIDTH;
-                color: gray;
+                color: ANNOTATION_FONT_COLOR;
                 margin-right: 1em;
             }
             .truncate {
