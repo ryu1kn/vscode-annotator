@@ -46,4 +46,20 @@ suite('AnnotationStyleBuilder', () => {
                 text-overflow: ellipsis;
             }`);
     });
+
+    test('it specifies line-height 1.5 if its value is falsy', () => {
+        const configStore = {
+            getEditorConfig: configName => {
+                const configs = {
+                    fontFamily: 'FONT_FAMILY',
+                    fontSize: 10,
+                    lineHeight: 0
+                };
+                return configs[configName];
+            },
+            getExtensionConfig: () => {}
+        };
+        const cssBuilder = new AnnotationStyleBuilder({configStore});
+        expect(cssBuilder.build()).to.have.string('line-height: 1.5;');
+    });
 });
