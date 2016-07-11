@@ -1,7 +1,7 @@
 {
   "name": "annotator",
   "displayName": "Annotator",
-  "description": "Display Annotation on the Code",
+  "description": "Displays git blame info of the current file. Opens the diff of a particular commit from there.",
   "version": "0.0.1",
   "publisher": "ryu1kn",
   "license": "SEE LICENSE IN LICENSE.txt",
@@ -51,7 +51,7 @@
     "commands": [
       {
         "command": "annotator.annotate",
-        "title": "Annotator: Show Git annotation of the Current File"
+        "title": "Annotator: Show Git Blame of the Current File"
       }
     ]
   },

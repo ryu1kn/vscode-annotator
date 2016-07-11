@@ -2,13 +2,14 @@
 
 ## Features
 
-Display `git blame` result of a current file. Quickly check the changes on the file on a selected commit.
+It displays git blame information of the current file.
+By selecting a commit hash of the annotation, the changes made in a particular commit are displayed.
 
 ![Annotate and view diff](https://raw.githubusercontent.com/ryu1kn/vscode-annotator/master/images/animations/annotate-code.gif)
 
 ## Commands
 
-* `Annotator: Show Git annotation of the Current File`
+* `Annotator: Show Git Blame of the Current File`
 
 ## Configurations
 
