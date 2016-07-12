@@ -20,7 +20,7 @@ suite('GitAnnotationDocumentBuilder', () => {
             '<body>',
                 '<div class="line">',
                     '<div class="annotation truncate">',
-                        '<a href="command:annotator.takeDiff?%5B%7B%22commitHash%22:%22COMMIT_HASH%22,%22filename%22:%22FILENAME%22%7D,%22REPOSITORY_ROOT%22%5D" class="commit-link">COMMIT</a>',
+                        '<a href="command:annotator.takeDiff?%5B%7B%22commitHash%22:%22COMMIT_HASH%22,%22filename%22:%22FILENAME%22%7D,%22REPOSITORY_ROOT%22%5D">COMMIT</a>',
                         '&nbsp;',
                         '<span>2016-06-12 AUTHOR_NAME</span>',
                     '</div>',
@@ -76,11 +76,39 @@ suite('GitAnnotationDocumentBuilder', () => {
             '<body>',
                 '<div class="line">',
                     '<div class="annotation truncate">',
-                        '<a href="command:annotator.takeDiff?%5B%7B%22commitHash%22:%22COMMIT_HASH%22,%22filename%22:%22FILENAME%22%7D,%22REPOSITORY_ROOT%22%5D" class="commit-link">COMMIT</a>',
+                        '<a href="command:annotator.takeDiff?%5B%7B%22commitHash%22:%22COMMIT_HASH%22,%22filename%22:%22FILENAME%22%7D,%22REPOSITORY_ROOT%22%5D">COMMIT</a>',
                         '&nbsp;',
                         '<span>2016-06-12 AUTHOR_NAME</span>',
                     '</div>',
                     '<pre>TEXT &lt; > &lt; TEXT</pre>',
+                '</div>',
+            '</body>'
+            /* eslint-enable indent */
+        ].join(''));
+    });
+
+    test('it escapes characters in the author name', () => {
+        const annotationStyleBuilder = {build: () => 'CSS'};
+        const builder = new GitAnnotationDocumentBuilder({annotationStyleBuilder});
+        const lines = [{
+            filename: 'FILENAME',
+            commitHash: 'COMMIT_HASH',
+            authorTime: 1465725065,
+            authorName: 'DODGY_AUTHOR_NAME <"\'`>',
+            lineContents: 'LINE_CONTENTS'
+        }];
+
+        expect(builder.build(lines, 'REPOSITORY_ROOT')).to.eql([
+            /* eslint-disable indent */
+            '<style>CSS</style>',
+            '<body>',
+                '<div class="line">',
+                    '<div class="annotation truncate">',
+                        '<a href="command:annotator.takeDiff?%5B%7B%22commitHash%22:%22COMMIT_HASH%22,%22filename%22:%22FILENAME%22%7D,%22REPOSITORY_ROOT%22%5D">COMMIT</a>',
+                        '&nbsp;',
+                        '<span>2016-06-12 DODGY_AUTHOR_NAME &lt;&quot;&#39;&#96;&gt;</span>',
+                    '</div>',
+                    '<pre>LINE_CONTENTS</pre>',
                 '</div>',
             '</body>'
             /* eslint-enable indent */
