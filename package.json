@@ -1,8 +1,8 @@
 {
   "name": "annotator",
   "displayName": "Annotator",
-  "description": "Displays git blame info of the current file. Opens the diff of a particular commit from there.",
-  "version": "0.0.1",
+  "description": "Display git blame info of the current file. Can open the diff of a particular commit from there.",
+  "version": "0.0.2",
   "publisher": "ryu1kn",
   "license": "SEE LICENSE IN LICENSE.txt",
   "icon": "images/annotator.png",
@@ -21,11 +21,11 @@
     "Other"
   ],
   "keywords": [
-    "vscode",
     "git",
     "annotate",
     "annotation",
-    "blame"
+    "blame",
+    "diff"
   ],
   "activationEvents": [
     "onCommand:annotator.annotate"

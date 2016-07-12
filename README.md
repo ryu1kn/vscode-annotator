@@ -22,6 +22,10 @@ By selecting a commit hash of the annotation, the changes made in a particular c
 
 ## Release Notes
 
+### 0.0.2
+
+* Fixed the problem that commit author names were not being escaped
+
 ### 0.0.1
 
-Initial release of Annotator
+* Initial release of Annotator
