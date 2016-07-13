@@ -15,6 +15,8 @@ By selecting a commit hash of the annotation, the changes made in a particular c
 
 * `annotator.annotationColumnWidth`: Width of the annotation column
 * `annotator.annotationFontColor`: Font color of the annotation text
+* `annotator.annotationTooltipWidth`: Width of the annotation tooltip
+* `annotator.annotationTooltipBackgroundColor`: Background color of the annotation tooltip
 
 ## Prerequisite
 
@@ -22,10 +24,14 @@ By selecting a commit hash of the annotation, the changes made in a particular c
 
 ## Release Notes
 
-### 0.0.2
+### 0.1.0: 13 July 2016
+
+* Added annotation tooltip to display more information about the commit
+
+### 0.0.2: 12 July 2016
 
 * Fixed the problem that commit author names were not being escaped
 
-### 0.0.1
+### 0.0.1: 11 July 2016
 
 * Initial release of Annotator
