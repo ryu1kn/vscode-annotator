@@ -36,10 +36,36 @@ suite('AnnotationStyleBuilder', () => {
                 flex-wrap: nowrap;
             }
             .annotation {
-                min-width: ANNOTATION_COLUMN_WIDTH;
-                max-width: ANNOTATION_COLUMN_WIDTH;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-flex-wrap: nowrap;
+                flex-wrap: nowrap;
+                position: relative;
+                width: ANNOTATION_COLUMN_WIDTH;
                 color: ANNOTATION_FONT_COLOR;
                 margin-right: 1em;
+            }
+            .annotation:hover::after {
+                display: block;
+                position: absolute;
+                z-index: 1;
+                content: attr(data-details);
+                white-space: pre-wrap;
+                top: 0;
+                width: 25em;
+                background-color: #222;
+                margin-top: -0.5em;
+                padding: .5em;
+                border-radius: 5px;
+            }
+            .short-info {
+                margin-left: .5em;
+            }
+            .short-info:hover {
+                text-decoration: underline;
+            }
+            .commit-link {
+                display: block;
             }
             .truncate {
                 white-space: nowrap;
