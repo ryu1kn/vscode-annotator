@@ -16,7 +16,9 @@ suite('AnnotationStyleBuilder', () => {
             getExtensionConfig: configName => {
                 const configs = {
                     annotationColumnWidth: 'ANNOTATION_COLUMN_WIDTH',
-                    annotationFontColor: 'ANNOTATION_FONT_COLOR'
+                    annotationFontColor: 'ANNOTATION_FONT_COLOR',
+                    annotationTooltipBackgroundColor: 'ANNOTATION_TOOLTIP_BACKGROUND_COLOR',
+                    annotationTooltipWidth: 'ANNOTATION_TOOLTIP_WIDTH'
                 };
                 return configs[configName];
             }
@@ -53,8 +55,8 @@ suite('AnnotationStyleBuilder', () => {
                 content: attr(data-details);
                 white-space: pre-wrap;
                 top: 0;
-                width: 25em;
-                background-color: #222;
+                width: ANNOTATION_TOOLTIP_WIDTH;
+                background-color: ANNOTATION_TOOLTIP_BACKGROUND_COLOR;
                 margin-top: -0.5em;
                 padding: .5em;
                 border-radius: 5px;

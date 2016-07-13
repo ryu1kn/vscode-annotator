@@ -45,6 +45,16 @@
           "description": "Font color of the annotation",
           "type": "string",
           "default": "gray"
+        },
+        "annotator.annotationTooltipWidth": {
+          "description": "Width of the annotation tooltip",
+          "type": "string",
+          "default": "30em"
+        },
+        "annotator.annotationTooltipBackgroundColor": {
+          "description": "Background color of the annotation tooltip",
+          "type": "string",
+          "default": "#222"
         }
       }
     },
