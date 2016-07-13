@@ -54,7 +54,7 @@
         "annotator.annotationTooltipBackgroundColor": {
           "description": "Background color of the annotation tooltip",
           "type": "string",
-          "default": "#222"
+          "default": "#272727"
         }
       }
     },
