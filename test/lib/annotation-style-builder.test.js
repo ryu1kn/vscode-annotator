@@ -40,6 +40,7 @@ suite('AnnotationStyleBuilder', () => {
                 display: flex;
                 -webkit-flex-wrap: nowrap;
                 flex-wrap: nowrap;
+                white-space: nowrap;
                 position: relative;
                 width: ANNOTATION_COLUMN_WIDTH;
                 color: ANNOTATION_FONT_COLOR;
@@ -64,7 +65,7 @@ suite('AnnotationStyleBuilder', () => {
             .short-info:hover {
                 text-decoration: underline;
             }
-            .commit-link {
+            .commit-hash {
                 display: block;
             }
             .truncate {
