@@ -67,7 +67,7 @@ suite('GitAnnotationDocumentBuilder', () => {
             commitHash: 'COMMIT_HASH',
             authorTime: 1465725065,
             authorName: 'AUTHOR_NAME',
-            lineContents: 'TEXT < > < TEXT',
+            lineContents: 'LINE_CONTENTS \\n &#xa; < &lt; > &gt; " \'',
             subject: 'SUBJECT'
         }];
 
@@ -81,7 +81,7 @@ suite('GitAnnotationDocumentBuilder', () => {
                             '1  COMMIT_ 2016-06-12 AUTHOR_NAME',
                         '</a>',
                     '</div>',
-                    '<pre>TEXT &lt; > &lt; TEXT</pre>',
+                    '<pre>LINE_CONTENTS \\n &amp;#xa; &lt; &amp;lt; &gt; &amp;gt; &quot; &#39;</pre>',
                 '</div>',
             '</body>'
             /* eslint-enable indent */

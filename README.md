@@ -24,6 +24,10 @@ By selecting a commit hash of the annotation, the changes made in a particular c
 
 ## Release Notes
 
+### 0.2.1: 14 July 2016
+
+* Fixed the problem that code block was not sufficiently escaped
+
 ### 0.2.0: 14 July 2016
 
 * Added line number in the annotation view
