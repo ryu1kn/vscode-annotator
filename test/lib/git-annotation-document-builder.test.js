@@ -25,7 +25,7 @@ suite('GitAnnotationDocumentBuilder', () => {
                             '1  COMMIT_ 2016-06-12 AUTHOR_NAME',
                         '</a>',
                     '</div>',
-                    '<pre>LINE_CONTENTS</pre>',
+                    '<pre><code>LINE_CONTENTS</code></pre>',
                 '</div>',
             '</body>'
             /* eslint-enable indent */
@@ -52,7 +52,7 @@ suite('GitAnnotationDocumentBuilder', () => {
                     '<div class="annotation" data-details="Commit: 0000000000000000000000000000000000000000&#xa;Author: AUTHOR_NAME&#xa;Date: 2016-06-12 19:51:05&#xa;&#xa;SUBJECT">',
                         '<div class="annotation-inner">1</div>',
                     '</div>',
-                    '<pre>LINE_CONTENTS</pre>',
+                    '<pre><code>LINE_CONTENTS</code></pre>',
                 '</div>',
             '</body>'
             /* eslint-enable indent */
@@ -81,7 +81,7 @@ suite('GitAnnotationDocumentBuilder', () => {
                             '1  COMMIT_ 2016-06-12 AUTHOR_NAME',
                         '</a>',
                     '</div>',
-                    '<pre>LINE_CONTENTS \\n &amp;#xa; &lt; &amp;lt; &gt; &amp;gt; &quot; &#39;</pre>',
+                    '<pre><code>LINE_CONTENTS \\n &amp;#xa; &lt; &amp;lt; &gt; &amp;gt; &quot; &#39;</code></pre>',
                 '</div>',
             '</body>'
             /* eslint-enable indent */
@@ -110,7 +110,7 @@ suite('GitAnnotationDocumentBuilder', () => {
                             '1  COMMIT_ 2016-06-12 DODGY_AUTHOR_NAME &lt;&quot;&#39;&#96;&gt;',
                         '</a>',
                     '</div>',
-                    '<pre>LINE_CONTENTS</pre>',
+                    '<pre><code>LINE_CONTENTS</code></pre>',
                 '</div>',
             '</body>'
             /* eslint-enable indent */
@@ -139,7 +139,7 @@ suite('GitAnnotationDocumentBuilder', () => {
                             '1  COMMIT_ 2016-06-12 AUTHOR_NAME',
                         '</a>',
                     '</div>',
-                    '<pre>LINE_CONTENTS</pre>',
+                    '<pre><code>LINE_CONTENTS</code></pre>',
                 '</div>',
             '</body>'
             /* eslint-enable indent */
@@ -172,7 +172,7 @@ suite('GitAnnotationDocumentBuilder', () => {
                             '  1  COMMIT_ 2016-06-12 AUTHOR_NAME',
                         '</a>',
                     '</div>',
-                    '<pre>LINE_CONTENTS</pre>',
+                    '<pre><code>LINE_CONTENTS</code></pre>',
                 '</div>'
             /* eslint-enable indent */
         ].join(''));
