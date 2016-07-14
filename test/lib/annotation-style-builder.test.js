@@ -38,11 +38,6 @@ suite('AnnotationStyleBuilder', () => {
                 flex-wrap: nowrap;
             }
             .annotation {
-                display: -webkit-flex;
-                display: flex;
-                -webkit-flex-wrap: nowrap;
-                flex-wrap: nowrap;
-                white-space: nowrap;
                 position: relative;
                 width: ANNOTATION_COLUMN_WIDTH;
                 color: ANNOTATION_FONT_COLOR;
@@ -55,25 +50,24 @@ suite('AnnotationStyleBuilder', () => {
                 content: attr(data-details);
                 white-space: pre-wrap;
                 top: 0;
+                right: -ANNOTATION_TOOLTIP_WIDTH;
                 width: ANNOTATION_TOOLTIP_WIDTH;
                 background-color: ANNOTATION_TOOLTIP_BACKGROUND_COLOR;
                 margin-top: -0.5em;
+                margin-right: -1em;
                 padding: .5em;
                 border-radius: 5px;
             }
-            .short-info {
-                margin-left: .5em;
-            }
-            .short-info:hover {
-                text-decoration: underline;
-            }
-            .commit-hash {
+            .annotation-inner {
                 display: block;
-            }
-            .truncate {
-                white-space: nowrap;
+                color: inherit;
+                text-decoration: none;
+                white-space: pre;
                 overflow: hidden;
                 text-overflow: ellipsis;
+            }
+            a.annotation-inner:hover {
+                text-decoration: underline;
             }`);
     });
 

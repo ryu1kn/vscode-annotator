@@ -39,7 +39,7 @@
         "annotator.annotationColumnWidth": {
           "description": "Width of the annotation column",
           "type": "string",
-          "default": "15em"
+          "default": "18em"
         },
         "annotator.annotationFontColor": {
           "description": "Font color of the annotation",

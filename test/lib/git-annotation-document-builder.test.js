@@ -21,8 +21,9 @@ suite('GitAnnotationDocumentBuilder', () => {
             '<body>',
                 '<div class="line">',
                     '<div class="annotation" data-details="Commit: COMMIT_HASH&#xa;Author: AUTHOR_NAME&#xa;Date: 2016-06-12 19:51:05&#xa;&#xa;SUBJECT">',
-                        '<a href="command:annotator.takeDiff?%5B%7B%22commitHash%22:%22COMMIT_HASH%22,%22filename%22:%22FILENAME%22%7D,%22REPOSITORY_ROOT%22%5D" class="commit-hash">COMMIT_</a>',
-                        '<div class="short-info truncate">2016-06-12 AUTHOR_NAME</div>',
+                        '<a href="command:annotator.takeDiff?%5B%7B%22commitHash%22:%22COMMIT_HASH%22,%22filename%22:%22FILENAME%22%7D,%22REPOSITORY_ROOT%22%5D" class="annotation-inner">',
+                            '1  COMMIT_ 2016-06-12 AUTHOR_NAME',
+                        '</a>',
                     '</div>',
                     '<pre>LINE_CONTENTS</pre>',
                 '</div>',
@@ -49,8 +50,7 @@ suite('GitAnnotationDocumentBuilder', () => {
             '<body>',
                 '<div class="line">',
                     '<div class="annotation" data-details="Commit: 0000000000000000000000000000000000000000&#xa;Author: AUTHOR_NAME&#xa;Date: 2016-06-12 19:51:05&#xa;&#xa;SUBJECT">',
-                        '<div class="commit-hash">0000000</div>',
-                        '<div class="short-info truncate">2016-06-12 AUTHOR_NAME</div>',
+                        '<div class="annotation-inner">1</div>',
                     '</div>',
                     '<pre>LINE_CONTENTS</pre>',
                 '</div>',
@@ -77,8 +77,9 @@ suite('GitAnnotationDocumentBuilder', () => {
             '<body>',
                 '<div class="line">',
                     '<div class="annotation" data-details="Commit: COMMIT_HASH&#xa;Author: AUTHOR_NAME&#xa;Date: 2016-06-12 19:51:05&#xa;&#xa;SUBJECT">',
-                        '<a href="command:annotator.takeDiff?%5B%7B%22commitHash%22:%22COMMIT_HASH%22,%22filename%22:%22FILENAME%22%7D,%22REPOSITORY_ROOT%22%5D" class="commit-hash">COMMIT_</a>',
-                        '<div class="short-info truncate">2016-06-12 AUTHOR_NAME</div>',
+                        '<a href="command:annotator.takeDiff?%5B%7B%22commitHash%22:%22COMMIT_HASH%22,%22filename%22:%22FILENAME%22%7D,%22REPOSITORY_ROOT%22%5D" class="annotation-inner">',
+                            '1  COMMIT_ 2016-06-12 AUTHOR_NAME',
+                        '</a>',
                     '</div>',
                     '<pre>TEXT &lt; > &lt; TEXT</pre>',
                 '</div>',
@@ -105,8 +106,9 @@ suite('GitAnnotationDocumentBuilder', () => {
             '<body>',
                 '<div class="line">',
                     '<div class="annotation" data-details="Commit: COMMIT_HASH&#xa;Author: DODGY_AUTHOR_NAME &lt;&quot;&#39;&#96;&gt;&#xa;Date: 2016-06-12 19:51:05&#xa;&#xa;SUBJECT">',
-                        '<a href="command:annotator.takeDiff?%5B%7B%22commitHash%22:%22COMMIT_HASH%22,%22filename%22:%22FILENAME%22%7D,%22REPOSITORY_ROOT%22%5D" class="commit-hash">COMMIT_</a>',
-                        '<div class="short-info truncate">2016-06-12 DODGY_AUTHOR_NAME &lt;&quot;&#39;&#96;&gt;</div>',
+                        '<a href="command:annotator.takeDiff?%5B%7B%22commitHash%22:%22COMMIT_HASH%22,%22filename%22:%22FILENAME%22%7D,%22REPOSITORY_ROOT%22%5D" class="annotation-inner">',
+                            '1  COMMIT_ 2016-06-12 DODGY_AUTHOR_NAME &lt;&quot;&#39;&#96;&gt;',
+                        '</a>',
                     '</div>',
                     '<pre>LINE_CONTENTS</pre>',
                 '</div>',
@@ -133,12 +135,45 @@ suite('GitAnnotationDocumentBuilder', () => {
             '<body>',
                 '<div class="line">',
                     '<div class="annotation" data-details="Commit: COMMIT_HASH&#xa;Author: AUTHOR_NAME&#xa;Date: 2016-06-12 19:51:05&#xa;&#xa;SUBJECT &lt;&gt;&amp;&quot;&#39;&#xa;\\/">',
-                        '<a href="command:annotator.takeDiff?%5B%7B%22commitHash%22:%22COMMIT_HASH%22,%22filename%22:%22FILENAME%22%7D,%22REPOSITORY_ROOT%22%5D" class="commit-hash">COMMIT_</a>',
-                        '<div class="short-info truncate">2016-06-12 AUTHOR_NAME</div>',
+                        '<a href="command:annotator.takeDiff?%5B%7B%22commitHash%22:%22COMMIT_HASH%22,%22filename%22:%22FILENAME%22%7D,%22REPOSITORY_ROOT%22%5D" class="annotation-inner">',
+                            '1  COMMIT_ 2016-06-12 AUTHOR_NAME',
+                        '</a>',
                     '</div>',
                     '<pre>LINE_CONTENTS</pre>',
                 '</div>',
             '</body>'
+            /* eslint-enable indent */
+        ].join(''));
+    });
+
+    test('it gives padding for the line number', () => {
+        'use strict';
+
+        const annotationStyleBuilder = {build: () => 'CSS'};
+        const builder = new GitAnnotationDocumentBuilder({annotationStyleBuilder});
+        const line = {
+            filename: 'FILENAME',
+            commitHash: 'COMMIT_HASH',
+            authorTime: 1465725065,
+            authorName: 'AUTHOR_NAME',
+            lineContents: 'LINE_CONTENTS',
+            subject: 'SUBJECT'
+        };
+        const lines = [];
+        for (let i = 0; i < 101; i++) lines.push(line);
+
+        expect(builder.build(lines, 'REPOSITORY_ROOT')).to.have.string([
+            /* eslint-disable indent */
+            '<style>CSS</style>',
+            '<body>',
+                '<div class="line">',
+                    '<div class="annotation" data-details="Commit: COMMIT_HASH&#xa;Author: AUTHOR_NAME&#xa;Date: 2016-06-12 19:51:05&#xa;&#xa;SUBJECT">',
+                        '<a href="command:annotator.takeDiff?%5B%7B%22commitHash%22:%22COMMIT_HASH%22,%22filename%22:%22FILENAME%22%7D,%22REPOSITORY_ROOT%22%5D" class="annotation-inner">',
+                            '  1  COMMIT_ 2016-06-12 AUTHOR_NAME',
+                        '</a>',
+                    '</div>',
+                    '<pre>LINE_CONTENTS</pre>',
+                '</div>'
             /* eslint-enable indent */
         ].join(''));
     });
