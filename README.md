@@ -24,6 +24,10 @@ By selecting a commit hash of the annotation, the changes made in a particular c
 
 ## Release Notes
 
+### 0.2.0: 14 July 2016
+
+* Added line number in the annotation view
+
 ### 0.1.0: 13 July 2016
 
 * Added annotation tooltip to display more information about the commit
