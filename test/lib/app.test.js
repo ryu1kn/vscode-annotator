@@ -7,16 +7,15 @@ suite('App', () => {
 
         test("it displays a given file's annotation as HTML", () => {
             const logger = getLogger();
-            const Uri = {parse: sinon.stub().returns('URI')};
+            const uriService = {encodeAnnotateFileAction: sinon.stub().returns('URI')};
             const commands = {executeCommand: sinon.stub().returns(Promise.resolve())};
             const annotaion = {
                 lines: 'BLAME',
                 repositoryRootPath: 'REPOSITORY_ROOT'
             };
             const annotationData = {set: sinon.spy()};
-            const getCurrentDateFn = () => 'DATE';
             const gitAnnotationLoader = {load: sinon.stub().returns(Promise.resolve(annotaion))};
-            const app = new App({Uri, annotationData, commands, getCurrentDateFn, gitAnnotationLoader, logger});
+            const app = new App({annotationData, commands, gitAnnotationLoader, logger, uriService});
             const editor = {
                 document: {
                     uri: {fsPath: 'PATH'},
@@ -26,7 +25,10 @@ suite('App', () => {
             return app.annotate(editor).then(() => {
                 expect(gitAnnotationLoader.load).to.have.been.calledWith('PATH');
                 expect(annotationData.set).to.have.been.calledWith('BLAME');
-                expect(Uri.parse).to.have.been.calledWith('annotator:/annotation?repositoryRoot=REPOSITORY_ROOT&_ts=DATE');
+                expect(uriService.encodeAnnotateFileAction).to.have.been.calledWith({
+                    path: 'PATH',
+                    repositoryRoot: 'REPOSITORY_ROOT'
+                });
                 expect(commands.executeCommand).to.have.been.calledWith('vscode.previewHtml', 'URI', undefined, 'annotation: FILENAME');
             });
         });
@@ -46,9 +48,9 @@ suite('App', () => {
 
         test('it displays a diff of 2 files', () => {
             const logger = getLogger();
-            const Uri = {parse: stubReturns('URI_1', 'URI_2')};
+            const uriService = {encodeShowFileAction: stubReturns('URI_1', 'URI_2')};
             const commands = {executeCommand: sinon.stub().returns(Promise.resolve())};
-            const app = new App({Uri, commands, logger});
+            const app = new App({commands, logger, uriService});
             const lineBlame = {
                 commitHash: 'COMMIT',
                 filename: 'FILENAME',
@@ -57,31 +59,46 @@ suite('App', () => {
             };
             return app.takeDiff(lineBlame, 'REPOSITORY_ROOT').then(() => {
                 expect(commands.executeCommand).to.have.been.calledWith('vscode.diff', 'URI_1', 'URI_2', 'FILENAME@COMMIT');
-                expect(Uri.parse.args[0]).to.eql(['annotator:/file/PREVIOUS_FILENAME?commit=PREVIOUS_COMMIT&repositoryRoot=REPOSITORY_ROOT']);
-                expect(Uri.parse.args[1]).to.eql(['annotator:/file/FILENAME?commit=COMMIT&repositoryRoot=REPOSITORY_ROOT']);
+                expect(uriService.encodeShowFileAction.args[0]).to.eql([{
+                    commitHash: 'PREVIOUS_COMMIT',
+                    path: 'PREVIOUS_FILENAME',
+                    repositoryRoot: 'REPOSITORY_ROOT'
+                }]);
+                expect(uriService.encodeShowFileAction.args[1]).to.eql([{
+                    commitHash: 'COMMIT',
+                    path: 'FILENAME',
+                    repositoryRoot: 'REPOSITORY_ROOT'
+                }]);
             });
         });
 
         test('it points to an empty file if filePath is not given', () => {
             const logger = getLogger();
-            const Uri = {parse: stubReturns('URI_1', 'URI_2')};
+            const uriService = {
+                encodeShowEmptyFileAction: sinon.stub().returns('URI_1'),
+                encodeShowFileAction: sinon.stub().returns('URI_2')
+            };
             const commands = {executeCommand: sinon.stub().returns(Promise.resolve())};
-            const app = new App({Uri, commands, logger});
+            const app = new App({commands, logger, uriService});
             const lineBlame = {
                 commitHash: 'COMMIT',
                 filename: 'FILENAME'
             };
             return app.takeDiff(lineBlame, 'REPOSITORY_ROOT').then(() => {
                 expect(commands.executeCommand).to.have.been.calledWith('vscode.diff', 'URI_1', 'URI_2', 'FILENAME@COMMIT');
-                expect(Uri.parse.args[0]).to.eql(['annotator:/emptyfile']);
-                expect(Uri.parse.args[1]).to.eql(['annotator:/file/FILENAME?commit=COMMIT&repositoryRoot=REPOSITORY_ROOT']);
+                expect(uriService.encodeShowFileAction.args).to.eql([[{
+                    commitHash: 'COMMIT',
+                    path: 'FILENAME',
+                    repositoryRoot: 'REPOSITORY_ROOT'
+                }]]);
+                expect(uriService.encodeShowEmptyFileAction.args).to.eql([[]]);
             });
         });
 
         test('it logs an error', () => {
-            const Uri = {parse: sinon.stub().throws(new Error('PARSE_ERROR'))};
+            const uriService = {encodeShowFileAction: sinon.stub().throws(new Error('ENCODE_ERROR'))};
             const logger = {error: sinon.spy()};
-            const app = new App({Uri, logger});
+            const app = new App({uriService, logger});
             const lineBlame = {
                 commitHash: 'COMMIT',
                 filename: 'FILENAME',
@@ -89,7 +106,7 @@ suite('App', () => {
                 previousFilename: 'PREVIOUS_FILENAME'
             };
             return app.takeDiff(lineBlame, 'REPOSITORY_ROOT').then(() => {
-                expect(logger.error.args[0][0]).to.have.string('Error: PARSE_ERROR');
+                expect(logger.error.args[0][0]).to.have.string('Error: ENCODE_ERROR');
             });
         });
     });

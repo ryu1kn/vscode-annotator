@@ -15,8 +15,8 @@ suite('GitAnnotationContentProvider', () => {
             annotationData, gitAnnotationDocumentBuilder
         });
         const uri = {
-            path: '/annotation',
-            query: 'repositoryRoot=REPOSITORY_ROOT'
+            path: 'annotate-file',
+            query: 'path=PATH&repositoryRoot=REPOSITORY_ROOT'
         };
         return contentProvider.provideTextDocumentContent(uri).then(document => {
             expect(document).to.eql('ANNOTATION_DOCUMENT');
@@ -32,8 +32,8 @@ suite('GitAnnotationContentProvider', () => {
         };
         const contentProvider = new GitAnnotationContentProvider({gitCommand});
         const uri = {
-            path: '/file/FILE_PATH',
-            query: 'repositoryRoot=REPOSITORY_ROOT&commit=COMMIT'
+            path: 'show-file',
+            query: 'repositoryRoot=REPOSITORY_ROOT&commitHash=COMMIT&path=FILE_PATH'
         };
         return contentProvider.provideTextDocumentContent(uri).then(document => {
             expect(document).to.eql('FILE_CONTENTS');
@@ -42,8 +42,16 @@ suite('GitAnnotationContentProvider', () => {
 
     test('it returns an empty string if it is requested an empty file', () => {
         const contentProvider = new GitAnnotationContentProvider({});
-        const uri = {path: '/emptyfile'};
+        const uri = {path: 'show-emptyfile'};
         const document = contentProvider.provideTextDocumentContent(uri);
         expect(document).to.eql('');
+    });
+
+    test('it throws exception if unknown action is provided in the uri', () => {
+        const contentProvider = new GitAnnotationContentProvider({});
+        const uri = {path: 'UNKOWN_ACTION'};
+        expect(() => {
+            contentProvider.provideTextDocumentContent(uri);
+        }).to.throw(Error, 'Unknown action');
     });
 });
