@@ -9,13 +9,7 @@ suite('App', () => {
             const logger = getLogger();
             const uriService = {encodeAnnotateFileAction: sinon.stub().returns('URI')};
             const commands = {executeCommand: sinon.stub().returns(Promise.resolve())};
-            const annotaion = {
-                lines: 'BLAME',
-                repositoryRootPath: 'REPOSITORY_ROOT'
-            };
-            const annotationData = {set: sinon.spy()};
-            const gitAnnotationLoader = {load: sinon.stub().returns(Promise.resolve(annotaion))};
-            const app = new App({annotationData, commands, gitAnnotationLoader, logger, uriService});
+            const app = new App({commands, logger, uriService});
             const editor = {
                 document: {
                     uri: {fsPath: 'PATH'},
@@ -23,23 +17,18 @@ suite('App', () => {
                 }
             };
             return app.annotate(editor).then(() => {
-                expect(gitAnnotationLoader.load).to.have.been.calledWith('PATH');
-                expect(annotationData.set).to.have.been.calledWith('BLAME');
-                expect(uriService.encodeAnnotateFileAction).to.have.been.calledWith({
-                    path: 'PATH',
-                    repositoryRoot: 'REPOSITORY_ROOT'
-                });
+                expect(uriService.encodeAnnotateFileAction).to.have.been.calledWith({path: 'PATH'});
                 expect(commands.executeCommand).to.have.been.calledWith('vscode.previewHtml', 'URI', undefined, 'annotation: FILENAME');
             });
         });
 
         test('it logs an error', () => {
-            const gitAnnotationLoader = {load: sinon.stub().throws(new Error('LOAD_ERROR'))};
+            const uriService = {encodeAnnotateFileAction: sinon.stub().throws(new Error('ENCODE_ERROR'))};
             const logger = {error: sinon.spy()};
             const editor = {document: {uri: {fsPath: 'PATH'}}};
-            const app = new App({gitAnnotationLoader, logger});
+            const app = new App({logger, uriService});
             return app.annotate(editor).then(() => {
-                expect(logger.error.args[0][0]).to.have.string('Error: LOAD_ERROR');
+                expect(logger.error.args[0][0]).to.have.string('Error: ENCODE_ERROR');
             });
         });
     });

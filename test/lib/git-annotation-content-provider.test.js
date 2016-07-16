@@ -4,7 +4,12 @@ const GitAnnotationContentProvider = require('../../lib/git-annotation-content-p
 suite('GitAnnotationContentProvider', () => {
 
     test('it retrieves annotation data and compose annotation document', () => {
-        const annotationData = {get: () => 'ANNOTATION_DATA_BY_LINES'};
+        const gitAnnotationLoader = {
+            load: stubWithArgs(['PATH'], Promise.resolve({
+                lines: 'ANNOTATION_DATA_BY_LINES',
+                repositoryRootPath: 'REPOSITORY_ROOT'
+            }))
+        };
         const gitAnnotationDocumentBuilder = {
             build: stubWithArgs(
                 ['ANNOTATION_DATA_BY_LINES', 'REPOSITORY_ROOT'],
@@ -12,7 +17,7 @@ suite('GitAnnotationContentProvider', () => {
             )
         };
         const contentProvider = new GitAnnotationContentProvider({
-            annotationData, gitAnnotationDocumentBuilder
+            gitAnnotationDocumentBuilder, gitAnnotationLoader
         });
         const uri = {
             path: 'annotate-file',
