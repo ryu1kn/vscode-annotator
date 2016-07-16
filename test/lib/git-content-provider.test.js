@@ -1,7 +1,7 @@
 
-const GitAnnotationContentProvider = require('../../lib/git-annotation-content-provider');
+const GitContentProvider = require('../../lib/git-content-provider');
 
-suite('GitAnnotationContentProvider', () => {
+suite('GitContentProvider', () => {
 
     test('it retrieves annotation data and compose annotation document', () => {
         const gitAnnotationLoader = {
@@ -16,7 +16,7 @@ suite('GitAnnotationContentProvider', () => {
                 Promise.resolve('ANNOTATION_DOCUMENT')
             )
         };
-        const contentProvider = new GitAnnotationContentProvider({
+        const contentProvider = new GitContentProvider({
             gitAnnotationDocumentBuilder, gitAnnotationLoader
         });
         const uri = {
@@ -35,7 +35,7 @@ suite('GitAnnotationContentProvider', () => {
                 Promise.resolve('FILE_CONTENTS')
             )
         };
-        const contentProvider = new GitAnnotationContentProvider({gitCommand});
+        const contentProvider = new GitContentProvider({gitCommand});
         const uri = {
             path: 'show-file',
             query: 'repositoryRoot=REPOSITORY_ROOT&commitHash=COMMIT&path=FILE_PATH'
@@ -46,14 +46,14 @@ suite('GitAnnotationContentProvider', () => {
     });
 
     test('it returns an empty string if it is requested an empty file', () => {
-        const contentProvider = new GitAnnotationContentProvider({});
+        const contentProvider = new GitContentProvider({});
         const uri = {path: 'show-emptyfile'};
         const document = contentProvider.provideTextDocumentContent(uri);
         expect(document).to.eql('');
     });
 
     test('it throws exception if unknown action is provided in the uri', () => {
-        const contentProvider = new GitAnnotationContentProvider({});
+        const contentProvider = new GitContentProvider({});
         const uri = {path: 'UNKOWN_ACTION'};
         expect(() => {
             contentProvider.provideTextDocumentContent(uri);
