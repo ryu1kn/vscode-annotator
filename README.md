@@ -22,6 +22,10 @@ By selecting a commit hash of the annotation, the changes made in a particular c
 
 `git` command must be available
 
+## Repository
+
+* https://github.com/ryu1kn/vscode-annotator
+
 ## Release Notes
 
 ### 0.2.1: 14 July 2016
