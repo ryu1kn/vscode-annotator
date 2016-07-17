@@ -9,7 +9,20 @@ suite('GitCommand', () => {
             const shellCommandRunner = {run: sinon.stub().returns(Promise.resolve('BLAME'))};
             const gitCommand = new GitCommand({shellCommandRunner});
 
-            return gitCommand.blame('/PATH/TO/FILE', 'ROOT_PATH').then(result => {
+            return gitCommand.blame('/PATH/TO/FILE', 'COMMIT_HASH', 'ROOT_PATH').then(result => {
+                expect(result).to.eql('BLAME');
+                expect(shellCommandRunner.run).to.have.been.calledWith(
+                    'git', ['blame', '--line-porcelain', 'COMMIT_HASH', '--', '/PATH/TO/FILE'], {cwd: 'ROOT_PATH'}
+                );
+            });
+        });
+
+        test('it invokes git blame without commitHash if it is not given', () => {
+            const shellCommandRunner = {run: sinon.stub().returns(Promise.resolve('BLAME'))};
+            const gitCommand = new GitCommand({shellCommandRunner});
+
+            const commitHash = undefined;
+            return gitCommand.blame('/PATH/TO/FILE', commitHash, 'ROOT_PATH').then(result => {
                 expect(result).to.eql('BLAME');
                 expect(shellCommandRunner.run).to.have.been.calledWith(
                     'git', ['blame', '--line-porcelain', '--', '/PATH/TO/FILE'], {cwd: 'ROOT_PATH'}

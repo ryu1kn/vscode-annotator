@@ -1,27 +1,22 @@
 
 const GitContentProvider = require('../../lib/git-content-provider');
+const querystring = require('querystring');
 
 suite('GitContentProvider', () => {
 
     test('it retrieves annotation data and compose annotation document', () => {
+        const actionParams = {
+            path: 'PATH',
+            repositoryRoot: 'REPOSITORY_ROOT'
+        };
         const gitAnnotationLoader = {
-            load: stubWithArgs(['PATH'], Promise.resolve({
-                lines: 'ANNOTATION_DATA_BY_LINES',
-                repositoryRootPath: 'REPOSITORY_ROOT'
-            }))
+            load: stubWithArgs([actionParams], Promise.resolve('ANNOTATION_DOCUMENT'))
         };
-        const gitAnnotationDocumentBuilder = {
-            build: stubWithArgs(
-                ['ANNOTATION_DATA_BY_LINES', 'REPOSITORY_ROOT'],
-                Promise.resolve('ANNOTATION_DOCUMENT')
-            )
-        };
-        const contentProvider = new GitContentProvider({
-            gitAnnotationDocumentBuilder, gitAnnotationLoader
-        });
+        const contentProvider = new GitContentProvider({gitAnnotationLoader});
+
         const uri = {
             path: 'annotate-file',
-            query: 'path=PATH&repositoryRoot=REPOSITORY_ROOT'
+            query: querystring.stringify(actionParams)
         };
         return contentProvider.provideTextDocumentContent(uri).then(document => {
             expect(document).to.eql('ANNOTATION_DOCUMENT');
