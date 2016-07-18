@@ -103,6 +103,20 @@ suite('UriService', () => {
                 path: 'annotate-file',
                 query: querystring.stringify(queryParams)
             };
+            expect(uriService.getTitle(uri)).to.eql('PATH@COMMIT_');
+        });
+
+        test('it adds a prefix in front of the title if it is given', () => {
+            const uriService = new UriService({});
+            const queryParams = {
+                path: 'PATH',
+                commitHash: 'COMMIT_HASH'
+            };
+            const uri = {
+                scheme: 'annotator',
+                path: 'annotate-file',
+                query: querystring.stringify(queryParams)
+            };
             expect(uriService.getTitle(uri, 'PREFIX:')).to.eql('PREFIX:PATH@COMMIT_');
         });
 
@@ -114,7 +128,7 @@ suite('UriService', () => {
                 path: 'annotate-file',
                 query: querystring.stringify(queryParams)
             };
-            expect(uriService.getTitle(uri, 'PREFIX:')).to.eql('PREFIX:PATH');
+            expect(uriService.getTitle(uri)).to.eql('PATH');
         });
 
         test('it composes a title for a diff view from path and commitHash', () => {
@@ -128,7 +142,7 @@ suite('UriService', () => {
                 path: 'show-file',
                 query: querystring.stringify(queryParams)
             };
-            expect(uriService.getTitle(uri, 'PREFIX:')).to.eql('PREFIX:PATH@COMMIT_');
+            expect(uriService.getTitle(uri)).to.eql('PATH@COMMIT_');
         });
     });
 });
