@@ -22,6 +22,21 @@ suite('App', () => {
             });
         });
 
+        test('does nothing if annotation should not be available', () => {
+            const logger = getLogger();
+            const uriService = {
+                convertToAnnotateFileAction: sinon.stub().returns(null)
+            };
+            const commands = {executeCommand: sinon.spy()};
+            const app = new App({commands, logger, uriService});
+            const editor = {
+                document: {uri: 'URI', fileName: 'FILENAME'}
+            };
+            return app.annotate(editor).then(() => {
+                expect(commands.executeCommand).to.have.been.not.called;
+            });
+        });
+
         test('it logs an error', () => {
             const uriService = {convertToAnnotateFileAction: sinon.stub().throws(new Error('ENCODE_ERROR'))};
             const logger = {error: sinon.spy()};

@@ -48,7 +48,7 @@ suite('UriService', () => {
             expect(() => uriService.convertToAnnotateFileAction(uri)).to.throws(Error);
         });
 
-        test('it throws an error if show-file action uri is given but previous commit is not available', () => {
+        test('it returns null if show-file action uri is given but previous commit is not available', () => {
             const Uri = {parse: sinon.stub().returns('URI')};
             const uriService = new UriService({Uri});
 
@@ -57,7 +57,7 @@ suite('UriService', () => {
                 scheme: 'annotator',
                 query: 'path=PATH&commitHash=COMMIT_HASH&repositoryRoot=REPOSITORY_ROOT'
             };
-            expect(() => uriService.convertToAnnotateFileAction(uri)).to.throws(Error);
+            expect(uriService.convertToAnnotateFileAction(uri)).to.eql(null);
         });
     });
 
