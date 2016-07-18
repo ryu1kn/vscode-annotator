@@ -3,6 +3,7 @@ typings/**
 test/**
 coverage/**
 images/animations/**
+__*
 .gitignore
 .editorconfig
 .eslintrc.yaml

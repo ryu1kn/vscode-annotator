@@ -2,14 +2,21 @@
 
 ## Features
 
-It displays git blame information of the current file.
-By selecting a commit hash of the annotation, the changes made in a particular commit are displayed.
+* Display the annotation view (git blame) of the current file
+* Display the diff of a particular commit by selecting a commit hash on the annotation view
+* From the commit diff, you can now open the annotation view of the file just before the commit, and trace back the history
+
+Blame the current file and open the diff of a particular commit
 
 ![Annotate and view diff](https://raw.githubusercontent.com/ryu1kn/vscode-annotator/master/images/animations/annotate-code.gif)
 
+From the commit diff, annotate the contents of the left side of the diff view
+
+![Annotate the file contents before the commit](https://raw.githubusercontent.com/ryu1kn/vscode-annotator/master/images/animations/annotate-contents-of-before-selected-commit.gif)
+
 ## Commands
 
-* `Annotator: Show Git Blame of the Current File`
+* `Annotator: Annotate the Current File or the File Before the Commit (if on Commit Diff)`
 
 ## Configurations
 
@@ -27,6 +34,10 @@ By selecting a commit hash of the annotation, the changes made in a particular c
 * https://github.com/ryu1kn/vscode-annotator
 
 ## Release Notes
+
+### 0.3.0: 18 July 2016
+
+* Added a feature to annotate the contents of the left side of the commit diff
 
 ### 0.2.1: 14 July 2016
 
