@@ -8,7 +8,7 @@ suite('App', () => {
         test("it displays a given file's annotation as HTML", () => {
             const logger = getLogger();
             const uriService = {convertToAnnotateFileAction: sinon.stub().returns('ANNOTATE_FILE_URI')};
-            const commands = {executeCommand: sinon.stub().returns(Promise.resolve())};
+            const commands = {executeCommand: sinon.spy()};
             const app = new App({commands, logger, uriService});
             const editor = {
                 document: {uri: 'URI', fileName: 'FILENAME'}
@@ -35,7 +35,7 @@ suite('App', () => {
         test('it displays a diff of 2 files', () => {
             const logger = getLogger();
             const uriService = {encodeShowFileAction: stubReturns('URI_1', 'URI_2')};
-            const commands = {executeCommand: sinon.stub().returns(Promise.resolve())};
+            const commands = {executeCommand: sinon.spy()};
             const app = new App({commands, logger, uriService});
             const lineBlame = {
                 commitHash: 'COMMIT',
@@ -67,7 +67,7 @@ suite('App', () => {
                 encodeShowEmptyFileAction: sinon.stub().returns('URI_1'),
                 encodeShowFileAction: sinon.stub().returns('URI_2')
             };
-            const commands = {executeCommand: sinon.stub().returns(Promise.resolve())};
+            const commands = {executeCommand: sinon.spy()};
             const app = new App({commands, logger, uriService});
             const lineBlame = {
                 commitHash: 'COMMIT',
