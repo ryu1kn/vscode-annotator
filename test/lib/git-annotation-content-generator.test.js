@@ -1,7 +1,7 @@
 
-const GitAnnotationLoader = require('../../lib/git-annotation-loader');
+const GitAnnotationContentGenerator = require('../../lib/git-annotation-content-generator');
 
-suite('GitAnnotationLoader', () => {
+suite('GitAnnotationContentGenerator', () => {
 
     test('it loads git annotation and construct a document', () => {
         const gitCommand = {
@@ -13,7 +13,7 @@ suite('GitAnnotationLoader', () => {
         const gitAnnotationDocumentBuilder = {
             build: stubWithArgs(['ANNOTATION_LIST', 'REPOSITORY_ROOT'], 'ANNOTATION_DOCUMENT')
         };
-        const gitAnnotationLoader = new GitAnnotationLoader({
+        const gitAnnotationContentGenerator = new GitAnnotationContentGenerator({
             gitCommand, gitAnnotationDocumentBuilder, gitBlameOutputParser
         });
 
@@ -22,7 +22,7 @@ suite('GitAnnotationLoader', () => {
             path: 'PATH',
             repositoryRoot: 'REPOSITORY_ROOT'
         };
-        return gitAnnotationLoader.load(params).then(document => {
+        return gitAnnotationContentGenerator.generate(params).then(document => {
             expect(document).to.eql('ANNOTATION_DOCUMENT');
         });
     });
@@ -38,7 +38,7 @@ suite('GitAnnotationLoader', () => {
         const gitAnnotationDocumentBuilder = {
             build: stubWithArgs(['ANNOTATION_LIST', 'REPOSITORY_ROOT'], 'ANNOTATION_DOCUMENT')
         };
-        const gitAnnotationLoader = new GitAnnotationLoader({
+        const gitAnnotationContentGenerator = new GitAnnotationContentGenerator({
             gitCommand, gitAnnotationDocumentBuilder, gitBlameOutputParser
         });
 
@@ -46,7 +46,7 @@ suite('GitAnnotationLoader', () => {
             path: 'PATH',
             commitHash: 'COMMIT_HASH'
         };
-        return gitAnnotationLoader.load(params).then(document => {
+        return gitAnnotationContentGenerator.generate(params).then(document => {
             expect(document).to.eql('ANNOTATION_DOCUMENT');
         });
     });
@@ -57,10 +57,10 @@ suite('GitAnnotationLoader', () => {
             getRepositoryRoot: stubWithArgs(['PATH'], Promise.resolve('REPOSITORY_ROOT\n'))
         };
         const gitBlameOutputParser = {parse: sinon.spy()};
-        const gitAnnotationLoader = new GitAnnotationLoader({gitCommand, gitBlameOutputParser});
+        const gitAnnotationContentGenerator = new GitAnnotationContentGenerator({gitCommand, gitBlameOutputParser});
 
         const params = {path: 'PATH'};
-        return gitAnnotationLoader.load(params).then(
+        return gitAnnotationContentGenerator.generate(params).then(
             throwError,
             e => {
                 expect(e).to.be.an('error');

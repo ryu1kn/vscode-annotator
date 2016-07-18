@@ -9,10 +9,10 @@ suite('GitContentProvider', () => {
             path: 'PATH',
             repositoryRoot: 'REPOSITORY_ROOT'
         };
-        const gitAnnotationLoader = {
-            load: stubWithArgs([actionParams], Promise.resolve('ANNOTATION_DOCUMENT'))
+        const gitAnnotationContentGenerator = {
+            generate: stubWithArgs([actionParams], Promise.resolve('ANNOTATION_DOCUMENT'))
         };
-        const contentProvider = new GitContentProvider({gitAnnotationLoader});
+        const contentProvider = new GitContentProvider({gitAnnotationContentGenerator});
 
         const uri = {
             path: 'annotate-file',
