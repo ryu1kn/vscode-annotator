@@ -4,7 +4,7 @@ const querystring = require('querystring');
 
 suite('UriService', () => {
 
-    suite('#getAsAnnotateFileAction', () => {
+    suite('#convertToAnnotateFileAction', () => {
 
         test('it converts file uri into annotate-file action uri', () => {
             const Uri = {parse: sinon.stub().returns('URI')};
@@ -103,7 +103,7 @@ suite('UriService', () => {
                 path: 'annotate-file',
                 query: querystring.stringify(queryParams)
             };
-            expect(uriService.getTitle(uri, 'PREFIX:')).to.eql('PREFIX:PATH@COMMIT_HASH');
+            expect(uriService.getTitle(uri, 'PREFIX:')).to.eql('PREFIX:PATH@COMMIT_');
         });
 
         test('it does not use a commit hash if it is not given', () => {
@@ -128,7 +128,7 @@ suite('UriService', () => {
                 path: 'show-file',
                 query: querystring.stringify(queryParams)
             };
-            expect(uriService.getTitle(uri, 'PREFIX:')).to.eql('PREFIX:PATH@COMMIT_HASH');
+            expect(uriService.getTitle(uri, 'PREFIX:')).to.eql('PREFIX:PATH@COMMIT_');
         });
     });
 });
