@@ -1,5 +1,6 @@
 
 const UriService = require('../../lib/uri-service');
+const querystring = require('querystring');
 
 suite('UriService', () => {
 
@@ -86,6 +87,48 @@ suite('UriService', () => {
 
             expect(uriService.encodeShowEmptyFileAction()).to.eql('URI');
             expect(Uri.parse).to.have.been.calledWith('annotator:show-emptyfile');
+        });
+    });
+
+    suite('#getTitle', () => {
+
+        test('it composes a title for an annotation view from path and commitHash', () => {
+            const uriService = new UriService({});
+            const queryParams = {
+                path: 'PATH',
+                commitHash: 'COMMIT_HASH'
+            };
+            const uri = {
+                scheme: 'annotator',
+                path: 'annotate-file',
+                query: querystring.stringify(queryParams)
+            };
+            expect(uriService.getTitle(uri, 'PREFIX:')).to.eql('PREFIX:PATH@COMMIT_HASH');
+        });
+
+        test('it does not use a commit hash if it is not given', () => {
+            const uriService = new UriService({});
+            const queryParams = {path: 'PATH'};
+            const uri = {
+                scheme: 'annotator',
+                path: 'annotate-file',
+                query: querystring.stringify(queryParams)
+            };
+            expect(uriService.getTitle(uri, 'PREFIX:')).to.eql('PREFIX:PATH');
+        });
+
+        test('it composes a title for a diff view from path and commitHash', () => {
+            const uriService = new UriService({});
+            const queryParams = {
+                path: 'PATH',
+                commitHash: 'COMMIT_HASH'
+            };
+            const uri = {
+                scheme: 'annotator',
+                path: 'show-file',
+                query: querystring.stringify(queryParams)
+            };
+            expect(uriService.getTitle(uri, 'PREFIX:')).to.eql('PREFIX:PATH@COMMIT_HASH');
         });
     });
 });

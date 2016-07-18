@@ -7,7 +7,10 @@ suite('App', () => {
 
         test("it displays a given file's annotation as HTML", () => {
             const logger = getLogger();
-            const uriService = {convertToAnnotateFileAction: sinon.stub().returns('ANNOTATE_FILE_URI')};
+            const uriService = {
+                convertToAnnotateFileAction: sinon.stub().returns('ANNOTATE_FILE_URI'),
+                getTitle: stubWithArgs(['ANNOTATE_FILE_URI', 'annotation: '], 'ANNOTATION_TITLE')
+            };
             const commands = {executeCommand: sinon.spy()};
             const app = new App({commands, logger, uriService});
             const editor = {
@@ -15,7 +18,7 @@ suite('App', () => {
             };
             return app.annotate(editor).then(() => {
                 expect(uriService.convertToAnnotateFileAction).to.have.been.calledWith('URI');
-                expect(commands.executeCommand).to.have.been.calledWith('vscode.previewHtml', 'ANNOTATE_FILE_URI', undefined, 'annotation: FILENAME');
+                expect(commands.executeCommand).to.have.been.calledWith('vscode.previewHtml', 'ANNOTATE_FILE_URI', undefined, 'ANNOTATION_TITLE');
             });
         });
 
@@ -34,7 +37,10 @@ suite('App', () => {
 
         test('it displays a diff of 2 files', () => {
             const logger = getLogger();
-            const uriService = {encodeShowFileAction: stubReturns('URI_1', 'URI_2')};
+            const uriService = {
+                encodeShowFileAction: stubReturns('URI_BEFORE', 'URI_AFTER'),
+                getTitle: stubWithArgs(['URI_AFTER'], 'ANNOTATION_TITLE')
+            };
             const commands = {executeCommand: sinon.spy()};
             const app = new App({commands, logger, uriService});
             const lineBlame = {
@@ -45,7 +51,7 @@ suite('App', () => {
                 repositoryRoot: 'REPOSITORY_ROOT'
             };
             return app.takeDiff(lineBlame).then(() => {
-                expect(commands.executeCommand).to.have.been.calledWith('vscode.diff', 'URI_1', 'URI_2', 'FILENAME@COMMIT');
+                expect(commands.executeCommand).to.have.been.calledWith('vscode.diff', 'URI_BEFORE', 'URI_AFTER', 'ANNOTATION_TITLE');
                 expect(uriService.encodeShowFileAction.args[0]).to.eql([{
                     commitHash: 'PREVIOUS_COMMIT',
                     path: 'PREVIOUS_FILENAME',
@@ -65,7 +71,8 @@ suite('App', () => {
             const logger = getLogger();
             const uriService = {
                 encodeShowEmptyFileAction: sinon.stub().returns('URI_1'),
-                encodeShowFileAction: sinon.stub().returns('URI_2')
+                encodeShowFileAction: sinon.stub().returns('URI_2'),
+                getTitle: stubWithArgs(['URI_2'], 'ANNOTATION_TITLE')
             };
             const commands = {executeCommand: sinon.spy()};
             const app = new App({commands, logger, uriService});
@@ -75,7 +82,7 @@ suite('App', () => {
                 repositoryRoot: 'REPOSITORY_ROOT'
             };
             return app.takeDiff(lineBlame).then(() => {
-                expect(commands.executeCommand).to.have.been.calledWith('vscode.diff', 'URI_1', 'URI_2', 'FILENAME@COMMIT');
+                expect(commands.executeCommand).to.have.been.calledWith('vscode.diff', 'URI_1', 'URI_2', 'ANNOTATION_TITLE');
                 expect(uriService.encodeShowFileAction.args).to.eql([[{
                     commitHash: 'COMMIT',
                     path: 'FILENAME',
