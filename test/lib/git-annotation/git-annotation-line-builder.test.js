@@ -1,5 +1,5 @@
 
-const GitAnnotationLineBuilder = require('../../lib/git-annotation-line-builder');
+const GitAnnotationLineBuilder = require('../../../lib/git-annotation/git-annotation-line-builder');
 
 suite('GitAnnotationLineBuilder', () => {
 

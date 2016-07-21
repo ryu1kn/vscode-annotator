@@ -1,5 +1,5 @@
 
-const GitAnnotationDocumentBuilder = require('../../lib/git-annotation-document-builder');
+const GitAnnotationDocumentBuilder = require('../../../lib/git-annotation/git-annotation-document-builder');
 
 suite('GitAnnotationDocumentBuilder', () => {
 

@@ -1,5 +1,5 @@
 
-const GitAnnotationLineValues = require('../../lib/git-annotation-line-values');
+const GitAnnotationLineValues = require('../../../lib/git-annotation/git-annotation-line-values');
 
 suite('GitAnnotationLineValues', () => {
 

@@ -1,5 +1,5 @@
 
-const GitAnnotationLineDirector = require('../../lib/git-annotation-line-director');
+const GitAnnotationLineDirector = require('../../../lib/git-annotation/git-annotation-line-director');
 
 suite('GitAnnotationLineDirector', () => {
 

@@ -1,5 +1,5 @@
 
-const GitAnnotationContentGenerator = require('../../lib/git-annotation-content-generator');
+const GitAnnotationContentGenerator = require('../../../lib/git-annotation/git-annotation-content-generator');
 
 suite('GitAnnotationContentGenerator', () => {
 
