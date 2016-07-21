@@ -50,6 +50,17 @@ suite('GitAnnotationLineValues', () => {
         expect(line.caption).to.eql('  1  COMMIT_ 2016-06-12 AUTHOR_NAME');
     });
 
+    test('it just gives padded line number if the line is not yet committed', () => {
+        const lineBlame = {commitHash: '0000000000000000000000000000000000000000'};
+        const params = {
+            lineBlame,
+            lineNumber: 1,
+            lineNumberWidth: 3
+        };
+        const line = new GitAnnotationLineValues(params);
+        expect(line.caption).to.eql('  1');
+    });
+
     test('it returns contents of the line of the commit', () => {
         const lineBlame = {lineContents: 'LINE_CONTENTS'};
         const line = new GitAnnotationLineValues({lineBlame});
@@ -79,5 +90,14 @@ suite('GitAnnotationLineValues', () => {
                 }
             ]
         });
+    });
+
+    test('it does not give command if the line is not yet committed', () => {
+        const lineBlame = {commitHash: '0000000000000000000000000000000000000000'};
+        const line = new GitAnnotationLineValues({
+            lineBlame,
+            repositoryRoot: 'REPOSITORY_ROOT'
+        });
+        expect(line.command).to.eql(null);
     });
 });
