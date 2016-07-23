@@ -26,9 +26,9 @@ suite('UriService', () => {
             const uriService = new UriService({Uri});
 
             const uri = {
-                path: 'show-file',
+                path: 'show-file/FILE.js',
                 scheme: 'annotator',
-                query: 'path=PATH&commitHash=COMMIT_HASH&previousPath=PREVIOUS_PATH&previousCommitHash=PREVIOUS_COMMIT_HASH&repositoryRoot=REPOSITORY_ROOT'
+                query: 'path=DIR%2FFILE.js&commitHash=COMMIT_HASH&previousPath=PREVIOUS_PATH&previousCommitHash=PREVIOUS_COMMIT_HASH&repositoryRoot=REPOSITORY_ROOT'
             };
             expect(uriService.convertToAnnotateFileAction(uri)).to.eql('URI');
             expect(Uri.parse).to.have.been.calledWith(
@@ -63,18 +63,18 @@ suite('UriService', () => {
 
     suite('#encodeShowFileAction', () => {
 
-        test('it encodes show-file action', () => {
+        test('it encodes show-file action, putting filename in uri path so that the editor can find the file type', () => {
             const Uri = {parse: sinon.stub().returns('URI')};
             const uriService = new UriService({Uri});
 
             const params = {
-                path: 'PATH',
+                path: '/DIR/FILE.js',
                 repositoryRoot: 'REPOSITORY_ROOT',
                 commitHash: 'COMMIT_HASH'
             };
             expect(uriService.encodeShowFileAction(params)).to.eql('URI');
             expect(Uri.parse).to.have.been.calledWith(
-                'annotator:show-file?path=PATH&repositoryRoot=REPOSITORY_ROOT&commitHash=COMMIT_HASH'
+                'annotator:show-file/FILE.js?path=%2FDIR%2FFILE.js&repositoryRoot=REPOSITORY_ROOT&commitHash=COMMIT_HASH'
             );
         });
     });
@@ -87,6 +87,29 @@ suite('UriService', () => {
 
             expect(uriService.encodeShowEmptyFileAction()).to.eql('URI');
             expect(Uri.parse).to.have.been.calledWith('annotator:show-emptyfile');
+        });
+    });
+
+    suite('#getAction', () => {
+
+        test('it recognise action of given uri', () => {
+            const uriService = new UriService({});
+
+            const uri = {
+                scheme: 'annotator',
+                path: 'show-file/FILE.js'
+            };
+            expect(uriService.getAction(uri)).to.eql('show-file');
+        });
+
+        test('it does not understand action if scheme of uri is not of this extension', () => {
+            const uriService = new UriService({});
+
+            const uri = {
+                scheme: 'UNKNOWN_SCHEME',
+                path: 'show-file/FILE.js'
+            };
+            expect(uriService.getAction(uri)).to.be.null;
         });
     });
 
