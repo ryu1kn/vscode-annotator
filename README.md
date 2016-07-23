@@ -35,6 +35,10 @@ From the commit diff, annotate the contents of the left side of the diff view
 
 ## Release Notes
 
+### 0.4.0: 23 July 2016
+
+* Let the editor do the syntax highlighting in the diff view
+
 ### 0.3.0: 18 July 2016
 
 * Added a feature to annotate the contents of the left side of the commit diff
