@@ -100,4 +100,10 @@ suite('GitAnnotationLineValues', () => {
         });
         expect(line.command).to.eql(null);
     });
+
+    test('it returns commit hash of the line of the commit', () => {
+        const lineBlame = {commitHash: 'COMMIT_HASH'};
+        const line = new GitAnnotationLineValues({lineBlame});
+        expect(line.commitHash).to.eql('COMMIT_HASH');
+    });
 });

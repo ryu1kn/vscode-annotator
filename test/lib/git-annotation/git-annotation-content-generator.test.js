@@ -10,11 +10,12 @@ suite('GitAnnotationContentGenerator', () => {
         const gitBlameOutputParser = {
             parse: stubWithArgs(['ANNOTATION_STRING'], 'ANNOTATION_LIST')
         };
-        const gitAnnotationDocumentBuilder = {
-            build: stubWithArgs(['ANNOTATION_LIST', 'REPOSITORY_ROOT'], 'ANNOTATION_DOCUMENT')
+        const gitAnnotationHtmlDirector = {
+            construct: stubWithArgs(['ANNOTATION_LIST', 'REPOSITORY_ROOT'], 'ANNOTATION_DOCUMENT')
         };
+        const gitAnnotationHtmlDirectorFactory = {create: () => gitAnnotationHtmlDirector};
         const gitAnnotationContentGenerator = new GitAnnotationContentGenerator({
-            gitCommand, gitAnnotationDocumentBuilder, gitBlameOutputParser
+            gitCommand, gitAnnotationHtmlDirectorFactory, gitBlameOutputParser
         });
 
         const params = {
@@ -35,11 +36,12 @@ suite('GitAnnotationContentGenerator', () => {
         const gitBlameOutputParser = {
             parse: stubWithArgs(['ANNOTATION_STRING'], 'ANNOTATION_LIST')
         };
-        const gitAnnotationDocumentBuilder = {
-            build: stubWithArgs(['ANNOTATION_LIST', 'REPOSITORY_ROOT'], 'ANNOTATION_DOCUMENT')
+        const gitAnnotationHtmlDirector = {
+            construct: stubWithArgs(['ANNOTATION_LIST', 'REPOSITORY_ROOT'], 'ANNOTATION_DOCUMENT')
         };
+        const gitAnnotationHtmlDirectorFactory = {create: () => gitAnnotationHtmlDirector};
         const gitAnnotationContentGenerator = new GitAnnotationContentGenerator({
-            gitCommand, gitAnnotationDocumentBuilder, gitBlameOutputParser
+            gitCommand, gitAnnotationHtmlDirectorFactory, gitBlameOutputParser
         });
 
         const params = {

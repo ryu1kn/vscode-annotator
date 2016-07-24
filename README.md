@@ -22,6 +22,7 @@ From the commit diff, annotate the contents of the left side of the diff view
 
 * `annotator.annotationColumnWidth`: Width of the annotation column
 * `annotator.annotationFontColor`: Font color of the annotation text
+* `annotator.annotationFocusColor`: Color for highlighting focused commit
 * `annotator.annotationTooltipWidth`: Width of the annotation tooltip
 * `annotator.annotationTooltipBackgroundColor`: Background color of the annotation tooltip
 

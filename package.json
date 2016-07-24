@@ -46,6 +46,11 @@
           "type": "string",
           "default": "gray"
         },
+        "annotator.annotationFocusColor": {
+          "description": "Color for highlighting focused commit",
+          "type": "string",
+          "default": "#ff9"
+        },
         "annotator.annotationTooltipWidth": {
           "description": "Width of the annotation tooltip",
           "type": "string",

@@ -1,15 +1,12 @@
 
-const GitAnnotationDocumentBuilder = require('../../../lib/git-annotation/git-annotation-document-builder');
+const GitAnnotationHtmlBodyGenerator = require('../../../lib/git-annotation/git-annotation-html-body-generator');
 
-suite('GitAnnotationDocumentBuilder', () => {
+suite('GitAnnotationHtmlBodyGenerator', () => {
 
-    test('it composes annotation HTML document from given annotation data', () => {
-        const annotationStyleBuilder = {build: () => 'CSS'};
+    test('it composes annotation HTML body from given annotation data', () => {
         const gitAnnotationLineDirector = {construct: sinon.stub().returns('LINE_HTML')};
         const gitAnnotationLineDirectorFactory = {create: sinon.stub().returns(gitAnnotationLineDirector)};
-        const builder = new GitAnnotationDocumentBuilder({
-            annotationStyleBuilder, gitAnnotationLineDirectorFactory
-        });
+        const generator = new GitAnnotationHtmlBodyGenerator({gitAnnotationLineDirectorFactory});
         const lines = [{
             filename: 'FILENAME',
             commitHash: 'COMMIT_HASH',
@@ -19,7 +16,7 @@ suite('GitAnnotationDocumentBuilder', () => {
             subject: 'SUBJECT'
         }];
 
-        expect(builder.build(lines, 'REPOSITORY_ROOT')).to.eql('<style>CSS</style><body>LINE_HTML</body>');
+        expect(generator.generate(lines, 'REPOSITORY_ROOT')).to.eql('LINE_HTML');
         expect(gitAnnotationLineDirector.construct).to.have.been.calledWith({
             lineBlame: {
                 authorName: 'AUTHOR_NAME',
