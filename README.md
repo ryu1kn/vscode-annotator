@@ -2,9 +2,10 @@
 
 ## Features
 
-* Display the annotation view (git blame) of the current file
-* Display the diff of a particular commit by selecting a commit hash on the annotation view
-* From the commit diff, you can now open the annotation view of the file just before the commit, and trace back the history
+* Display the annotation view (git blame) of the current file.
+* Highlight the annotations with same commit hash when hovering over them.
+* Display the diff of a particular commit by selecting a commit hash on the annotation view.
+* From the commit diff, you can now open the annotation view of the file just before the commit, and trace back the history.
 
 Blame the current file and open the diff of a particular commit
 
@@ -22,7 +23,7 @@ From the commit diff, annotate the contents of the left side of the diff view
 
 * `annotator.annotationColumnWidth`: Width of the annotation column
 * `annotator.annotationFontColor`: Font color of the annotation text
-* `annotator.annotationFocusColor`: Color for highlighting focused commit
+* `annotator.annotationHighlightColor`: Highlight color when hovering over the annotation text
 * `annotator.annotationTooltipWidth`: Width of the annotation tooltip
 * `annotator.annotationTooltipBackgroundColor`: Background color of the annotation tooltip
 
@@ -35,6 +36,10 @@ From the commit diff, annotate the contents of the left side of the diff view
 * https://github.com/ryu1kn/vscode-annotator
 
 ## Release Notes
+
+### 0.5.0: 24 July 2016
+
+* Added a feature to highlight the annotations with same commit hash on the annotation view
 
 ### 0.4.0: 23 July 2016
 

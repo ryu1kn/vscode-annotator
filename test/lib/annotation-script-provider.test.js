@@ -6,7 +6,7 @@ suite('AnnotationStyleBuilder', () => {
     test('it dynamically builds up CSS from user configurations', () => {
         const configStore = {
             getExtensionConfig: configName => {
-                const configs = {annotationFocusColor: 'ANNOTATION_FOCUS_COLOR'};
+                const configs = {annotationHighlightColor: 'ANNOTATION_FOCUS_COLOR'};
                 return configs[configName];
             }
         };
