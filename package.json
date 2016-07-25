@@ -49,7 +49,7 @@
         "annotator.annotationHighlightColor": {
           "description": "Highlight color when hovering over the annotation text",
           "type": "string",
-          "default": "#FFF59D"
+          "default": "#DFDDB2"
         },
         "annotator.annotationTooltipWidth": {
           "description": "Width of the annotation tooltip",
@@ -59,7 +59,7 @@
         "annotator.annotationTooltipBackgroundColor": {
           "description": "Background color of the annotation tooltip",
           "type": "string",
-          "default": "#272727"
+          "default": "#3A3830"
         }
       }
     },
