@@ -41,7 +41,8 @@ suite('AnnotationStyleBuilder', () => {
             }
             .annotation {
                 position: relative;
-                width: ANNOTATION_COLUMN_WIDTH;
+                min-width: ANNOTATION_COLUMN_WIDTH;
+                max-width: ANNOTATION_COLUMN_WIDTH;
                 color: ANNOTATION_FONT_COLOR;
             }
             .annotation:hover::after {
