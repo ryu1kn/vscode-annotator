@@ -5,17 +5,21 @@ suite('GitAnnotationHtmlDirector', () => {
 
     test('it builds the HTML document of an annotation view', () => {
         const annotationScriptProvider = {provide: () => 'SCRIPT'};
-        const annotationStyleBuilder = {build: () => 'CSS'};
-        const gitAnnotationHtmlBodyGenerator = {generate: sinon.stub().returns('BODY')};
+        const annotationStyleBuilder = {build: stubWithArgs(['COLOR_MAP'], 'CSS')};
+        const gitAnnotationHtmlBodyGenerator = {
+            generate: stubWithArgs(['LINE_BLAME', 'REPOSITORY_ROOT'], 'BODY')
+        };
         const gitAnnotationHtmlBuilder = {
             addCss: sinon.spy(),
             addScript: sinon.spy(),
             addSafeBody: sinon.spy(),
             getHtml: () => 'HTML'
         };
+        const commitColorDesignator = {designate: stubWithArgs(['LINE_BLAME'], 'COLOR_MAP')};
         const director = new GitAnnotationHtmlDirector({
             annotationStyleBuilder,
             annotationScriptProvider,
+            commitColorDesignator,
             gitAnnotationHtmlBodyGenerator,
             gitAnnotationHtmlBuilder
         });
@@ -24,6 +28,5 @@ suite('GitAnnotationHtmlDirector', () => {
         expect(gitAnnotationHtmlBuilder.addCss).to.have.been.calledWith('CSS');
         expect(gitAnnotationHtmlBuilder.addScript).to.have.been.calledWith('SCRIPT');
         expect(gitAnnotationHtmlBuilder.addSafeBody).to.have.been.calledWith('BODY');
-        expect(gitAnnotationHtmlBodyGenerator.generate).to.have.been.calledWith('LINE_BLAME', 'REPOSITORY_ROOT');
     });
 });

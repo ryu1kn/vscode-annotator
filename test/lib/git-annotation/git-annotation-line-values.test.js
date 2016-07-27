@@ -22,7 +22,6 @@ suite('GitAnnotationLineValues', () => {
 
     test('it composes the caption of the commit', () => {
         const lineBlame = {
-            commitHash: 'COMMIT_HASH',
             authorTime: 1465725065,
             authorName: 'AUTHOR_NAME'
         };
@@ -32,12 +31,11 @@ suite('GitAnnotationLineValues', () => {
             maxLineNumber: 1
         };
         const line = new GitAnnotationLineValues(params);
-        expect(line.caption).to.eql('1  COMMIT_ 2016-06-12 AUTHOR_NAME');
+        expect(line.caption).to.eql('1  2016-06-12 AUTHOR_NAME');
     });
 
     test('it gives padding for the line number', () => {
         const lineBlame = {
-            commitHash: 'COMMIT_HASH',
             authorTime: 1465725065,
             authorName: 'AUTHOR_NAME'
         };
@@ -47,7 +45,7 @@ suite('GitAnnotationLineValues', () => {
             lineNumberWidth: 3
         };
         const line = new GitAnnotationLineValues(params);
-        expect(line.caption).to.eql('  1  COMMIT_ 2016-06-12 AUTHOR_NAME');
+        expect(line.caption).to.eql('  1  2016-06-12 AUTHOR_NAME');
     });
 
     test('it just gives padded line number if the line is not yet committed', () => {

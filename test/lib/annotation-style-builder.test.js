@@ -23,8 +23,9 @@ suite('AnnotationStyleBuilder', () => {
                 return configs[configName];
             }
         };
+        const commitColorMap = {COMMIT_1: 'COLOR_1', COMMIT_2: 'COLOR_2'};
         const cssBuilder = new AnnotationStyleBuilder({configStore});
-        expect(cssBuilder.build()).to.eql(`
+        expect(cssBuilder.build(commitColorMap)).to.eql(`
             * {
                 font-family: FONT_FAMILY;
                 font-size: 10px;
@@ -41,7 +42,6 @@ suite('AnnotationStyleBuilder', () => {
                 position: relative;
                 width: ANNOTATION_COLUMN_WIDTH;
                 color: ANNOTATION_FONT_COLOR;
-                margin-right: 1em;
             }
             .annotation:hover::after {
                 display: block;
@@ -66,9 +66,16 @@ suite('AnnotationStyleBuilder', () => {
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
-            a.annotation-inner:hover {
+            .annotation-inner:hover {
                 text-decoration: underline;
-            }`);
+            }
+            .commitColor {
+                min-width: 2em;
+                max-width: 2em;
+                margin: 0 1em 0 .5em;
+            }
+        .line[data-commitHash="COMMIT_1"] > .commitColor {background-color: COLOR_1;}
+.line[data-commitHash="COMMIT_2"] > .commitColor {background-color: COLOR_2;}`);
     });
 
     test('it specifies line-height 1.5 if its value is falsy', () => {

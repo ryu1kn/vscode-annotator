@@ -20,8 +20,8 @@ suite('AnnotationStyleBuilder', () => {
 
             function addCommitHighlightRule(event) {
                 if (event.target.className !== 'annotation') return;
-                var commitHash = event.target.attributes['data-commitHash'].value;
-                var selectorText = '[data-commitHash="' + commitHash + '"]';
+                var commitHash = event.target.parentNode.attributes['data-commitHash'].value;
+                var selectorText = '.line[data-commitHash="' + commitHash + '"] > .annotation';
                 var highlightRule = selectorText + ' {background-color: ANNOTATION_FOCUS_COLOR;}';
                 index = 0;
                 stylesheet.insertRule(highlightRule, index);
