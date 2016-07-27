@@ -3,7 +3,7 @@
 ## Features
 
 * Display the annotation view (git blame) of the current file.
-* Display color next to annotation to indicate how (relatively) old the commit is.
+* The vertical colour bar is coloured darker for older commits and lighter for more recent commits (or the other way around, depending on the order you specified ).
 * Highlight the annotations with same commit hash when hovering over them.
 * Display the diff of a particular commit by selecting a commit hash on the annotation view.
 * From the commit diff, you can now open the annotation view of the file just before the commit, and trace back the history.
@@ -16,9 +16,9 @@ From the commit diff, annotate the contents of the left side of the diff view
 
 ![Annotate the file contents before the commit](https://raw.githubusercontent.com/ryu1kn/vscode-annotator/master/images/animations/annotate-contents-of-before-selected-commit.gif)
 
-Customising colours for lighter colour themes
+Annotation with different colour settings, etc.
 
-![Customise colours for lighter colour themes](https://raw.githubusercontent.com/ryu1kn/vscode-annotator/master/images/screencaptures/light-theme.png)
+![Annotation with different colour settings](https://raw.githubusercontent.com/ryu1kn/vscode-annotator/master/images/screencaptures/light-theme.png)
 
 ## Commands
 
@@ -43,6 +43,10 @@ Customising colours for lighter colour themes
 * https://github.com/ryu1kn/vscode-annotator
 
 ## Release Notes
+
+### 0.6.0: 27 July 2016
+
+* Added a feature to show vertical colour bar to indicate the age of each commit
 
 ### 0.5.0: 24 July 2016
 

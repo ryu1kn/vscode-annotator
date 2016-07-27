@@ -2,7 +2,7 @@
   "name": "annotator",
   "displayName": "Annotator",
   "description": "Display git blame info along with your code. Can open the diff of a particular commit from there.",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "publisher": "ryu1kn",
   "license": "SEE LICENSE IN LICENSE.txt",
   "icon": "images/annotator.png",
@@ -50,7 +50,7 @@
           },
           "maxItems": 2,
           "minItems": 2,
-          "default": ["#b36b00", "#ffd699"]
+          "default": ["#0D47A1", "#BBDEFB"]
         },
         "annotator.annotationCommitColorBarWidth": {
           "description": "Width of the commit color bar",
@@ -65,7 +65,7 @@
         "annotator.annotationHighlightColor": {
           "description": "Highlight color when hovering over the annotation text",
           "type": "string",
-          "default": "#DFDDB2"
+          "default": "#BBDEFB"
         },
         "annotator.annotationTooltipWidth": {
           "description": "Width of the annotation tooltip",
