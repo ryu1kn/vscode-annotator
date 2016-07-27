@@ -28,7 +28,7 @@ Customising colours for lighter colour themes
 
 * `annotator.annotationColumnWidth`: Width of the annotation column
 * `annotator.annotationCommitColorRange`: Range of colors to be used for coloring each commit
-* `annotator.annotationCommitColorBandWidth`: Width of the commit color band
+* `annotator.annotationCommitColorBarWidth`: Width of the commit color bar
 * `annotator.annotationFontColor`: Font color of the annotation text
 * `annotator.annotationHighlightColor`: Highlight color when hovering over the annotation text
 * `annotator.annotationTooltipWidth`: Width of the annotation tooltip

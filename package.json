@@ -52,8 +52,8 @@
           "minItems": 2,
           "default": ["#b36b00", "#ffd699"]
         },
-        "annotator.annotationCommitColorBandWidth": {
-          "description": "Width of the commit color band",
+        "annotator.annotationCommitColorBarWidth": {
+          "description": "Width of the commit color bar",
           "type": "string",
           "default": "1.5em"
         },
