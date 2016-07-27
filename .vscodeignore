@@ -3,6 +3,7 @@ typings/**
 test/**
 coverage/**
 images/animations/**
+images/screencaptures/**
 __*
 .gitignore
 .editorconfig

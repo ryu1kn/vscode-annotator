@@ -16,6 +16,10 @@ From the commit diff, annotate the contents of the left side of the diff view
 
 ![Annotate the file contents before the commit](https://raw.githubusercontent.com/ryu1kn/vscode-annotator/master/images/animations/annotate-contents-of-before-selected-commit.gif)
 
+Customising colours for lighter colour themes
+
+![Customise colours for lighter colour themes](https://raw.githubusercontent.com/ryu1kn/vscode-annotator/master/images/screencaptures/light-theme.png)
+
 ## Commands
 
 * `Annotator: Annotate the Current File or the File Before the Commit (if on Commit Diff)`
