@@ -3,6 +3,7 @@
 ## Features
 
 * Display the annotation view (git blame) of the current file.
+* Display color next to annotation to indicate how (relatively) old the commit is.
 * Highlight the annotations with same commit hash when hovering over them.
 * Display the diff of a particular commit by selecting a commit hash on the annotation view.
 * From the commit diff, you can now open the annotation view of the file just before the commit, and trace back the history.
@@ -22,6 +23,8 @@ From the commit diff, annotate the contents of the left side of the diff view
 ## Configurations
 
 * `annotator.annotationColumnWidth`: Width of the annotation column
+* `annotator.annotationCommitColorRange`: Range of colors to be used for coloring each commit
+* `annotator.annotationCommitColorBandWidth`: Width of the commit color band
 * `annotator.annotationFontColor`: Font color of the annotation text
 * `annotator.annotationHighlightColor`: Highlight color when hovering over the annotation text
 * `annotator.annotationTooltipWidth`: Width of the annotation tooltip

@@ -4,10 +4,15 @@ const CommitColorDesignator = require('../../../lib/git-annotation/commit-color-
 suite('CommitColorDesignator', () => {
 
     test('it assign colours to each commit old one for closer to startColor', () => {
-        const designator = new CommitColorDesignator({
-            startColor: '#000000',
-            endColor: '#FFFFFF'
-        });
+        const configStore = {
+            getExtensionConfig: configName => {
+                const configs = {
+                    annotationCommitColorRange: ['#000000', '#FFFFFF']
+                };
+                return configs[configName];
+            }
+        };
+        const designator = new CommitColorDesignator({configStore});
 
         const lineBlames = [
             {commitHash: 'COMMIT_1', authorTime: 200},

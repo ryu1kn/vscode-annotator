@@ -41,6 +41,22 @@
           "type": "string",
           "default": "13em"
         },
+        "annotator.annotationCommitColorRange": {
+          "description": "Range of colors to be used for coloring each commit",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^#[0-9A-Fa-f]{6}$"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "default": ["#b36b00", "#ffd699"]
+        },
+        "annotator.annotationCommitColorBandWidth": {
+          "description": "Width of the commit color band",
+          "type": "string",
+          "default": "1.5em"
+        },
         "annotator.annotationFontColor": {
           "description": "Font color of the annotation",
           "type": "string",

@@ -18,7 +18,8 @@ suite('AnnotationStyleBuilder', () => {
                     annotationColumnWidth: 'ANNOTATION_COLUMN_WIDTH',
                     annotationFontColor: 'ANNOTATION_FONT_COLOR',
                     annotationTooltipBackgroundColor: 'ANNOTATION_TOOLTIP_BACKGROUND_COLOR',
-                    annotationTooltipWidth: 'ANNOTATION_TOOLTIP_WIDTH'
+                    annotationTooltipWidth: 'ANNOTATION_TOOLTIP_WIDTH',
+                    annotationCommitColorBandWidth: 'ANNOTATION_COMMIT_COLOR_BAND_WIDTH'
                 };
                 return configs[configName];
             }
@@ -70,8 +71,8 @@ suite('AnnotationStyleBuilder', () => {
                 text-decoration: underline;
             }
             .commitColor {
-                min-width: 2em;
-                max-width: 2em;
+                min-width: ANNOTATION_COMMIT_COLOR_BAND_WIDTH;
+                max-width: ANNOTATION_COMMIT_COLOR_BAND_WIDTH;
                 margin: 0 1em 0 .5em;
             }
         .line[data-commitHash="COMMIT_1"] > .commitColor {background-color: COLOR_1;}
