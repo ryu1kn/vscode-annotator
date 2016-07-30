@@ -65,7 +65,7 @@ suite('GitService', () => {
         test('it shows the contents of a specified file of a specified commit', () => {
             const shellCommandRunner = {run: sinon.spy()};
             const gitService = new GitService({shellCommandRunner});
-            gitService.show('COMMIT', '/PATH/TO/FILE', 'ROOT_PATH');
+            gitService.getFileContents('COMMIT', '/PATH/TO/FILE', 'ROOT_PATH');
             expect(shellCommandRunner.run).to.have.been.calledWith(
                 'git', ['show', 'COMMIT:/PATH/TO/FILE'], {cwd: 'ROOT_PATH'}
             );

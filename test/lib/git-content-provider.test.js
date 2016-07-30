@@ -26,7 +26,7 @@ suite('GitContentProvider', () => {
 
     test('it retrieves the file contents of specified commit', () => {
         const gitService = {
-            show: stubWithArgs(
+            getFileContents: stubWithArgs(
                 ['COMMIT', '/DIR/FILE.js', 'REPOSITORY_ROOT'],
                 Promise.resolve('FILE_CONTENTS')
             )
