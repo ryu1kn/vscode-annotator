@@ -1,6 +1,6 @@
 
 const _ = require('lodash');
-const SwitchDiffCommand = require('../../lib/switch-diff-command');
+const SwitchDiffCommand = require('../../../lib/command/switch-diff');
 const querystring = require('querystring');
 
 suite('SwitchDiffCommand', () => {
