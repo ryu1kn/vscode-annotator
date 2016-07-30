@@ -33,15 +33,18 @@ suite('GitService', () => {
         });
     });
 
-    suite('#diffTree', () => {
+    suite('#getChangedFilesInCommit', () => {
 
         test('it lists all the changed files in a commit with their change type (e.g. M/A/D/...)', () => {
-            const shellCommandRunner = {run: sinon.spy()};
-            const gitService = new GitService({shellCommandRunner});
-            gitService.diffTree('COMMIT_HASH', 'REPOSITORY_ROOT');
-            expect(shellCommandRunner.run).to.have.been.calledWith(
-                'git', ['diff-tree', 'COMMIT_HASH', '--name-status', '--no-commit-id', '-M', '-r'], {cwd: 'REPOSITORY_ROOT'}
-            );
+            const changedFileListParser = {parse: sinon.spy()};
+            const shellCommandRunner = {run: sinon.stub().returns(Promise.resolve('GIT_OUTPUT'))};
+            const gitService = new GitService({changedFileListParser, shellCommandRunner});
+            return gitService.getChangedFilesInCommit('COMMIT_HASH', 'REPOSITORY_ROOT').then(() => {
+                expect(shellCommandRunner.run).to.have.been.calledWith(
+                    'git', ['diff-tree', 'COMMIT_HASH', '--name-status', '--no-commit-id', '-M', '-r'], {cwd: 'REPOSITORY_ROOT'}
+                );
+                expect(changedFileListParser.parse).to.have.been.calledWith('GIT_OUTPUT');
+            });
         });
     });
 
