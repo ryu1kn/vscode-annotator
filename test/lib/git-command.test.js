@@ -31,6 +31,18 @@ suite('GitCommand', () => {
         });
     });
 
+    suite('#diffTree', () => {
+
+        test('it lists all the changed files in a commit with their change type (e.g. M/A/D/...)', () => {
+            const shellCommandRunner = {run: sinon.spy()};
+            const gitCommand = new GitCommand({shellCommandRunner});
+            gitCommand.diffTree('COMMIT_HASH', 'REPOSITORY_ROOT');
+            expect(shellCommandRunner.run).to.have.been.calledWith(
+                'git', ['diff-tree', 'COMMIT_HASH', '--name-status', '--no-commit-id', '-M', '-r'], {cwd: 'REPOSITORY_ROOT'}
+            );
+        });
+    });
+
     suite('#getRepositoryRoot', () => {
 
         test('it executes git rev-parse to get the absolute path of git repository', () => {

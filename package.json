@@ -83,6 +83,10 @@
       {
         "command": "annotator.annotate",
         "title": "Annotator: Annotate the Current File or the File Before the Commit (if on Commit Diff)"
+      },
+      {
+        "command": "annotator.switchDiffInCommit",
+        "title": "Annotator: Show Diff of Another File in the Same Commit"
       }
     ]
   },
