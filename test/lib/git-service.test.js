@@ -3,14 +3,15 @@ const GitService = require('../../lib/git-service');
 
 suite('GitService', () => {
 
-    suite('#blame', () => {
+    suite('#gitBlame', () => {
 
         test('it executes git blame with a file path and commit hash', () => {
             const shellCommandRunner = {run: sinon.stub().returns(Promise.resolve('BLAME'))};
-            const gitService = new GitService({shellCommandRunner});
+            const gitBlameOutputParser = {parse: stubWithArgs(['BLAME'], 'PARSED_BLAME')};
+            const gitService = new GitService({gitBlameOutputParser, shellCommandRunner});
 
-            return gitService.blame('/PATH/TO/FILE', 'COMMIT_HASH', 'ROOT_PATH').then(result => {
-                expect(result).to.eql('BLAME');
+            return gitService.getBlame('/PATH/TO/FILE', 'COMMIT_HASH', 'ROOT_PATH').then(result => {
+                expect(result).to.eql('PARSED_BLAME');
                 expect(shellCommandRunner.run).to.have.been.calledWith(
                     'git', ['blame', '--line-porcelain', 'COMMIT_HASH', '--', '/PATH/TO/FILE'], {cwd: 'ROOT_PATH'}
                 );
@@ -19,11 +20,12 @@ suite('GitService', () => {
 
         test('it invokes git blame without commitHash if it is not given', () => {
             const shellCommandRunner = {run: sinon.stub().returns(Promise.resolve('BLAME'))};
-            const gitService = new GitService({shellCommandRunner});
+            const gitBlameOutputParser = {parse: stubWithArgs(['BLAME'], 'PARSED_BLAME')};
+            const gitService = new GitService({gitBlameOutputParser, shellCommandRunner});
 
             const commitHash = undefined;
-            return gitService.blame('/PATH/TO/FILE', commitHash, 'ROOT_PATH').then(result => {
-                expect(result).to.eql('BLAME');
+            return gitService.getBlame('/PATH/TO/FILE', commitHash, 'ROOT_PATH').then(result => {
+                expect(result).to.eql('PARSED_BLAME');
                 expect(shellCommandRunner.run).to.have.been.calledWith(
                     'git', ['blame', '--line-porcelain', '--', '/PATH/TO/FILE'], {cwd: 'ROOT_PATH'}
                 );
