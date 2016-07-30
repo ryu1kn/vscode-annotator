@@ -28,7 +28,7 @@ suite('GitAnnotationContentGenerator', () => {
     test('it finds repository root path if it is not given', () => {
         const gitService = {
             getBlame: stubWithArgs(['PATH', 'COMMIT_HASH', 'REPOSITORY_ROOT'], Promise.resolve('ANNOTATION_LIST')),
-            getRepositoryRoot: stubWithArgs(['PATH'], Promise.resolve('REPOSITORY_ROOT\n'))
+            getRepositoryRoot: stubWithArgs(['PATH'], Promise.resolve('REPOSITORY_ROOT'))
         };
         const gitAnnotationHtmlDirector = {
             construct: stubWithArgs(['ANNOTATION_LIST', 'REPOSITORY_ROOT'], 'ANNOTATION_DOCUMENT')

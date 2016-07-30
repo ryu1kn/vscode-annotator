@@ -51,16 +51,18 @@ suite('GitService', () => {
     suite('#getRepositoryRoot', () => {
 
         test('it executes git rev-parse to get the absolute path of git repository', () => {
-            const shellCommandRunner = {run: sinon.spy()};
+            const shellCommandRunner = {run: sinon.stub().returns(Promise.resolve('PATH\n'))};
             const gitService = new GitService({shellCommandRunner});
-            gitService.getRepositoryRoot('/PATH/TO/FILE');
-            expect(shellCommandRunner.run).to.have.been.calledWith(
-                'git', ['rev-parse', '--show-toplevel'], {cwd: '/PATH/TO'}
-            );
+            return gitService.getRepositoryRoot('/PATH/TO/FILE').then(path => {
+                expect(path).to.eql('PATH');
+                expect(shellCommandRunner.run).to.have.been.calledWith(
+                    'git', ['rev-parse', '--show-toplevel'], {cwd: '/PATH/TO'}
+                );
+            });
         });
     });
 
-    suite('#show', () => {
+    suite('#getFileContents', () => {
 
         test('it shows the contents of a specified file of a specified commit', () => {
             const shellCommandRunner = {run: sinon.spy()};
