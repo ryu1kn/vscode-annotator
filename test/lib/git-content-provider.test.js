@@ -25,14 +25,14 @@ suite('GitContentProvider', () => {
     });
 
     test('it retrieves the file contents of specified commit', () => {
-        const gitCommand = {
+        const gitService = {
             show: stubWithArgs(
                 ['COMMIT', '/DIR/FILE.js', 'REPOSITORY_ROOT'],
                 Promise.resolve('FILE_CONTENTS')
             )
         };
         const uriService = fakeUriService();
-        const contentProvider = new GitContentProvider({gitCommand, uriService});
+        const contentProvider = new GitContentProvider({gitService, uriService});
         const uri = {
             path: 'show-file/FILE.js',
             query: 'repositoryRoot=REPOSITORY_ROOT&commitHash=COMMIT&path=%2FDIR%2FFILE.js'

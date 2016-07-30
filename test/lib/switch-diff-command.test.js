@@ -8,7 +8,7 @@ suite('SwitchDiffCommand', () => {
     test('it takes diff of another file in the same commit', () => {
         const uriService = {getAction: () => 'ACTION'};
         const commands = {executeCommand: sinon.spy()};
-        const gitCommand = {diffTree: sinon.stub().returns(Promise.resolve('GIT_OUTPUT'))};
+        const gitService = {diffTree: sinon.stub().returns(Promise.resolve('GIT_OUTPUT'))};
         const changedFileListParser = {parse: sinon.stub().returns('PARSED_GIT_OUTPUT')};
         const changedFilePicker = {pick: sinon.stub().returns({
             path: 'PATH',
@@ -18,7 +18,7 @@ suite('SwitchDiffCommand', () => {
             uriService,
             changedFilePicker,
             changedFileListParser,
-            gitCommand,
+            gitService,
             commands
         });
 
@@ -36,7 +36,7 @@ suite('SwitchDiffCommand', () => {
                 previousPath: 'PREVIOUS_PATH',
                 repositoryRoot: 'REPOSITORY_ROOT'
             });
-            expect(gitCommand.diffTree).to.have.been.calledWith('COMMIT_HASH', 'REPOSITORY_ROOT');
+            expect(gitService.diffTree).to.have.been.calledWith('COMMIT_HASH', 'REPOSITORY_ROOT');
             expect(changedFileListParser.parse).to.have.been.calledWith('GIT_OUTPUT');
             expect(changedFilePicker.pick).to.have.been.calledWith('PARSED_GIT_OUTPUT');
         });
@@ -44,13 +44,13 @@ suite('SwitchDiffCommand', () => {
 
     test('it does nothing if action is not available in the uri', () => {
         const uriService = {getAction: () => null};
-        const gitCommand = {diffTree: sinon.spy()};
-        const switchDiffCommand = new SwitchDiffCommand({uriService, gitCommand});
+        const gitService = {diffTree: sinon.spy()};
+        const switchDiffCommand = new SwitchDiffCommand({uriService, gitService});
 
         const editor = _.set({}, 'document.uri', 'URI');
         return switchDiffCommand.execute(editor).then(result => {
             expect(result).to.be.undefined;
-            expect(gitCommand.diffTree).to.have.been.not.called;
+            expect(gitService.diffTree).to.have.been.not.called;
         });
     });
 

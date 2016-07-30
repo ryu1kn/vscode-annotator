@@ -4,7 +4,7 @@ const GitAnnotationContentGenerator = require('../../../lib/git-annotation/git-a
 suite('GitAnnotationContentGenerator', () => {
 
     test('it loads git annotation and construct a document', () => {
-        const gitCommand = {
+        const gitService = {
             blame: stubWithArgs(['PATH', 'COMMIT_HASH', 'REPOSITORY_ROOT'], Promise.resolve('ANNOTATION_STRING'))
         };
         const gitBlameOutputParser = {
@@ -15,7 +15,7 @@ suite('GitAnnotationContentGenerator', () => {
         };
         const gitAnnotationHtmlDirectorFactory = {create: () => gitAnnotationHtmlDirector};
         const gitAnnotationContentGenerator = new GitAnnotationContentGenerator({
-            gitCommand, gitAnnotationHtmlDirectorFactory, gitBlameOutputParser
+            gitService, gitAnnotationHtmlDirectorFactory, gitBlameOutputParser
         });
 
         const params = {
@@ -29,7 +29,7 @@ suite('GitAnnotationContentGenerator', () => {
     });
 
     test('it finds repository root path if it is not given', () => {
-        const gitCommand = {
+        const gitService = {
             blame: stubWithArgs(['PATH', 'COMMIT_HASH', 'REPOSITORY_ROOT'], Promise.resolve('ANNOTATION_STRING')),
             getRepositoryRoot: stubWithArgs(['PATH'], Promise.resolve('REPOSITORY_ROOT\n'))
         };
@@ -41,7 +41,7 @@ suite('GitAnnotationContentGenerator', () => {
         };
         const gitAnnotationHtmlDirectorFactory = {create: () => gitAnnotationHtmlDirector};
         const gitAnnotationContentGenerator = new GitAnnotationContentGenerator({
-            gitCommand, gitAnnotationHtmlDirectorFactory, gitBlameOutputParser
+            gitService, gitAnnotationHtmlDirectorFactory, gitBlameOutputParser
         });
 
         const params = {
@@ -54,12 +54,12 @@ suite('GitAnnotationContentGenerator', () => {
     });
 
     test('it does not try to parse git result if command failed', () => {
-        const gitCommand = {
+        const gitService = {
             blame: sinon.stub().returns(Promise.reject(new Error('BLAME_ERROR'))),
             getRepositoryRoot: stubWithArgs(['PATH'], Promise.resolve('REPOSITORY_ROOT\n'))
         };
         const gitBlameOutputParser = {parse: sinon.spy()};
-        const gitAnnotationContentGenerator = new GitAnnotationContentGenerator({gitCommand, gitBlameOutputParser});
+        const gitAnnotationContentGenerator = new GitAnnotationContentGenerator({gitService, gitBlameOutputParser});
 
         const params = {path: 'PATH'};
         return gitAnnotationContentGenerator.generate(params).then(
