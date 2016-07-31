@@ -2,7 +2,7 @@
   "name": "annotator",
   "displayName": "Annotator",
   "description": "Display git blame info along with your code. Can open the diff of a particular commit from there.",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "publisher": "ryu1kn",
   "license": "SEE LICENSE IN LICENSE.txt",
   "icon": "images/annotator.png",
@@ -28,7 +28,8 @@
     "diff"
   ],
   "activationEvents": [
-    "onCommand:annotator.annotate"
+    "onCommand:annotator.annotate",
+    "onCommand:annotator.switchDiffWithinCommit"
   ],
   "main": "./extension",
   "contributes": {

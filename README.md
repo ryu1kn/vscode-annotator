@@ -53,6 +53,10 @@ Annotation with different colour settings, etc.
 
 ## Release Notes
 
+### 0.7.1: 31 July 2016
+
+* Fixed a problem that `switchDiffWithinCommit` command was not registered as `activationEvents`
+
 ### 0.7.0: 31 July 2016
 
 * Added a feature to open a diff of another file changed in the same commit
