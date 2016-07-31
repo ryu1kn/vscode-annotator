@@ -39,6 +39,28 @@ suite('SwitchDiffCommand', () => {
         });
     });
 
+    test('it does nothing if no file is selected', () => {
+        const uriService = {getAction: () => 'ACTION'};
+        const commands = {executeCommand: sinon.spy()};
+        const gitService = {getChangedFilesInCommit: sinon.stub().returns(Promise.resolve('FILES'))};
+        const changedFilePicker = {pick: sinon.stub().returns(null)};
+        const switchDiffCommand = new SwitchDiffCommand({
+            uriService,
+            changedFilePicker,
+            gitService,
+            commands
+        });
+
+        const uriQuery = {
+            commitHash: 'COMMIT_HASH',
+            repositoryRoot: 'REPOSITORY_ROOT'
+        };
+        const editor = _.set({}, 'document.uri.query', querystring.stringify(uriQuery));
+        return switchDiffCommand.execute(editor).then(() => {
+            expect(commands.executeCommand).to.have.been.not.called;
+        });
+    });
+
     test('it does nothing if action is not available in the uri', () => {
         const uriService = {getAction: () => null};
         const gitService = {getChangedFilesInCommit: sinon.spy()};

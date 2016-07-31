@@ -29,12 +29,24 @@ suite('ChangedFilePicker', () => {
         });
     });
 
+    test('it gives back "null" if no item is selected', () => {
+        const changedFileLabelMaker = {make: () => 'LABEL'};
+        const window = fakeWindow({index: 'NOT_EXIST'});
+        const changedFilePicker = new ChangedFilePicker({changedFileLabelMaker, window});
+        const changedFiles = [
+            {path: 'PATH', previousPath: 'PREVIOUS_PATH'}
+        ];
+        return changedFilePicker.pick(changedFiles).then(item => {
+            expect(item).to.be.null;
+        });
+    });
+
     function fakeWindow(params) {
         return {
             _showQuickPickSpy: sinon.spy(),
             showQuickPick: function (items) {
                 this._showQuickPickSpy(items);
-                return Promise.resolve(items[params.index]);
+                return Promise.resolve(items[params.index] || {});
             }
         };
     }
