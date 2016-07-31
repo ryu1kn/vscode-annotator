@@ -86,7 +86,7 @@
       },
       {
         "command": "annotator.switchDiffInCommit",
-        "title": "Annotator: Show Diff of Another File in the Same Commit"
+        "title": "Annotator: Show Diff of Another File Changed in the Same Commit"
       }
     ]
   },
