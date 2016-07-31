@@ -38,8 +38,7 @@ suite('TakeDiffCommand', () => {
     test('it points to an empty file if filePath is not given', () => {
         const logger = getLogger();
         const uriService = {
-            encodeShowEmptyFileAction: sinon.stub().returns('URI_1'),
-            encodeShowFileAction: sinon.stub().returns('URI_2'),
+            encodeShowFileAction: stubReturns('URI_1', 'URI_2'),
             getTitle: stubWithArgs(['URI_2'], 'ANNOTATION_TITLE')
         };
         const commands = {executeCommand: sinon.spy()};
@@ -51,16 +50,16 @@ suite('TakeDiffCommand', () => {
         };
         return command.execute(lineBlame).then(() => {
             expect(commands.executeCommand).to.have.been.calledWith('vscode.diff', 'URI_1', 'URI_2', 'ANNOTATION_TITLE');
-            expect(uriService.encodeShowEmptyFileAction.args).to.eql([[{
-                commitHash: undefined,
-                path: undefined,
-                repositoryRoot: 'REPOSITORY_ROOT'
-            }]]);
-            expect(uriService.encodeShowFileAction.args).to.eql([[{
-                commitHash: 'COMMIT',
-                path: 'FILENAME',
-                repositoryRoot: 'REPOSITORY_ROOT'
-            }]]);
+            expect(uriService.encodeShowFileAction.args).to.eql([
+                [{
+                    repositoryRoot: 'REPOSITORY_ROOT'
+                }],
+                [{
+                    commitHash: 'COMMIT',
+                    path: 'FILENAME',
+                    repositoryRoot: 'REPOSITORY_ROOT'
+                }]
+            ]);
         });
     });
 

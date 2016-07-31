@@ -44,7 +44,7 @@ suite('GitContentProvider', () => {
 
     test('it returns an empty string if it is requested an empty file', () => {
         const contentProvider = new GitContentProvider({uriService: fakeUriService()});
-        const uri = {path: 'show-emptyfile'};
+        const uri = {path: 'show-file', query: 'repositoryRoot=REPOSITORY_ROOT'};
         const document = contentProvider.provideTextDocumentContent(uri);
         expect(document).to.eql('');
     });

@@ -77,17 +77,19 @@ suite('UriService', () => {
                 'annotator:show-file/FILE.js?path=%2FDIR%2FFILE.js&repositoryRoot=REPOSITORY_ROOT&commitHash=COMMIT_HASH'
             );
         });
-    });
 
-    suite('#encodeShowEmptyFileAction', () => {
-
-        test('it encodes show-emptyfile action', () => {
+        test('it does not put a filename in the path if it is not given', () => {
             const Uri = {parse: sinon.stub().returns('URI')};
             const uriService = new UriService({Uri});
 
-            const params = {KEYS: 'VALUES'};
-            expect(uriService.encodeShowEmptyFileAction(params)).to.eql('URI');
-            expect(Uri.parse).to.have.been.calledWith('annotator:show-emptyfile?KEYS=VALUES');
+            const params = {
+                repositoryRoot: 'REPOSITORY_ROOT',
+                commitHash: 'COMMIT_HASH'
+            };
+            expect(uriService.encodeShowFileAction(params)).to.eql('URI');
+            expect(Uri.parse).to.have.been.calledWith(
+                'annotator:show-file?repositoryRoot=REPOSITORY_ROOT&commitHash=COMMIT_HASH'
+            );
         });
     });
 
@@ -177,7 +179,7 @@ suite('UriService', () => {
             };
             const uri = {
                 scheme: 'annotator',
-                path: 'show-emptyfile',
+                path: 'show-file',
                 query: querystring.stringify(queryParams)
             };
             expect(uriService.getTitle(uri)).to.eql('PREVIOUS_PATH@COMMIT_');
