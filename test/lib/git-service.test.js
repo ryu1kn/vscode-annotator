@@ -41,7 +41,7 @@ suite('GitService', () => {
             const gitService = new GitService({changedFileListParser, shellCommandRunner});
             return gitService.getChangedFilesInCommit('COMMIT_HASH', 'REPOSITORY_ROOT').then(() => {
                 expect(shellCommandRunner.run).to.have.been.calledWith(
-                    'git', ['diff-tree', 'COMMIT_HASH', '--name-status', '--no-commit-id', '-M', '-r'], {cwd: 'REPOSITORY_ROOT'}
+                    'git', ['diff-tree', 'COMMIT_HASH', '--name-status', '--parents', '-M', '-r'], {cwd: 'REPOSITORY_ROOT'}
                 );
                 expect(changedFileListParser.parse).to.have.been.calledWith('GIT_OUTPUT');
             });

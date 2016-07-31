@@ -8,11 +8,14 @@ suite('SwitchDiffCommand', () => {
     test('it takes diff of another file in the same commit', () => {
         const uriService = {getAction: () => 'ACTION'};
         const commands = {executeCommand: sinon.spy()};
-        const gitService = {getChangedFilesInCommit: sinon.stub().returns(Promise.resolve('FILES'))};
-        const changedFilePicker = {pick: sinon.stub().returns({
+        const gitService = {getChangedFilesInCommit: sinon.stub().returns(Promise.resolve({
+            previousCommitHash: 'PREVIOUS_COMMIT_HASH',
+            changedFiles: 'FILES'
+        }))};
+        const changedFilePicker = {pick: sinon.stub().returns(Promise.resolve({
             path: 'PATH',
             previousPath: 'PREVIOUS_PATH'
-        })};
+        }))};
         const switchDiffCommand = new SwitchDiffCommand({
             uriService,
             changedFilePicker,
@@ -22,7 +25,6 @@ suite('SwitchDiffCommand', () => {
 
         const uriQuery = {
             commitHash: 'COMMIT_HASH',
-            previousCommitHash: 'PREVIOUS_COMMIT_HASH',
             repositoryRoot: 'REPOSITORY_ROOT'
         };
         const editor = _.set({}, 'document.uri.query', querystring.stringify(uriQuery));
@@ -43,7 +45,7 @@ suite('SwitchDiffCommand', () => {
         const uriService = {getAction: () => 'ACTION'};
         const commands = {executeCommand: sinon.spy()};
         const gitService = {getChangedFilesInCommit: sinon.stub().returns(Promise.resolve('FILES'))};
-        const changedFilePicker = {pick: sinon.stub().returns(null)};
+        const changedFilePicker = {pick: sinon.stub().returns(Promise.resolve(null))};
         const switchDiffCommand = new SwitchDiffCommand({
             uriService,
             changedFilePicker,
