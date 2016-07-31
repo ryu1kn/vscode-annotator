@@ -3,12 +3,12 @@
 ## Features
 
 * Display the annotation view (git blame) of the current file.
-* The vertical colour bar is coloured darker for older commits and lighter for more recent commits (or the other way around, depending on the colours you specified).
-* Highlight the annotations with same commit hash when hovering over them.
 * Display the diff of a particular commit by selecting a commit hash on the annotation view.
 * From the commit diff view, you can:
   * Open the annotation view of the file just before the commit, and trace back the history.
   * Open the diff of another file in the same commit.
+* The vertical colour bar is coloured darker for older commits and lighter for more recent commits (or the other way around, depending on the colours you specified).
+* Highlight the annotations with same commit hash when hovering over them.
 
 Blame the current file and open the diff of a particular commit
 
@@ -29,7 +29,9 @@ Annotation with different colour settings, etc.
 ## Commands
 
 * `Annotator: Annotate the Current File or the File Before the Commit (if on Commit Diff)`
+    * *Command ID:* `annotator.annotate`
 * `Annotator: Show Diff of Another File Changed in the Same Commit`
+    * *Command ID:* `annotator.switchDiffWithinCommit`
 
 ## Configurations
 
@@ -51,7 +53,7 @@ Annotation with different colour settings, etc.
 
 ## Release Notes
 
-### 0.7.0:
+### 0.7.0: 31 July 2016
 
 * Added a feature to open a diff of another file changed in the same commit
 

@@ -2,7 +2,7 @@
   "name": "annotator",
   "displayName": "Annotator",
   "description": "Display git blame info along with your code. Can open the diff of a particular commit from there.",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "publisher": "ryu1kn",
   "license": "SEE LICENSE IN LICENSE.txt",
   "icon": "images/annotator.png",
@@ -85,7 +85,7 @@
         "title": "Annotator: Annotate the Current File or the File Before the Commit (if on Commit Diff)"
       },
       {
-        "command": "annotator.switchDiffInCommit",
+        "command": "annotator.switchDiffWithinCommit",
         "title": "Annotator: Show Diff of Another File Changed in the Same Commit"
       }
     ]
