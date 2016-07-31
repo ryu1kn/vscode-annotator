@@ -85,8 +85,9 @@ suite('UriService', () => {
             const Uri = {parse: sinon.stub().returns('URI')};
             const uriService = new UriService({Uri});
 
-            expect(uriService.encodeShowEmptyFileAction()).to.eql('URI');
-            expect(Uri.parse).to.have.been.calledWith('annotator:show-emptyfile');
+            const params = {KEYS: 'VALUES'};
+            expect(uriService.encodeShowEmptyFileAction(params)).to.eql('URI');
+            expect(Uri.parse).to.have.been.calledWith('annotator:show-emptyfile?KEYS=VALUES');
         });
     });
 
@@ -166,6 +167,20 @@ suite('UriService', () => {
                 query: querystring.stringify(queryParams)
             };
             expect(uriService.getTitle(uri)).to.eql('PATH@COMMIT_');
+        });
+
+        test('it composes a title for a deleted file diff view', () => {
+            const uriService = new UriService({});
+            const queryParams = {
+                previousPath: 'PREVIOUS_PATH',
+                commitHash: 'COMMIT_HASH'
+            };
+            const uri = {
+                scheme: 'annotator',
+                path: 'show-emptyfile',
+                query: querystring.stringify(queryParams)
+            };
+            expect(uriService.getTitle(uri)).to.eql('PREVIOUS_PATH@COMMIT_');
         });
     });
 });

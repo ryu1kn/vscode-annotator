@@ -51,12 +51,16 @@ suite('TakeDiffCommand', () => {
         };
         return command.execute(lineBlame).then(() => {
             expect(commands.executeCommand).to.have.been.calledWith('vscode.diff', 'URI_1', 'URI_2', 'ANNOTATION_TITLE');
+            expect(uriService.encodeShowEmptyFileAction.args).to.eql([[{
+                commitHash: undefined,
+                path: undefined,
+                repositoryRoot: 'REPOSITORY_ROOT'
+            }]]);
             expect(uriService.encodeShowFileAction.args).to.eql([[{
                 commitHash: 'COMMIT',
                 path: 'FILENAME',
                 repositoryRoot: 'REPOSITORY_ROOT'
             }]]);
-            expect(uriService.encodeShowEmptyFileAction.args).to.eql([[]]);
         });
     });
 
