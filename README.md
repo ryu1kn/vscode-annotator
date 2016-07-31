@@ -47,9 +47,9 @@ Annotation with different colour settings, etc.
 
 `git` command must be available
 
-## Repository
+## Request Features or Report Bugs
 
-* https://github.com/ryu1kn/vscode-annotator
+* https://github.com/ryu1kn/vscode-annotator/issues
 
 ## Release Notes
 
