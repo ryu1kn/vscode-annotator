@@ -45,7 +45,7 @@ Annotation with different colour settings, etc.
 
 ## Prerequisite
 
-`git` command must be available
+`git` command must be available. You need to either make `git` available in your `PATH` or set `git.path` in your settings.
 
 ## Request Features or Report Bugs
 

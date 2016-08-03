@@ -1,3 +1,7 @@
+### 0.7.3: 3 August 2016
+
+* Fixed the problem that it was not respecting the editor's `git.path` config value
+
 ### 0.7.2: 31 July 2016
 
 * Fixed the problem that trying to see another file diff after opening a file addition diff causes an error
