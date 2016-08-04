@@ -5,12 +5,12 @@ suite('#AnnotateCommand', () => {
 
     test("it displays a given file's annotation as HTML", () => {
         const logger = getLogger();
+        const editorTitleResolver = {resolve: stubWithArgs(['ANNOTATE_FILE_URI'], 'ANNOTATION_TITLE')};
         const uriService = {
-            convertToAnnotateFileAction: sinon.stub().returns('ANNOTATE_FILE_URI'),
-            getTitle: stubWithArgs(['ANNOTATE_FILE_URI', 'annotation: '], 'ANNOTATION_TITLE')
+            convertToAnnotateFileAction: sinon.stub().returns('ANNOTATE_FILE_URI')
         };
         const commands = {executeCommand: sinon.spy()};
-        const command = new AnnotateCommand({commands, logger, uriService});
+        const command = new AnnotateCommand({commands, editorTitleResolver, logger, uriService});
         const editor = {
             document: {uri: 'URI', fileName: 'FILENAME'}
         };

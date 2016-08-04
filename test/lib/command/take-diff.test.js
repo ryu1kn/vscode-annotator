@@ -5,12 +5,12 @@ suite('TakeDiffCommand', () => {
 
     test('it displays a diff of 2 files', () => {
         const logger = getLogger();
+        const editorTitleResolver = {resolve: stubWithArgs(['URI_AFTER'], 'ANNOTATION_TITLE')};
         const uriService = {
-            encodeShowFileAction: stubReturns('URI_BEFORE', 'URI_AFTER'),
-            getTitle: stubWithArgs(['URI_AFTER'], 'ANNOTATION_TITLE')
+            encodeShowFileAction: stubReturns('URI_BEFORE', 'URI_AFTER')
         };
         const commands = {executeCommand: sinon.spy()};
-        const command = new TakeDiffCommand({commands, logger, uriService});
+        const command = new TakeDiffCommand({commands, editorTitleResolver, logger, uriService});
         const lineBlame = {
             commitHash: 'COMMIT',
             path: 'FILENAME',
@@ -37,12 +37,10 @@ suite('TakeDiffCommand', () => {
 
     test('it points to an empty file if filePath is not given', () => {
         const logger = getLogger();
-        const uriService = {
-            encodeShowFileAction: stubReturns('URI_1', 'URI_2'),
-            getTitle: stubWithArgs(['URI_2'], 'ANNOTATION_TITLE')
-        };
+        const editorTitleResolver = {resolve: stubWithArgs(['URI_2'], 'ANNOTATION_TITLE')};
+        const uriService = {encodeShowFileAction: stubReturns('URI_1', 'URI_2')};
         const commands = {executeCommand: sinon.spy()};
-        const command = new TakeDiffCommand({commands, logger, uriService});
+        const command = new TakeDiffCommand({commands, editorTitleResolver, logger, uriService});
         const lineBlame = {
             commitHash: 'COMMIT',
             path: 'FILENAME',
