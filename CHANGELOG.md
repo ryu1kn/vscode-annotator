@@ -1,3 +1,7 @@
+### 0.8.0: 5 August 2016
+
+* Revised how to set an editor title so that a file name stands out
+
 ### 0.7.3: 3 August 2016
 
 * Fixed the problem that it was not respecting the editor's `git.path` config value
