@@ -1,5 +1,6 @@
 
 const UriService = require('../../lib/uri-service');
+const querystring = require('querystring');
 
 suite('UriService', () => {
 
@@ -55,6 +56,24 @@ suite('UriService', () => {
                 path: 'show-file',
                 scheme: 'annotator',
                 query: 'path=PATH&commitHash=COMMIT_HASH&repositoryRoot=REPOSITORY_ROOT'
+            };
+            expect(uriService.convertToAnnotateFileAction(uri)).to.eql(null);
+        });
+
+        test('it returns null if show-file action uri is given but previous path is not available', () => {
+            const Uri = {parse: sinon.stub().returns('URI')};
+            const uriService = new UriService({Uri});
+
+            const queryParams = {
+                path: 'PATH',
+                commitHash: 'COMMIT_HASH',
+                repositoryRoot: 'REPOSITORY_ROOT',
+                previousCommitHash: 'PREVIOUS_COMMIT_HASH'
+            };
+            const uri = {
+                path: 'show-file',
+                scheme: 'annotator',
+                query: querystring.stringify(queryParams)
             };
             expect(uriService.convertToAnnotateFileAction(uri)).to.eql(null);
         });
