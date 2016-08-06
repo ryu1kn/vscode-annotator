@@ -45,21 +45,6 @@ suite('AnnotationStyleBuilder', () => {
                 max-width: ANNOTATION_COLUMN_WIDTH;
                 color: ANNOTATION_FONT_COLOR;
             }
-            .annotation:hover::after {
-                display: block;
-                position: absolute;
-                z-index: 1;
-                content: attr(data-details);
-                white-space: pre-wrap;
-                top: 0;
-                right: -ANNOTATION_TOOLTIP_WIDTH;
-                width: ANNOTATION_TOOLTIP_WIDTH;
-                background-color: ANNOTATION_TOOLTIP_BACKGROUND_COLOR;
-                margin-top: -0.5em;
-                margin-right: -1em;
-                padding: .5em;
-                border-radius: 5px;
-            }
             .annotation-inner {
                 display: block;
                 color: inherit;
@@ -70,6 +55,19 @@ suite('AnnotationStyleBuilder', () => {
             }
             .annotation-inner:hover {
                 text-decoration: underline;
+            }
+            .tooltip {
+                display: block;
+                position: absolute;
+                z-index: 1;
+                white-space: pre-wrap;
+                width: ANNOTATION_TOOLTIP_WIDTH;
+                background-color: ANNOTATION_TOOLTIP_BACKGROUND_COLOR;
+                margin-top: -0.5em;
+                margin-right: -1em;
+                padding: .5em;
+                border-radius: 5px;
+                color: ANNOTATION_FONT_COLOR;
             }
             .commitColor {
                 min-width: ANNOTATION_COMMIT_COLOR_BAR_WIDTH;

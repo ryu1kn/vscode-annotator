@@ -12,8 +12,8 @@ suite('GitAnnotationLineBuilder', () => {
         builder.addLineContents('LINE_CONTENTS');
         expect(builder.getHtml()).to.eql([
             /* eslint-disable indent */
-            '<div class="line" data-commitHash="COMMIT_HASH">',
-                '<div class="annotation" data-details="DETAILS">',
+            '<div class="line" data-commitHash="COMMIT_HASH" data-details="DETAILS">',
+                '<div class="annotation">',
                     '<a href="command:COMMAND_NAME?%22COMMAND_ARGS%22" class="annotation-inner">',
                         'CAPTION',
                     '</a>',
@@ -33,8 +33,8 @@ suite('GitAnnotationLineBuilder', () => {
         builder.addLineContents('LINE_CONTENTS');
         expect(builder.getHtml()).to.eql([
             /* eslint-disable indent */
-            '<div class="line" data-commitHash="COMMIT_HASH">',
-                '<div class="annotation" data-details="DETAILS">',
+            '<div class="line" data-commitHash="COMMIT_HASH" data-details="DETAILS">',
+                '<div class="annotation">',
                     '<div class="annotation-inner">CAPTION</div>',
                 '</div>',
                 '<div class="commitColor"></div>',
@@ -52,8 +52,8 @@ suite('GitAnnotationLineBuilder', () => {
         builder.addLineContents('LINE_CONTENTS \\n &#xa; < &lt; > &gt; " \'');
         expect(builder.getHtml()).to.eql([
             /* eslint-disable indent */
-            '<div class="line" data-commitHash="COMMIT_HASH">',
-                '<div class="annotation" data-details="DETAILS">',
+            '<div class="line" data-commitHash="COMMIT_HASH" data-details="DETAILS">',
+                '<div class="annotation">',
                     '<div class="annotation-inner">CAPTION</div>',
                 '</div>',
                 '<div class="commitColor"></div>',
@@ -71,8 +71,8 @@ suite('GitAnnotationLineBuilder', () => {
         builder.addLineContents('LINE_CONTENTS');
         expect(builder.getHtml()).to.eql([
             /* eslint-disable indent */
-            '<div class="line" data-commitHash="COMMIT_HASH">',
-                '<div class="annotation" data-details="DETAILS &lt;&gt;&amp;&quot;&#39;&#xa;\\/">',
+            '<div class="line" data-commitHash="COMMIT_HASH" data-details="DETAILS &lt;&gt;&amp;&quot;&#39;&#xa;\\/">',
+                '<div class="annotation">',
                     '<div class="annotation-inner">CAPTION</div>',
                 '</div>',
                 '<div class="commitColor"></div>',
@@ -90,8 +90,8 @@ suite('GitAnnotationLineBuilder', () => {
         builder.addLineContents('LINE_CONTENTS');
         expect(builder.getHtml()).to.eql([
             /* eslint-disable indent */
-            '<div class="line" data-commitHash="COMMIT_HASH">',
-                '<div class="annotation" data-details="DETAILS">',
+            '<div class="line" data-commitHash="COMMIT_HASH" data-details="DETAILS">',
+                '<div class="annotation">',
                     '<div class="annotation-inner">CAPTION &lt;&gt;&amp;&quot;&#39;\n\\/</div>',
                 '</div>',
                 '<div class="commitColor"></div>',
