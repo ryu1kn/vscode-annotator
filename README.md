@@ -51,6 +51,6 @@ Annotation with different colour settings, etc.
 
 * https://github.com/ryu1kn/vscode-annotator/issues
 
-## Change Log
+## Changelog
 
 * https://github.com/ryu1kn/vscode-annotator/blob/master/CHANGELOG.md

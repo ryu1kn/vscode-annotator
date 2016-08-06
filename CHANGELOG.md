@@ -1,3 +1,7 @@
+### 0.9.0: 6 August 2016
+
+* Made the annotation tooltip text selectable
+
 ### 0.8.0: 5 August 2016
 
 * Revised how to set an editor title so that a file name stands out
