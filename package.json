@@ -43,13 +43,12 @@
           "default": "13em"
         },
         "annotator.annotationCommitColorRange": {
-          "description": "Range of colors to be used for coloring each commit",
+          "description": "Range of colors to be used for coloring each commit. Specify intermediate colours by giving more than 2 colors",
           "type": "array",
           "items": {
             "type": "string",
             "pattern": "^#[0-9A-Fa-f]{6}$"
           },
-          "maxItems": 2,
           "minItems": 2,
           "default": ["#0D47A1", "#BBDEFB"]
         },
