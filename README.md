@@ -36,12 +36,12 @@ Annotation with different colour settings, etc.
 ## Configurations
 
 * `annotator.annotationColumnWidth`: Width of the annotation column
-* `annotator.annotationCommitColorRange`: Range of colors to be used for coloring each commit. Specify intermediate colours by giving more than 2 colors
-* `annotator.annotationCommitColorBarWidth`: Width of the commit color bar
-* `annotator.annotationFontColor`: Font color of the annotation text
-* `annotator.annotationHighlightColor`: Highlight color when hovering over the annotation text
+* `annotator.annotationCommitColorRange`: Range of colours to be used for colouring each commit. Specify intermediate colours by giving more than 2 colours
+* `annotator.annotationCommitColorBarWidth`: Width of the commit colour bar
+* `annotator.annotationFontColor`: Font colour of the annotation text
+* `annotator.annotationHighlightColor`: Highlight colour when hovering over the annotation text
 * `annotator.annotationTooltipWidth`: Width of the annotation tooltip
-* `annotator.annotationTooltipBackgroundColor`: Background color of the annotation tooltip
+* `annotator.annotationTooltipBackgroundColor`: Background colour of the annotation tooltip
 
 ## Prerequisite
 
