@@ -43,7 +43,7 @@
           "default": "13em"
         },
         "annotator.annotationCommitColorRange": {
-          "description": "Range of colors to be used for coloring each commit. Specify intermediate colours by giving more than 2 colors",
+          "description": "Range of colours to be used for colouring each commit. Specify intermediate colours by giving more than 2 colours",
           "type": "array",
           "items": {
             "type": "string",
@@ -53,17 +53,17 @@
           "default": ["#0D47A1", "#BBDEFB"]
         },
         "annotator.annotationCommitColorBarWidth": {
-          "description": "Width of the commit color bar",
+          "description": "Width of the commit colour bar",
           "type": "string",
           "default": "1.5em"
         },
         "annotator.annotationFontColor": {
-          "description": "Font color of the annotation",
+          "description": "Font colour of the annotation text",
           "type": "string",
           "default": "gray"
         },
         "annotator.annotationHighlightColor": {
-          "description": "Highlight color when hovering over the annotation text",
+          "description": "Highlight colour when hovering over the annotation text",
           "type": "string",
           "default": "#BBDEFB"
         },
@@ -73,7 +73,7 @@
           "default": "30em"
         },
         "annotator.annotationTooltipBackgroundColor": {
-          "description": "Background color of the annotation tooltip",
+          "description": "Background colour of the annotation tooltip",
           "type": "string",
           "default": "#3A3830"
         }
