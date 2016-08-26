@@ -3,7 +3,7 @@
 ## Features
 
 * Display the annotation view (git blame) of the current file.
-* Display the diff of a particular commit by selecting a commit hash on the annotation view.
+* Display the diff of a particular commit by selecting the annotation of a line.
 * From the commit diff view, you can:
   * Open the annotation view of the file just before the commit, and trace back the history.
   * Open the diff of another file in the same commit.
