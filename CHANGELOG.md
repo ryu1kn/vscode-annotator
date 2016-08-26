@@ -1,3 +1,9 @@
+
+### 0.10.0: Not yet released
+
+* Allow specifying intermediate colours for the vertical colour bar
+* Show the error information of git command if the command provides any
+
 ### 0.9.0: 6 August 2016
 
 * Made the annotation tooltip text selectable
