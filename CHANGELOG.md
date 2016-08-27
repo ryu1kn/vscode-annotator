@@ -1,5 +1,5 @@
 
-### 0.10.0: Not yet released
+### 0.10.0: 27 August 2016
 
 * Allow specifying intermediate colours for the vertical colour bar
 * Show the error information of git command if the command provides any
