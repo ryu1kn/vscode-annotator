@@ -1,4 +1,8 @@
 
+### 0.10.1: 11 October 2016
+
+* Fixed the problem that annotation tooltip dropped to the left end of the annotation view (Issue #10)
+
 ### 0.10.0: 27 August 2016
 
 * Allow specifying intermediate colours for the vertical colour bar
