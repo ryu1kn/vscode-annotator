@@ -64,7 +64,7 @@ suite('AnnotationStyleBuilder', () => {
                 width: ANNOTATION_TOOLTIP_WIDTH;
                 background-color: ANNOTATION_TOOLTIP_BACKGROUND_COLOR;
                 margin-top: -0.5em;
-                margin-right: -1em;
+                margin-left: ANNOTATION_COLUMN_WIDTH;
                 padding: .5em;
                 border-radius: 5px;
                 color: ANNOTATION_FONT_COLOR;
