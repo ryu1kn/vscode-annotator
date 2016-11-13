@@ -28,7 +28,7 @@ suite('GitAnnotationLineValues', () => {
         const params = {
             lineBlame,
             lineNumber: 1,
-            maxLineNumber: 1
+            lineNumberWidth: 1
         };
         const line = new GitAnnotationLineValues(params);
         expect(line.caption).to.eql('1  2016-06-12 AUTHOR_NAME');
