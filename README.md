@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ryu1kn/vscode-annotator.svg?branch=master)](https://travis-ci.org/ryu1kn/vscode-annotator)
+
 # Annotator
 
 ## Features
