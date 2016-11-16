@@ -41,8 +41,14 @@ suite('GitAnnotationLineDirector', () => {
 
     function formatDateTime(date) {
         const pad0 = n => n < 10 ? `0${n}` : n;
-        const dateString = [date.getFullYear(), date.getMonth() + 1, date.getDate()].map(pad0).join('-');
-        const timeString = [date.getHours(), date.getMinutes(), date.getSeconds()].map(pad0).join(':');
-        return `${dateString} ${timeString}`;
+        const dateString = date.toLocaleString('en-AU', {timeZone: 'Australia/Melbourne', hour12: false});
+        return dateString.replace(
+            /^(\d{1,2})\/(\d{1,2})\/(\d{4}), (\d{2}):(\d{2}):(\d{2})$/,
+            (_match, month, date, year, hour, minutes, seconds) => {
+                const dateString = [year, month, date].map(pad0).join('-');
+                const timeString = [hour, minutes, seconds].join(':');
+                return `${dateString} ${timeString}`;
+            }
+        );
     }
 });
