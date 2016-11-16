@@ -12,7 +12,10 @@ suite('GitAnnotationLineDirector', () => {
             addLineContents: sinon.spy(),
             getHtml: () => 'LINE_HTML'
         };
-        const director = new GitAnnotationLineDirector({builder, formatDateTime});
+        const director = new GitAnnotationLineDirector({
+            builder,
+            formatDateTime: date => date.toISOString()
+        });
         const params = {
             lineBlame: {
                 commitHash: 'COMMIT_HASH',
@@ -26,7 +29,7 @@ suite('GitAnnotationLineDirector', () => {
             repositoryRoot: 'REPOSITORY_ROOT'
         };
         expect(director.construct(params)).to.be.eql('LINE_HTML');
-        expect(builder.addDetails).to.have.been.calledWith('Commit: COMMIT_HASH\nAuthor: AUTHOR_NAME\nDate: 2016-06-12 19:51:05\n\nSUBJECT');
+        expect(builder.addDetails).to.have.been.calledWith('Commit: COMMIT_HASH\nAuthor: AUTHOR_NAME\nDate: 2016-06-12T09:51:05.000Z\n\nSUBJECT');
         expect(builder.addCaption).to.have.been.calledWith('  1  2016-06-12 AUTHOR_NAME');
         expect(builder.addCommitHash).to.have.been.calledWith('COMMIT_HASH');
         expect(builder.addCommand).to.have.been.calledWith({
@@ -38,17 +41,4 @@ suite('GitAnnotationLineDirector', () => {
         });
         expect(builder.addLineContents).to.have.been.calledWith('LINE_CONTENTS');
     });
-
-    function formatDateTime(date) {
-        const pad0 = n => n < 10 ? `0${n}` : n;
-        const dateString = date.toLocaleString('en-AU', {timeZone: 'Australia/Melbourne', hour12: false});
-        return dateString.replace(
-            /^(\d{1,2})\/(\d{1,2})\/(\d{4}), (\d{2}):(\d{2}):(\d{2})$/,
-            (_match, month, date, year, hour, minutes, seconds) => {
-                const dateString = [year, month, date].map(pad0).join('-');
-                const timeString = [hour, minutes, seconds].join(':');
-                return `${dateString} ${timeString}`;
-            }
-        );
-    }
 });

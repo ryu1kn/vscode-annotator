@@ -10,8 +10,11 @@ suite('GitAnnotationLineValues', () => {
             authorName: 'AUTHOR_NAME',
             subject: 'SUBJECT'
         };
-        const line = new GitAnnotationLineValues({lineBlame, formatDateTime});
-        expect(line.details).to.eql('Commit: COMMIT_HASH\nAuthor: AUTHOR_NAME\nDate: 2016-06-12 19:51:05\n\nSUBJECT');
+        const line = new GitAnnotationLineValues({
+            lineBlame,
+            formatDateTime: date => date.toISOString()
+        });
+        expect(line.details).to.eql('Commit: COMMIT_HASH\nAuthor: AUTHOR_NAME\nDate: 2016-06-12T09:51:05.000Z\n\nSUBJECT');
     });
 
     test('it indicates that the line is committed', () => {
@@ -104,17 +107,4 @@ suite('GitAnnotationLineValues', () => {
         const line = new GitAnnotationLineValues({lineBlame});
         expect(line.commitHash).to.eql('COMMIT_HASH');
     });
-
-    function formatDateTime(date) {
-        const pad0 = n => n < 10 ? `0${n}` : n;
-        const dateString = date.toLocaleString('en-AU', {timeZone: 'Australia/Melbourne', hour12: false});
-        return dateString.replace(
-            /^(\d{1,2})\/(\d{1,2})\/(\d{4}), (\d{2}):(\d{2}):(\d{2})$/,
-            (_match, month, date, year, hour, minutes, seconds) => {
-                const dateString = [year, month, date].map(pad0).join('-');
-                const timeString = [hour, minutes, seconds].join(':');
-                return `${dateString} ${timeString}`;
-            }
-        );
-    }
 });
