@@ -9,5 +9,6 @@ __*
 .editorconfig
 .eslintrc.yaml
 .eslintignore
+.nvmrc
 jsconfig.json
 vsc-extension-quickstart.md
