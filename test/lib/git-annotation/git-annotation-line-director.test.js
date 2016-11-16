@@ -12,7 +12,7 @@ suite('GitAnnotationLineDirector', () => {
             addLineContents: sinon.spy(),
             getHtml: () => 'LINE_HTML'
         };
-        const director = new GitAnnotationLineDirector(builder);
+        const director = new GitAnnotationLineDirector({builder, formatDateTime});
         const params = {
             lineBlame: {
                 commitHash: 'COMMIT_HASH',
@@ -38,4 +38,11 @@ suite('GitAnnotationLineDirector', () => {
         });
         expect(builder.addLineContents).to.have.been.calledWith('LINE_CONTENTS');
     });
+
+    function formatDateTime(date) {
+        const pad0 = n => n < 10 ? `0${n}` : n;
+        const dateString = [date.getFullYear(), date.getMonth() + 1, date.getDate()].map(pad0).join('-');
+        const timeString = [date.getHours(), date.getMinutes(), date.getSeconds()].map(pad0).join(':');
+        return `${dateString} ${timeString}`;
+    }
 });

@@ -10,7 +10,7 @@ suite('GitAnnotationLineValues', () => {
             authorName: 'AUTHOR_NAME',
             subject: 'SUBJECT'
         };
-        const line = new GitAnnotationLineValues({lineBlame});
+        const line = new GitAnnotationLineValues({lineBlame, formatDateTime});
         expect(line.details).to.eql('Commit: COMMIT_HASH\nAuthor: AUTHOR_NAME\nDate: 2016-06-12 19:51:05\n\nSUBJECT');
     });
 
@@ -104,4 +104,11 @@ suite('GitAnnotationLineValues', () => {
         const line = new GitAnnotationLineValues({lineBlame});
         expect(line.commitHash).to.eql('COMMIT_HASH');
     });
+
+    function formatDateTime(date) {
+        const pad0 = n => n < 10 ? `0${n}` : n;
+        const dateString = [date.getFullYear(), date.getMonth() + 1, date.getDate()].map(pad0).join('-');
+        const timeString = [date.getHours(), date.getMinutes(), date.getSeconds()].map(pad0).join(':');
+        return `${dateString} ${timeString}`;
+    }
 });
