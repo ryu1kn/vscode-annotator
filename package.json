@@ -103,7 +103,7 @@
     "test-mode": "mocha test --recursive --ui tdd --watch"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chai": "^4.1.2",
     "codeclimate-test-reporter": "^0.4.0",
     "eslint": "^2.12.0",
     "eslint-config-xo": "^0.15.0",
