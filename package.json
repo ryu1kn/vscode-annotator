@@ -97,7 +97,7 @@
   },
   "scripts": {
     "postinstall": "node ./node_modules/vscode/bin/install",
-    "coverage": "istanbul cover ./node_modules/.bin/_mocha -- test --recursive --ui tdd",
+    "coverage": "nyc mocha test --recursive --ui tdd",
     "lint": "eslint .",
     "test": "mocha test --recursive --ui tdd",
     "test-mode": "mocha test --recursive --ui tdd --watch"
@@ -107,8 +107,8 @@
     "codeclimate-test-reporter": "^0.5.0",
     "eslint": "^4.12.1",
     "eslint-config-xo": "^0.19.0",
-    "istanbul": "^0.4.5",
     "mocha": "^4.0.1",
+    "nyc": "^11.3.0",
     "sinon": "^4.1.2",
     "sinon-chai": "^2.14.0",
     "vscode": "^1.1.9"

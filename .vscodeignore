@@ -1,3 +1,4 @@
+.nyc_output/**
 .vscode/**
 typings/**
 test/**
@@ -10,6 +11,7 @@ __*
 .eslintrc.yaml
 .eslintignore
 .nvmrc
+.nycrc
 .codeclimate.yml
 .travis.yml
 jsconfig.json
