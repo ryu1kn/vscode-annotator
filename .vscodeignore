@@ -13,4 +13,5 @@ __*
 .codeclimate.yml
 .travis.yml
 jsconfig.json
+package-lock.json
 vsc-extension-quickstart.md
