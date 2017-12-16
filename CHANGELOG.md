@@ -1,7 +1,11 @@
 
+### 0.11.0: 17 December 2017
+
+* Added a configuration to ignore whitespace when executing `git blame`. [#15](https://github.com/ryu1kn/vscode-annotator/issues/15)
+
 ### 0.10.1: 11 October 2016
 
-* Fixed the problem that annotation tooltip dropped to the left end of the annotation view (Issue #10)
+* Fixed the problem that annotation tooltip dropped to the left end of the annotation view. [#10](https://github.com/ryu1kn/vscode-annotator/issues/10)
 
 ### 0.10.0: 27 August 2016
 
