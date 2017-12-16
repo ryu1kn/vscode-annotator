@@ -6,10 +6,7 @@ suite('GitService', () => {
     suite('#gitBlame', () => {
 
         test('it executes git blame with a file path and commit hash', () => {
-            const configStore = {getGitConfig: () => '/PATH/TO/GIT'};
-            const shellCommandRunner = {run: sinon.stub().returns(Promise.resolve('BLAME'))};
-            const gitBlameOutputParser = {parse: stubWithArgs(['BLAME'], 'PARSED_BLAME')};
-            const gitService = new GitService({configStore, gitBlameOutputParser, shellCommandRunner});
+            const {gitService, shellCommandRunner} = createGitService();
 
             return gitService.getBlame('/PATH/TO/FILE', 'COMMIT_HASH', 'ROOT_PATH').then(result => {
                 expect(result).to.eql('PARSED_BLAME');
@@ -22,10 +19,7 @@ suite('GitService', () => {
         });
 
         test('it invokes git blame without commitHash if it is not given', () => {
-            const configStore = {getGitConfig: () => '/PATH/TO/GIT'};
-            const shellCommandRunner = {run: sinon.stub().returns(Promise.resolve('BLAME'))};
-            const gitBlameOutputParser = {parse: stubWithArgs(['BLAME'], 'PARSED_BLAME')};
-            const gitService = new GitService({configStore, gitBlameOutputParser, shellCommandRunner});
+            const {gitService, shellCommandRunner} = createGitService();
 
             const commitHash = undefined;
             return gitService.getBlame('/PATH/TO/FILE', commitHash, 'ROOT_PATH').then(result => {
@@ -35,6 +29,28 @@ suite('GitService', () => {
                 );
             });
         });
+
+        test('it pass `-w` option to blame command if ignoring whitespace is required', () => {
+            const {gitService, shellCommandRunner} = createGitService({ignoreWhitespace: true});
+
+            return gitService.getBlame('/PATH/TO/FILE', 'COMMIT_HASH', 'ROOT_PATH').then(() => {
+                expect(shellCommandRunner.run.args[0][1]).to.eql([
+                    'blame', '-w', '--line-porcelain', 'COMMIT_HASH', '--', '/PATH/TO/FILE'
+                ]);
+            });
+        });
+
+        function createGitService({ignoreWhitespace} = {}) {
+            const config = {'git.ignoreWhitespaceOnBlame': ignoreWhitespace || false};
+            const configStore = {
+                getGitConfig: () => '/PATH/TO/GIT',
+                getExtensionConfig: configName => config[configName]
+            };
+            const shellCommandRunner = {run: sinon.stub().returns(Promise.resolve('BLAME'))};
+            const gitBlameOutputParser = {parse: stubWithArgs(['BLAME'], 'PARSED_BLAME')};
+            const gitService = new GitService({configStore, gitBlameOutputParser, shellCommandRunner});
+            return {gitService, shellCommandRunner};
+        }
     });
 
     suite('#_git', () => {
