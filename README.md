@@ -44,6 +44,7 @@ Annotation with different colour settings, etc.
 * `annotator.annotationHighlightColor`: Highlight colour when hovering over the annotation text
 * `annotator.annotationTooltipWidth`: Width of the annotation tooltip
 * `annotator.annotationTooltipBackgroundColor`: Background colour of the annotation tooltip
+* `annotator.git.ignoreWhitespaceOnBlame`: Ignore whitespace when `git blame` by specifying [`-w` option](https://www.git-scm.com/docs/git-blame#git-blame--w).
 
 ## Prerequisite
 

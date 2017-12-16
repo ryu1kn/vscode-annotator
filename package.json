@@ -79,6 +79,11 @@
           "description": "Background colour of the annotation tooltip",
           "type": "string",
           "default": "#3A3830"
+        },
+        "annotator.git.ignoreWhitespaceOnBlame": {
+          "description": "Ignore whitespace when comparing the parent’s version and the child’s to find where the lines came from",
+          "type": "boolean",
+          "default": false
         }
       }
     },
