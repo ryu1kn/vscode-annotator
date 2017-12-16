@@ -2,5 +2,6 @@
 /.nyc_output/
 /node_modules
 /typings
+/.vscode/settings.json
 npm-debug.log
 __*
