@@ -119,6 +119,7 @@
     "vscode": "^1.1.11"
   },
   "dependencies": {
+    "multiline-string": "0.1.0",
     "lodash": "^4.17.5"
   }
 }
