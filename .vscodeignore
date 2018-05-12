@@ -1,12 +1,12 @@
-.nyc_output/**
-.idea
-.vscode/**
-typings/**
-test/**
-coverage/**
-images/animations/**
-images/screencaptures/**
-__*
+.nyc_output/**/*
+.idea/**/*
+.vscode/**/*
+typings/**/*
+test/**/*
+coverage/**/*
+images/animations/**/*
+images/screencaptures/**/*
+**/__*
 .gitignore
 .editorconfig
 .eslintrc.yaml
@@ -17,4 +17,4 @@ __*
 .travis.yml
 jsconfig.json
 package-lock.json
-vsc-extension-quickstart.md
+
