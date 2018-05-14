@@ -3,5 +3,5 @@
 /node_modules
 /typings
 /.vscode/settings.json
-npm-debug.log
+*.log
 __*
