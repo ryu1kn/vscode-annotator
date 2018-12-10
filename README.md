@@ -28,6 +28,15 @@ Annotation with different colour settings, etc.
 
 ![Annotation with different colour settings](https://raw.githubusercontent.com/ryu1kn/vscode-annotator/master/images/screencaptures/light-theme.png)
 
+## Request Features or Report Bugs
+
+Feature requests and bug reports are very welcome: https://github.com/ryu1kn/vscode-partial-diff/issues
+
+A couple of requests from me when you raise an github issue.
+
+* **Requesting a feature:** Please try to provide the context of why you want the feature. Such as, in what situation the feature could help you and how, or how the lack of the feature is causing an inconvenience to you. I can't think of introducing it until I understand how it helps you 🙂
+* **Reporting a bug:** Please include environment information (OS name/version, the editor version). Also consider providing screenshots (or even videos) where appropriate. They are often very very helpful!
+
 ## Commands
 
 * `Annotator: Annotate the Current File or the File Before the Commit (if on Commit Diff)`
@@ -49,10 +58,6 @@ Annotation with different colour settings, etc.
 ## Prerequisite
 
 `git` command must be available. You need to either make `git` available in your `PATH` or set `git.path` in your settings.
-
-## Request Features or Report Bugs
-
-* https://github.com/ryu1kn/vscode-annotator/issues
 
 ## Changelog
 
