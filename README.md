@@ -30,7 +30,7 @@ Annotation with different colour settings, etc.
 
 ## Request Features or Report Bugs
 
-Feature requests and bug reports are very welcome: https://github.com/ryu1kn/vscode-partial-diff/issues
+Feature requests and bug reports are very welcome: https://github.com/ryu1kn/vscode-annotator/issues
 
 A couple of requests from me when you raise an github issue.
 
