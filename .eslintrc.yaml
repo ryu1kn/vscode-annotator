@@ -54,6 +54,7 @@ rules:
   padded-blocks:
   - warn
   - classes: always
+  padding-line-between-statements: off
   object-property-newline:
   - error
   - allowMultiplePropertiesPerLine: true
