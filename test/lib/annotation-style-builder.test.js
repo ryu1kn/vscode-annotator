@@ -33,6 +33,9 @@ suite('AnnotationStyleBuilder', () => {
                 line-height: 1.5;
                 margin: 0;
             }
+            code {
+                color: var(--vscode-editor-foreground);
+            }
             .line {
                 display: -webkit-flex;
                 display: flex;
