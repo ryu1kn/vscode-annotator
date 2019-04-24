@@ -9,14 +9,14 @@ suite('#AnnotateCommand', () => {
         const uriService = {
             convertToAnnotateFileAction: sinon.stub().returns('ANNOTATE_FILE_URI')
         };
-        const commands = {executeCommand: sinon.spy()};
-        const command = new AnnotateCommand({commands, editorTitleResolver, logger, uriService});
+        const vscode = getVscode();
+        const command = new AnnotateCommand({vscode, editorTitleResolver, logger, uriService});
         const editor = {
             document: {uri: 'URI', fileName: 'FILENAME'}
         };
         return command.execute(editor).then(() => {
             expect(uriService.convertToAnnotateFileAction).to.have.been.calledWith('URI');
-            expect(commands.executeCommand).to.have.been.calledWith('vscode.previewHtml', 'ANNOTATE_FILE_URI', undefined, 'ANNOTATION_TITLE');
+            expect(vscode.window.createWebviewPanel).to.have.been.calledWith('annotator-annotation', 'ANNOTATION_TITLE', 'active', {enableScripts: true});
         });
     });
 
@@ -25,13 +25,13 @@ suite('#AnnotateCommand', () => {
         const uriService = {
             convertToAnnotateFileAction: sinon.stub().returns(null)
         };
-        const commands = {executeCommand: sinon.spy()};
-        const command = new AnnotateCommand({commands, logger, uriService});
+        const vscode = getVscode();
+        const command = new AnnotateCommand({vscode, logger, uriService});
         const editor = {
             document: {uri: 'URI', fileName: 'FILENAME'}
         };
         return command.execute(editor).then(() => {
-            expect(commands.executeCommand).to.have.been.not.called;
+            expect(vscode.window.createWebviewPanel).to.have.been.not.called;
         });
     });
 
@@ -47,5 +47,14 @@ suite('#AnnotateCommand', () => {
 
     function getLogger() {
         return console;
+    }
+
+    function getVscode() {
+        return {
+            ViewColumn: {Active: 'active'},
+            window: {
+                createWebviewPanel: sinon.spy()
+            }
+        };
     }
 });
