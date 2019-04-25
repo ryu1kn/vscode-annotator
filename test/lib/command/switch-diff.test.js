@@ -1,5 +1,5 @@
 
-const _ = require('lodash');
+const _set = require('lodash.set');
 const SwitchDiffCommand = require('../../../lib/command/switch-diff');
 const querystring = require('querystring');
 
@@ -27,7 +27,7 @@ suite('SwitchDiffCommand', () => {
             commitHash: 'COMMIT_HASH',
             repositoryRoot: 'REPOSITORY_ROOT'
         };
-        const editor = _.set({}, 'document.uri.query', querystring.stringify(uriQuery));
+        const editor = _set({}, 'document.uri.query', querystring.stringify(uriQuery));
         return switchDiffCommand.execute(editor).then(() => {
             expect(commands.executeCommand).to.have.been.calledWith('annotator.takeDiff', {
                 commitHash: 'COMMIT_HASH',
@@ -57,7 +57,7 @@ suite('SwitchDiffCommand', () => {
             commitHash: 'COMMIT_HASH',
             repositoryRoot: 'REPOSITORY_ROOT'
         };
-        const editor = _.set({}, 'document.uri.query', querystring.stringify(uriQuery));
+        const editor = _set({}, 'document.uri.query', querystring.stringify(uriQuery));
         return switchDiffCommand.execute(editor).then(() => {
             expect(commands.executeCommand).to.have.been.not.called;
         });
@@ -68,7 +68,7 @@ suite('SwitchDiffCommand', () => {
         const gitService = {getChangedFilesInCommit: sinon.spy()};
         const switchDiffCommand = new SwitchDiffCommand({uriService, gitService});
 
-        const editor = _.set({}, 'document.uri', 'URI');
+        const editor = _set({}, 'document.uri', 'URI');
         return switchDiffCommand.execute(editor).then(result => {
             expect(result).to.be.undefined;
             expect(gitService.getChangedFilesInCommit).to.have.been.not.called;
@@ -80,7 +80,7 @@ suite('SwitchDiffCommand', () => {
         const logger = {error: sinon.spy()};
         const switchDiffCommand = new SwitchDiffCommand({uriService, logger});
 
-        const editor = _.set({}, 'document.uri', 'URI');
+        const editor = _set({}, 'document.uri', 'URI');
         return switchDiffCommand.execute(editor).then(() => {
             expect(logger.error.args[0][0]).to.have.string('Error: URI_SERVICE_ERROR');
         });

@@ -112,6 +112,7 @@
     "codeclimate-test-reporter": "^0.5.1",
     "eslint": "^5.16.0",
     "eslint-config-xo": "^0.26.0",
+    "lodash.set": "^4.3.2",
     "mocha": "^6.1.4",
     "nyc": "^14.0.0",
     "sinon": "^7.3.2",
@@ -119,7 +120,15 @@
     "vscode": "^1.1.33"
   },
   "dependencies": {
-    "multiline-string": "0.2.0",
-    "lodash": "^4.17.11"
+    "lodash.escape": "^4.0.1",
+    "lodash.map": "^4.6.0",
+    "lodash.padstart": "^4.6.1",
+    "lodash.parseint": "^4.0.2",
+    "lodash.pickby": "^4.6.0",
+    "lodash.range": "^3.2.0",
+    "lodash.reduce": "^4.6.0",
+    "lodash.uniq": "^4.5.0",
+    "lodash.uniqwith": "^4.5.0",
+    "multiline-string": "0.2.0"
   }
 }
