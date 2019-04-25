@@ -12,6 +12,7 @@ suite('AnnotationStyleBuilder', () => {
         };
         const provider = new AnnotationScriptProvider({configStore});
         expect(provider.provide()).to.eql(`
+            var vscode = acquireVsCodeApi();
             var stylesheet = document.styleSheets[0];
             var state = {
                 timeoutId: null,
@@ -21,6 +22,7 @@ suite('AnnotationStyleBuilder', () => {
 
             document.body.addEventListener('mouseenter', onMouseEnter, true);
             document.body.addEventListener('mouseleave', onMouseLeave, true);
+            document.body.addEventListener('click', onClick, true);
 
             function onMouseEnter(event) {
                 var el = event.target;
@@ -62,10 +64,10 @@ suite('AnnotationStyleBuilder', () => {
 
             function addCommitHighlightRuleAndTooltip(annotationEl) {
                 state.index = 0;
-                var commitHash = annotationEl.parentNode.attributes['data-commitHash'].value;
+                var commitHash = annotationEl.parentNode.getAttribute('data-commitHash');
                 stylesheet.insertRule(createHighlightRule(commitHash), state.index);
 
-                var tooltipContents = annotationEl.parentNode.attributes['data-details'].value;
+                var tooltipContents = annotationEl.parentNode.getAttribute('data-details');
                 state.tooltipEl = annotationEl.insertAdjacentElement('afterend', createTooltipEl(tooltipContents));
             }
 
@@ -91,6 +93,17 @@ suite('AnnotationStyleBuilder', () => {
                     state.tooltipEl = null;
                 }
                 state.timeoutId = null;
+            }
+
+            function onClick(event) {
+                event.preventDefault();
+
+                var el = event.target;
+                if (el.className === 'annotation-inner') return sendDiffRequest(el);
+            }
+
+            function sendDiffRequest(lineEl) {
+                vscode.postMessage(lineEl.getAttribute('data-command'));
             }
         `);
     });

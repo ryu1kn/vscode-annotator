@@ -14,7 +14,7 @@ suite('GitAnnotationLineBuilder', () => {
             /* eslint-disable indent */
             '<div class="line" data-commitHash="COMMIT_HASH" data-details="DETAILS">',
                 '<div class="annotation">',
-                    '<a href="command:COMMAND_NAME?%22COMMAND_ARGS%22" class="annotation-inner">',
+                    '<a href="" data-command="%7B%22name%22:%22COMMAND_NAME%22,%22args%22:%22COMMAND_ARGS%22%7D" class="annotation-inner">',
                         'CAPTION',
                     '</a>',
                 '</div>',
