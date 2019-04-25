@@ -1,4 +1,9 @@
 
+### 0.11.1: 25 April 2019
+
+* Fixed the issue that extension was not working as [`previewHtml`](https://github.com/Microsoft/vscode/issues/62630)
+  command had been deprecated and dropped. [#17](https://github.com/ryu1kn/vscode-annotator/issues/17)
+
 ### 0.11.0: 17 December 2017
 
 * Added a configuration to ignore whitespace when executing `git blame`. [#15](https://github.com/ryu1kn/vscode-annotator/issues/15)
