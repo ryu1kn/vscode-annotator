@@ -17,7 +17,7 @@ suite('#AnnotateCommand', () => {
         return command.execute(editor).then(() => {
             expect(uriService.convertToAnnotateFileAction).to.have.been.calledWith('URI');
             expect(vscode.window.createWebviewPanel).to.have.been.calledWith(
-                'annotator-annotation', 'ANNOTATION_TITLE', 'active', {enableScripts: true, enableCommandUris: true}
+                'annotator-annotation', 'ANNOTATION_TITLE', 'active', {enableScripts: true}
             );
         });
     });
