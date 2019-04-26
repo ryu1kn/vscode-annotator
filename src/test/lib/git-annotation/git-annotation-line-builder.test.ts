@@ -11,7 +11,6 @@ suite('GitAnnotationLineBuilder', () => {
         builder.addCaption('CAPTION');
         builder.addLineContents('LINE_CONTENTS');
         expect(builder.getHtml()).to.eql([
-            /* eslint-disable indent */
             '<div class="line" data-commitHash="COMMIT_HASH" data-details="DETAILS">',
                 '<div class="annotation">',
                     '<a href="" data-command="%7B%22name%22:%22COMMAND_NAME%22,%22args%22:%22COMMAND_ARGS%22%7D" class="annotation-inner">',
@@ -21,7 +20,6 @@ suite('GitAnnotationLineBuilder', () => {
                 '<div class="commitColor"></div>',
                 '<pre><code>LINE_CONTENTS</code></pre>',
             '</div>'
-            /* eslint-enable indent */
         ].join(''));
     });
 
@@ -32,7 +30,6 @@ suite('GitAnnotationLineBuilder', () => {
         builder.addCommitHash('COMMIT_HASH');
         builder.addLineContents('LINE_CONTENTS');
         expect(builder.getHtml()).to.eql([
-            /* eslint-disable indent */
             '<div class="line" data-commitHash="COMMIT_HASH" data-details="DETAILS">',
                 '<div class="annotation">',
                     '<div class="annotation-inner">CAPTION</div>',
@@ -40,7 +37,6 @@ suite('GitAnnotationLineBuilder', () => {
                 '<div class="commitColor"></div>',
                 '<pre><code>LINE_CONTENTS</code></pre>',
             '</div>'
-            /* eslint-enable indent */
         ].join(''));
     });
 
@@ -51,7 +47,6 @@ suite('GitAnnotationLineBuilder', () => {
         builder.addCommitHash('COMMIT_HASH');
         builder.addLineContents('LINE_CONTENTS \\n &#xa; < &lt; > &gt; " \'');
         expect(builder.getHtml()).to.eql([
-            /* eslint-disable indent */
             '<div class="line" data-commitHash="COMMIT_HASH" data-details="DETAILS">',
                 '<div class="annotation">',
                     '<div class="annotation-inner">CAPTION</div>',
@@ -59,7 +54,6 @@ suite('GitAnnotationLineBuilder', () => {
                 '<div class="commitColor"></div>',
                 '<pre><code>LINE_CONTENTS \\n &amp;#xa; &lt; &amp;lt; &gt; &amp;gt; &quot; &#39;</code></pre>',
             '</div>'
-            /* eslint-enable indent */
         ].join(''));
     });
 
@@ -70,7 +64,6 @@ suite('GitAnnotationLineBuilder', () => {
         builder.addCommitHash('COMMIT_HASH');
         builder.addLineContents('LINE_CONTENTS');
         expect(builder.getHtml()).to.eql([
-            /* eslint-disable indent */
             '<div class="line" data-commitHash="COMMIT_HASH" data-details="DETAILS &lt;&gt;&amp;&quot;&#39;&#xa;\\/">',
                 '<div class="annotation">',
                     '<div class="annotation-inner">CAPTION</div>',
@@ -78,7 +71,6 @@ suite('GitAnnotationLineBuilder', () => {
                 '<div class="commitColor"></div>',
                 '<pre><code>LINE_CONTENTS</code></pre>',
             '</div>'
-            /* eslint-enable indent */
         ].join(''));
     });
 
@@ -89,7 +81,6 @@ suite('GitAnnotationLineBuilder', () => {
         builder.addCommitHash('COMMIT_HASH');
         builder.addLineContents('LINE_CONTENTS');
         expect(builder.getHtml()).to.eql([
-            /* eslint-disable indent */
             '<div class="line" data-commitHash="COMMIT_HASH" data-details="DETAILS">',
                 '<div class="annotation">',
                     '<div class="annotation-inner">CAPTION &lt;&gt;&amp;&quot;&#39;\n\\/</div>',
@@ -97,7 +88,6 @@ suite('GitAnnotationLineBuilder', () => {
                 '<div class="commitColor"></div>',
                 '<pre><code>LINE_CONTENTS</code></pre>',
             '</div>'
-            /* eslint-enable indent */
         ].join(''));
     });
 });

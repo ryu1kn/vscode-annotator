@@ -18,13 +18,11 @@ export class GitAnnotationHtmlBuilder {
 
     getHtml() {
         return [
-            /* eslint-disable indent */
             `<style>${this._css}</style>`,
             '<body>',
                 this._safeBodyHtml,
                 `<script type="text/javascript">${this._script}</script>`,
             '</body>'
-            /* eslint-enable indent */
         ].join('');
     }
 

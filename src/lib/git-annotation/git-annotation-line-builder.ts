@@ -32,7 +32,6 @@ export class GitAnnotationLineBuilder {
         const safeDetails = this._escapeNewLine(_escape(this._details));
         const safeCommitHash = _escape(this._commitHash);
         return [
-            /* eslint-disable indent */
             `<div class="line" data-commitHash="${safeCommitHash}" data-details="${safeDetails}">`,
                 '<div class="annotation">',
                     this._annotationHtml,
@@ -40,7 +39,6 @@ export class GitAnnotationLineBuilder {
                 '<div class="commitColor"></div>',
                 `<pre><code>${_escape(this._lineContents)}</code></pre>`,
             '</div>'
-            /* eslint-enable indent */
         ].join('');
     }
 

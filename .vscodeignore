@@ -13,8 +13,6 @@ __*/**/*
 **/*.log
 .gitignore
 .editorconfig
-.eslintrc.yaml
-.eslintignore
 .nvmrc
 .nycrc
 .codeclimate.yml

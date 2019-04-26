@@ -9,7 +9,6 @@ export class AnnotationScriptProvider {
 
     provide() {
         const highlightColour = this._configStore.getExtensionConfig('annotationHighlightColor');
-        /* eslint-disable max-len */
         return `
             var vscode = acquireVsCodeApi();
             var stylesheet = document.styleSheets[0];
@@ -105,7 +104,6 @@ export class AnnotationScriptProvider {
                 vscode.postMessage(lineEl.getAttribute('data-command'));
             }
         `;
-        /* eslint-enable max-len */
     }
 
 }

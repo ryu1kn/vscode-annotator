@@ -23,7 +23,7 @@ export class GitBlameOutputParser {
     _getLineInfoList(gitOutput) {
         const regexForOneLineInfo = /\n\t[^\n]*\n/g;
         const lineInfoList = [];
-        for (let startIndex = 0; regexForOneLineInfo.exec(gitOutput) !== null; startIndex = regexForOneLineInfo.lastIndex) {    // eslint-disable-line max-len
+        for (let startIndex = 0; regexForOneLineInfo.exec(gitOutput) !== null; startIndex = regexForOneLineInfo.lastIndex) {
             lineInfoList.push(gitOutput.substring(startIndex, regexForOneLineInfo.lastIndex));
         }
         return lineInfoList;

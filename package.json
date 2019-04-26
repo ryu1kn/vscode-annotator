@@ -117,8 +117,6 @@
     "@types/node": "^11.13.8",
     "chai": "^4.2.0",
     "codeclimate-test-reporter": "^0.5.1",
-    "eslint": "^5.16.0",
-    "eslint-config-xo": "^0.26.0",
     "lodash.set": "^4.3.2",
     "mocha": "^6.1.4",
     "nyc": "^14.0.0",
