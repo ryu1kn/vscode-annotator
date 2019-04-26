@@ -2,7 +2,9 @@
 .idea/**/*
 .vscode/**/*
 typings/**/*
-test/**/*
+src/**/*
+out/**/*.map
+out/test/**/*
 coverage/**/*
 images/animations/**/*
 images/screencaptures/**/*
@@ -20,4 +22,6 @@ __*/**/*
 jsconfig.json
 package-lock.json
 tag-release.sh
+tsconfig.json
+tslint.json
 yarn.lock
