@@ -3,8 +3,8 @@ import {ChangedFileLabelMaker} from './changed-file-label-maker';
 const _size = obj => obj ? Object.keys(obj).length : 0;
 
 export class ChangedFilePicker {
-    private _window: any;
-    private _changedFileLabelMaker: ChangedFileLabelMaker;
+    private readonly _window: any;
+    private readonly _changedFileLabelMaker: ChangedFileLabelMaker;
 
     constructor(params) {
         this._window = params.window;

@@ -4,7 +4,7 @@ const path = require('path');
 const querystring = require('querystring');
 
 export class EditorTitleResolver {
-    private _workspaceRoot: any;
+    private readonly _workspaceRoot: any;
 
     constructor(params) {
         this._workspaceRoot = params.workspaceRoot;

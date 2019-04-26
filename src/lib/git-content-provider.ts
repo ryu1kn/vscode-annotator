@@ -5,9 +5,9 @@ import {UriService} from './uri-service';
 const querystring = require('querystring');
 
 export class GitContentProvider {
-    private _gitService: GitService;
-    private _gitAnnotationContentGenerator: GitAnnotationContentGenerator;
-    private _uriService: UriService;
+    private readonly _gitService: GitService;
+    private readonly _gitAnnotationContentGenerator: GitAnnotationContentGenerator;
+    private readonly _uriService: UriService;
 
     constructor(params) {
         this._gitService = params.gitService;

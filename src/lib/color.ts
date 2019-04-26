@@ -4,7 +4,7 @@ const _parseInt = require('lodash.parseint');
 const HEX_DIGITS = '0123456789ABCDEF'.split('');
 
 export class Color {
-    private _color: any;
+    private readonly _color: any;
 
     constructor(colorCode) {
         this._color = this._normalise(colorCode);

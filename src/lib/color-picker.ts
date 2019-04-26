@@ -4,8 +4,8 @@ const _uniq = require('lodash.uniq');
 import {Color} from './color';
 
 export class ColorPicker {
-    private _colors: any;
-    private _calculateScore: any;
+    private readonly _colors: any;
+    private readonly _calculateScore: any;
 
     constructor(params) {
         this._colors = params.colors.map(color => new Color(color));

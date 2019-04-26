@@ -4,11 +4,11 @@ import {GitContentProvider} from '../git-content-provider';
 
 export class AnnotateCommand {
     private readonly _vscode: any;
-    private _extensionContext: any;
-    private _logger: Console | { error: any };
-    private _uriService: UriService;
-    private _editorTitleResolver: EditorTitleResolver;
-    private _contentProvider: GitContentProvider;
+    private readonly _extensionContext: any;
+    private readonly _logger: Console | { error: any };
+    private readonly _uriService: UriService;
+    private readonly _editorTitleResolver: EditorTitleResolver;
+    private readonly _contentProvider: GitContentProvider;
 
     constructor(params) {
         this._vscode = params.vscode;

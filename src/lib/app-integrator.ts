@@ -5,11 +5,11 @@ import {SwitchDiffCommand} from './command/switch-diff';
 import {TakeDiffCommand} from './command/take-diff';
 
 export class AppIntegrator {
-    private _vscode: any;
-    private _gitContentProvider: GitContentProvider;
-    private _annotateCommand: AnnotateCommand;
-    private _switchDiffCommand: SwitchDiffCommand;
-    private _takeDiffCommand: TakeDiffCommand;
+    private readonly _vscode: any;
+    private readonly _gitContentProvider: GitContentProvider;
+    private readonly _annotateCommand: AnnotateCommand;
+    private readonly _switchDiffCommand: SwitchDiffCommand;
+    private readonly _takeDiffCommand: TakeDiffCommand;
 
     constructor(params) {
         this._vscode = params.vscode;

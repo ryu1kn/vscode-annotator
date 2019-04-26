@@ -4,10 +4,10 @@ import {EditorTitleResolver} from '../editor-title-resolver';
 const _pickBy = require('lodash.pickby');
 
 export class TakeDiffCommand {
-    private _commands: any;
-    private _logger: Console | { error: any };
-    private _uriService: UriService;
-    private _editorTitleResolver: EditorTitleResolver;
+    private readonly _commands: any;
+    private readonly _logger: Console | { error: any };
+    private readonly _uriService: UriService;
+    private readonly _editorTitleResolver: EditorTitleResolver;
 
     constructor(params) {
         this._commands = params.commands;

@@ -4,8 +4,8 @@ const path = require('path');
 const querystring = require('querystring');
 
 export class UriService {
-    private _Uri: any | { parse: any } | { parse: any };
-    private _getCurrentDate: any;
+    private readonly _Uri: any | { parse: any } | { parse: any };
+    private readonly _getCurrentDate: any;
 
     constructor(params) {
         this._Uri = params.Uri;

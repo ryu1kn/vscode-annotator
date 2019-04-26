@@ -2,8 +2,8 @@
 import {GitAnnotationLineValues} from './git-annotation-line-values';
 
 export class GitAnnotationLineDirector {
-    private _builder: any;
-    private _formatDateTime: any;
+    private readonly _builder: any;
+    private readonly _formatDateTime: any;
 
     constructor({builder, formatDateTime}) {
         this._builder = builder;

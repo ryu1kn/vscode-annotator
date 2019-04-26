@@ -3,7 +3,7 @@ import {ConfigStore} from './config-store';
 const _map = require('lodash.map');
 
 export class AnnotationStyleBuilder {
-    private _configStore: ConfigStore;
+    private readonly _configStore: ConfigStore;
 
     constructor(params) {
         this._configStore = params.configStore;

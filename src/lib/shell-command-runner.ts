@@ -1,6 +1,6 @@
 
 export class ShellCommandRunner {
-    private _childProcess: any;
+    private readonly _childProcess: any;
 
     constructor(params) {
         this._childProcess = params.childProcess;

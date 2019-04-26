@@ -5,11 +5,11 @@ import {GitAnnotationHtmlBuilder} from './git-annotation-html-builder';
 import {CommitColorDesignator} from './commit-color-designator';
 
 export class GitAnnotationHtmlDirector {
-    private _annotationStyleBuilder: AnnotationStyleBuilder;
-    private _annotationScriptProvider: AnnotationScriptProvider;
-    private _gitAnnotationHtmlBodyGenerator: GitAnnotationHtmlBodyGenerator;
-    private _gitAnnotationHtmlBuilder: GitAnnotationHtmlBuilder;
-    private _commitColorDesignator: CommitColorDesignator;
+    private readonly _annotationStyleBuilder: AnnotationStyleBuilder;
+    private readonly _annotationScriptProvider: AnnotationScriptProvider;
+    private readonly _gitAnnotationHtmlBodyGenerator: GitAnnotationHtmlBodyGenerator;
+    private readonly _gitAnnotationHtmlBuilder: GitAnnotationHtmlBuilder;
+    private readonly _commitColorDesignator: CommitColorDesignator;
 
     constructor(params) {
         this._annotationStyleBuilder = params.annotationStyleBuilder;

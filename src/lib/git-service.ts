@@ -6,10 +6,10 @@ import {GitBlameOutputParser} from './git-blame-output-parser';
 const path = require('path');
 
 export class GitService {
-    private _changedFileListParser: ChangedFileListParser;
-    private _configStore: ConfigStore;
-    private _shellCommandRunner: ShellCommandRunner;
-    private _gitBlameOutputParser: GitBlameOutputParser;
+    private readonly _changedFileListParser: ChangedFileListParser;
+    private readonly _configStore: ConfigStore;
+    private readonly _shellCommandRunner: ShellCommandRunner;
+    private readonly _gitBlameOutputParser: GitBlameOutputParser;
 
     constructor(params) {
         this._changedFileListParser = params.changedFileListParser;

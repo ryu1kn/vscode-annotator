@@ -5,11 +5,11 @@ import * as Const from '../const';
 const multiline = require('multiline-string')();
 
 export class GitAnnotationLineValues {
-    private _lineBlameData: any;
-    private _lineNumber: any;
-    private _lineNumberWidth: any;
-    private _repositoryRoot: any;
-    private _formatDateTime: any;
+    private readonly _lineBlameData: any;
+    private readonly _lineNumber: any;
+    private readonly _lineNumberWidth: any;
+    private readonly _repositoryRoot: any;
+    private readonly _formatDateTime: any;
 
     constructor(params) {
         this._lineBlameData = params.lineBlame;

@@ -1,7 +1,7 @@
 import * as Const from './const';
 
 export class ConfigStore {
-    private _workspace: any;
+    private readonly _workspace: any;
 
     constructor(params) {
         this._workspace = params.workspace;

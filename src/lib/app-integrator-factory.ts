@@ -19,7 +19,7 @@ const childProcess = require('child_process');
 const vscode = require('vscode');
 
 export class AppIntegratorFactory {
-    private _extensionContext: any;
+    private readonly _extensionContext: any;
     private _annotateCommand: AnnotateCommand;
     private _changedFilePicker: ChangedFilePicker;
     private _configStore: ConfigStore;
