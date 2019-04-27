@@ -1,10 +1,10 @@
 import * as sinon from 'sinon';
+import {deepStrictEqual, strictEqual} from 'assert';
 import {ChangedFilePicker} from '../../lib/changed-file-picker';
-import {expect} from '../helper/assert';
 
 suite('ChangedFilePicker', () => {
 
-    test('it picks one of changed files', () => {
+    test('it picks one of changed files', async () => {
         const changedFileLabelMaker = {make: () => 'LABEL'};
         const window = fakeWindow({index: 0});
         const changedFilePicker = new ChangedFilePicker({changedFileLabelMaker, window});
@@ -12,34 +12,31 @@ suite('ChangedFilePicker', () => {
             {path: 'PATH_1', previousPath: 'PREVIOUS_PATH_1'},
             {path: 'PATH_2', previousPath: 'PREVIOUS_PATH_2'}
         ];
-        return changedFilePicker.pick(changedFiles).then(item => {
-            expect(item).to.eql({path: 'PATH_1', previousPath: 'PREVIOUS_PATH_1'});
-        });
+        const item = await changedFilePicker.pick(changedFiles);
+        deepStrictEqual(item, {path: 'PATH_1', previousPath: 'PREVIOUS_PATH_1'});
     });
 
-    test('it passes LABEL when it invoke QuickPick', () => {
+    test('it passes LABEL when it invoke QuickPick', async () => {
         const changedFileLabelMaker = {make: () => 'LABEL'};
         const window = fakeWindow({index: 0});
         const changedFilePicker = new ChangedFilePicker({changedFileLabelMaker, window});
         const changedFiles = [
             {changeType: 'M', path: 'PATH', previousPath: 'PATH'}
         ];
-        return changedFilePicker.pick(changedFiles).then(() => {
-            const showQuickPickArg = window._showQuickPickSpy.args[0][0];
-            expect(showQuickPickArg[0].label).to.eql('LABEL');
-        });
+        await changedFilePicker.pick(changedFiles);
+        const showQuickPickArg = window._showQuickPickSpy.args[0][0];
+        strictEqual(showQuickPickArg[0].label, 'LABEL');
     });
 
-    test('it gives back "null" if no item is selected', () => {
+    test('it gives back "null" if no item is selected', async () => {
         const changedFileLabelMaker = {make: () => 'LABEL'};
         const window = fakeWindow({index: 'NOT_EXIST'});
         const changedFilePicker = new ChangedFilePicker({changedFileLabelMaker, window});
         const changedFiles = [
             {path: 'PATH', previousPath: 'PREVIOUS_PATH'}
         ];
-        return changedFilePicker.pick(changedFiles).then(item => {
-            expect(item).to.be.null;
-        });
+        const item = await changedFilePicker.pick(changedFiles);
+        strictEqual(item, null);
     });
 
     function fakeWindow(params) {

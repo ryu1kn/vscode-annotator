@@ -1,5 +1,5 @@
 import {EditorTitleResolver} from '../../lib/editor-title-resolver';
-import {expect} from '../helper/assert';
+import {strictEqual} from 'assert';
 
 const querystring = require('querystring');
 
@@ -17,7 +17,7 @@ suite('EditorTitleResolver', () => {
             path: 'annotate-file',
             query: querystring.stringify(queryParams)
         };
-        expect(titleResolver.resolve(uri)).to.eql('FILE@COMMIT_ \u2013 DIR');
+        strictEqual(titleResolver.resolve(uri), 'FILE@COMMIT_ \u2013 DIR');
     });
 
     test('it does not use a commit hash if it is not given', () => {
@@ -29,7 +29,7 @@ suite('EditorTitleResolver', () => {
             path: 'annotate-file',
             query: querystring.stringify(queryParams)
         };
-        expect(titleResolver.resolve(uri)).to.eql('FILE \u2013 DIR');
+        strictEqual(titleResolver.resolve(uri), 'FILE \u2013 DIR');
     });
 
     test('it does not show directory path if the file is at the workspace root', () => {
@@ -41,7 +41,7 @@ suite('EditorTitleResolver', () => {
             path: 'annotate-file',
             query: querystring.stringify(queryParams)
         };
-        expect(titleResolver.resolve(uri)).to.eql('FILE');
+        strictEqual(titleResolver.resolve(uri), 'FILE');
     });
 
     test('it shows absolute directory path if workspace is not available', () => {
@@ -52,7 +52,7 @@ suite('EditorTitleResolver', () => {
             path: 'annotate-file',
             query: querystring.stringify(queryParams)
         };
-        expect(titleResolver.resolve(uri)).to.eql('FILE \u2013 /PATH/TO');
+        strictEqual(titleResolver.resolve(uri), 'FILE \u2013 /PATH/TO');
     });
 
     test('it shows absolute directory path if file is outside of workspace', () => {
@@ -64,7 +64,7 @@ suite('EditorTitleResolver', () => {
             path: 'annotate-file',
             query: querystring.stringify(queryParams)
         };
-        expect(titleResolver.resolve(uri)).to.eql('FILE \u2013 /PATH/OUTSIDE_WS');
+        strictEqual(titleResolver.resolve(uri), 'FILE \u2013 /PATH/OUTSIDE_WS');
     });
 
     test('it shows absolute directory path if file is outside of workspace', () => {
@@ -79,7 +79,7 @@ suite('EditorTitleResolver', () => {
             path: 'annotate-file',
             query: querystring.stringify(queryParams)
         };
-        expect(titleResolver.resolve(uri)).to.eql('FILE \u2013 /PATH/OUTSIDE_WS');
+        strictEqual(titleResolver.resolve(uri), 'FILE \u2013 /PATH/OUTSIDE_WS');
     });
 
     test('it composes a title for a diff view from path and commitHash', () => {
@@ -95,7 +95,7 @@ suite('EditorTitleResolver', () => {
             path: 'show-file',
             query: querystring.stringify(queryParams)
         };
-        expect(titleResolver.resolve(uri)).to.eql('FILE@COMMIT_ \u2013 DIR1/DIR2');
+        strictEqual(titleResolver.resolve(uri), 'FILE@COMMIT_ \u2013 DIR1/DIR2');
     });
 
     test('it composes a title for a deleted file diff view', () => {
@@ -111,6 +111,6 @@ suite('EditorTitleResolver', () => {
             path: 'show-file',
             query: querystring.stringify(queryParams)
         };
-        expect(titleResolver.resolve(uri)).to.eql('PREVIOUS_FILE@COMMIT_ \u2013 DIR1/DIR2');
+        strictEqual(titleResolver.resolve(uri), 'PREVIOUS_FILE@COMMIT_ \u2013 DIR1/DIR2');
     });
 });

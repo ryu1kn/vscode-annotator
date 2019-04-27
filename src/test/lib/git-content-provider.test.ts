@@ -1,5 +1,6 @@
 import {GitContentProvider} from '../../lib/git-content-provider';
-import {expect, stubWithArgs} from '../helper/assert';
+import {stubWithArgs} from '../helper/assert';
+import {strictEqual} from 'assert';
 
 const querystring = require('querystring');
 
@@ -21,7 +22,7 @@ suite('GitContentProvider', () => {
             query: querystring.stringify(actionParams)
         };
         return contentProvider.provideTextDocumentContent(uri).then(document => {
-            expect(document).to.eql('ANNOTATION_DOCUMENT');
+            strictEqual(document, 'ANNOTATION_DOCUMENT');
         });
     });
 
@@ -39,7 +40,7 @@ suite('GitContentProvider', () => {
             query: 'repositoryRoot=REPOSITORY_ROOT&commitHash=COMMIT&path=%2FDIR%2FFILE.js'
         };
         return contentProvider.provideTextDocumentContent(uri).then(document => {
-            expect(document).to.eql('FILE_CONTENTS');
+            strictEqual(document, 'FILE_CONTENTS');
         });
     });
 
@@ -47,7 +48,7 @@ suite('GitContentProvider', () => {
         const contentProvider = new GitContentProvider({uriService: fakeUriService()});
         const uri = {path: 'show-file', query: 'repositoryRoot=REPOSITORY_ROOT'};
         const document = await contentProvider.provideTextDocumentContent(uri);
-        expect(document).to.eql('');
+        strictEqual(document, '');
     });
 
     test('it throws exception if unknown action is provided in the uri', () => {
@@ -56,7 +57,7 @@ suite('GitContentProvider', () => {
         return contentProvider.provideTextDocumentContent(uri).then(
             () => { throw new Error('Should not have been called'); },
             e => {
-                expect(e.message).to.eql('Unknown action');
+                strictEqual(e.message, 'Unknown action');
             }
         );
     });

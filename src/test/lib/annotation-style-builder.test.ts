@@ -1,5 +1,5 @@
 import {AnnotationStyleBuilder} from '../../lib/annotation-style-builder';
-import {expect} from '../helper/assert';
+import {ok, strictEqual} from 'assert';
 
 suite('AnnotationStyleBuilder', () => {
 
@@ -26,7 +26,7 @@ suite('AnnotationStyleBuilder', () => {
         };
         const commitColorMap = {COMMIT_1: 'COLOR_1', COMMIT_2: 'COLOR_2'};
         const cssBuilder = new AnnotationStyleBuilder({configStore});
-        expect(cssBuilder.build(commitColorMap)).to.eql(`
+        strictEqual(cssBuilder.build(commitColorMap), `
             * {
                 font-family: FONT_FAMILY;
                 font-size: 10px;
@@ -94,6 +94,6 @@ suite('AnnotationStyleBuilder', () => {
             getExtensionConfig: () => {}
         };
         const cssBuilder = new AnnotationStyleBuilder({configStore});
-        expect(cssBuilder.build()).to.have.string('line-height: 1.5;');
+        ok(cssBuilder.build().includes('line-height: 1.5;'));
     });
 });

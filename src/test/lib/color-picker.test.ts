@@ -1,5 +1,5 @@
 import {ColorPicker} from '../../lib/color-picker';
-import {expect} from '../helper/assert';
+import {deepStrictEqual} from 'assert';
 
 suite('ColorPicker', () => {
 
@@ -9,7 +9,7 @@ suite('ColorPicker', () => {
             calculateScore: value => value
         });
         const colors = colorPicker.giveColors([1, 2, 3]);
-        expect(colors).to.eql(['#000000', '#808080', '#FFFFFF']);
+        deepStrictEqual(colors, ['#000000', '#808080', '#FFFFFF']);
     });
 
     test('it uses the first colour if only one value given', () => {
@@ -18,7 +18,7 @@ suite('ColorPicker', () => {
             calculateScore: value => value
         });
         const colors = colorPicker.giveColors([10]);
-        expect(colors).to.eql(['#000000']);
+        deepStrictEqual(colors, ['#000000']);
     });
 
     test('it returns an empty array if no values given', () => {
@@ -27,7 +27,7 @@ suite('ColorPicker', () => {
             calculateScore: value => value
         });
         const colors = colorPicker.giveColors([]);
-        expect(colors).to.eql([]);
+        deepStrictEqual(colors, []);
     });
 
     test('it gives the same colour for the same value', () => {
@@ -36,7 +36,7 @@ suite('ColorPicker', () => {
             calculateScore: value => value
         });
         const colors = colorPicker.giveColors([1, 2, 2]);
-        expect(colors).to.eql(['#000000', '#FFFFFF', '#FFFFFF']);
+        deepStrictEqual(colors, ['#000000', '#FFFFFF', '#FFFFFF']);
     });
 
     test('it uses colours closer to the first colour for smaller scores', () => {
@@ -45,7 +45,7 @@ suite('ColorPicker', () => {
             calculateScore: value => value
         });
         const colors = colorPicker.giveColors([2, 1]);
-        expect(colors).to.eql(['#FFFFFF', '#000000']);
+        deepStrictEqual(colors, ['#FFFFFF', '#000000']);
     });
 
     test('it allows you to specify multiple intermediate colours', () => {
@@ -54,6 +54,6 @@ suite('ColorPicker', () => {
             calculateScore: value => value
         });
         const colors = colorPicker.giveColors([1, 2, 3, 4]);
-        expect(colors).to.eql(['#000000', '#002200', '#112211', '#330033']);
+        deepStrictEqual(colors, ['#000000', '#002200', '#112211', '#330033']);
     });
 });

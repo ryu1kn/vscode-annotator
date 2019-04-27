@@ -1,5 +1,5 @@
 import {GitBlameOutputParser} from '../../lib/git-blame-output-parser';
-import {expect} from '../helper/assert';
+import {deepStrictEqual} from 'assert';
 
 const multiline = require('multiline-string')();
 
@@ -35,7 +35,7 @@ suite('GitBlameOutputParser', () => {
             filename test/index.js
             \tmodule.exports = testRunner;
             `);
-        expect(gitBlameOutputParser.parse(gitOutput)).to.eql([
+        deepStrictEqual(gitBlameOutputParser.parse(gitOutput), [
             {
                 commitHash: '3d08763c287388a5e4b125a53bbe53a4bf5d0401',
                 lineNoInOriginalFile: 23,

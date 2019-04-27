@@ -1,6 +1,7 @@
 import * as sinon from 'sinon';
 import {TakeDiffCommand} from '../../../lib/command/take-diff';
 import {expect, stubReturns, stubWithArgs} from '../../helper/assert';
+import {deepStrictEqual, ok} from 'assert';
 
 suite('TakeDiffCommand', () => {
 
@@ -21,12 +22,12 @@ suite('TakeDiffCommand', () => {
         };
         return command.execute(lineBlame).then(() => {
             expect(commands.executeCommand).to.have.been.calledWith('vscode.diff', 'URI_BEFORE', 'URI_AFTER', 'ANNOTATION_TITLE');
-            expect(uriService.encodeShowFileAction.args[0]).to.eql([{
+            deepStrictEqual(uriService.encodeShowFileAction.args[0], [{
                 commitHash: 'PREVIOUS_COMMIT',
                 path: 'PREVIOUS_FILENAME',
                 repositoryRoot: 'REPOSITORY_ROOT'
             }]);
-            expect(uriService.encodeShowFileAction.args[1]).to.eql([{
+            deepStrictEqual(uriService.encodeShowFileAction.args[1], [{
                 commitHash: 'COMMIT',
                 path: 'FILENAME',
                 previousCommitHash: 'PREVIOUS_COMMIT',
@@ -49,7 +50,7 @@ suite('TakeDiffCommand', () => {
         };
         return command.execute(lineBlame).then(() => {
             expect(commands.executeCommand).to.have.been.calledWith('vscode.diff', 'URI_1', 'URI_2', 'ANNOTATION_TITLE');
-            expect(uriService.encodeShowFileAction.args).to.eql([
+            deepStrictEqual(uriService.encodeShowFileAction.args, [
                 [{
                     repositoryRoot: 'REPOSITORY_ROOT'
                 }],
@@ -73,7 +74,7 @@ suite('TakeDiffCommand', () => {
             previousPath: 'PREVIOUS_FILENAME'
         };
         return command.execute(lineBlame).then(() => {
-            expect(logger.error.args[0][0]).to.have.string('Error: ENCODE_ERROR');
+            ok(logger.error.args[0][0].includes('Error: ENCODE_ERROR'));
         });
     });
 

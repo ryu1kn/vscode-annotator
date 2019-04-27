@@ -1,5 +1,5 @@
 import {AnnotationScriptProvider} from '../../lib/annotation-script-provider';
-import {expect} from '../helper/assert';
+import {strictEqual} from 'assert';
 
 suite('AnnotationStyleBuilder', () => {
 
@@ -11,7 +11,7 @@ suite('AnnotationStyleBuilder', () => {
             }
         };
         const provider = new AnnotationScriptProvider({configStore});
-        expect(provider.provide()).to.eql(`
+        strictEqual(provider.provide(), `
             var vscode = acquireVsCodeApi();
             var stylesheet = document.styleSheets[0];
             var state = {

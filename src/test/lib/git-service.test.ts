@@ -1,6 +1,7 @@
 import * as sinon from 'sinon';
 import {GitService} from '../../lib/git-service';
 import {expect, stubWithArgs} from '../helper/assert';
+import {deepStrictEqual, strictEqual} from 'assert';
 
 suite('GitService', () => {
 
@@ -10,7 +11,7 @@ suite('GitService', () => {
             const {gitService, shellCommandRunner} = createGitService();
 
             return gitService.getBlame('/PATH/TO/FILE', 'COMMIT_HASH', 'ROOT_PATH').then(result => {
-                expect(result).to.eql('PARSED_BLAME');
+                strictEqual(result, 'PARSED_BLAME');
                 expect(shellCommandRunner.run).to.have.been.calledWith(
                     '/PATH/TO/GIT',
                     ['blame', '--line-porcelain', 'COMMIT_HASH', '--', '/PATH/TO/FILE'],
@@ -24,7 +25,7 @@ suite('GitService', () => {
 
             const commitHash = undefined;
             return gitService.getBlame('/PATH/TO/FILE', commitHash, 'ROOT_PATH').then(result => {
-                expect(result).to.eql('PARSED_BLAME');
+                strictEqual(result, 'PARSED_BLAME');
                 expect(shellCommandRunner.run).to.have.been.calledWith(
                     '/PATH/TO/GIT', ['blame', '--line-porcelain', '--', '/PATH/TO/FILE'], {cwd: 'ROOT_PATH'}
                 );
@@ -35,7 +36,7 @@ suite('GitService', () => {
             const {gitService, shellCommandRunner} = createGitService({ignoreWhitespace: true});
 
             return gitService.getBlame('/PATH/TO/FILE', 'COMMIT_HASH', 'ROOT_PATH').then(() => {
-                expect(shellCommandRunner.run.args[0][1]).to.eql([
+                deepStrictEqual(shellCommandRunner.run.args[0][1], [
                     'blame', '-w', '--line-porcelain', 'COMMIT_HASH', '--', '/PATH/TO/FILE'
                 ]);
             });
@@ -59,13 +60,13 @@ suite('GitService', () => {
         test('it holds the git path specified in the settings', () => {
             const configStore = {getGitConfig: stubWithArgs(['path'], '/PATH/TO/GIT')};
             const gitService = new GitService({configStore});
-            expect(gitService._gitPath).to.eql('/PATH/TO/GIT');
+            strictEqual(gitService._gitPath, '/PATH/TO/GIT');
         });
 
         test('it returns "git" if the git path is not specified in the settings', () => {
             const configStore = {getGitConfig: () => null};
             const gitService = new GitService({configStore});
-            expect(gitService._gitPath).to.eql('git');
+            strictEqual(gitService._gitPath, 'git');
         });
     });
 
@@ -94,7 +95,7 @@ suite('GitService', () => {
             const shellCommandRunner = {run: sinon.stub().returns(Promise.resolve('PATH\n'))};
             const gitService = new GitService({configStore, shellCommandRunner});
             return gitService.getRepositoryRoot('/PATH/TO/FILE').then(path => {
-                expect(path).to.eql('PATH');
+                strictEqual(path, 'PATH');
                 expect(shellCommandRunner.run).to.have.been.calledWith(
                     '/PATH/TO/GIT', ['rev-parse', '--show-toplevel'], {cwd: '/PATH/TO'}
                 );

@@ -1,6 +1,8 @@
 import * as sinon from 'sinon';
 import {UriService} from '../../lib/uri-service';
 import {expect} from '../helper/assert';
+import {strictEqual, throws} from 'assert';
+
 const querystring = require('querystring');
 
 suite('UriService', () => {
@@ -16,7 +18,7 @@ suite('UriService', () => {
                 fsPath: 'PATH',
                 scheme: 'file'
             };
-            expect(uriService.convertToAnnotateFileAction(uri)).to.eql('URI');
+            strictEqual(uriService.convertToAnnotateFileAction(uri), 'URI');
             expect(Uri.parse).to.have.been.calledWith(
                 'annotator:annotate-file?path=PATH&_ts=DATE'
             );
@@ -31,7 +33,7 @@ suite('UriService', () => {
                 scheme: 'annotator',
                 query: 'path=DIR%2FFILE.js&commitHash=COMMIT_HASH&previousPath=PREVIOUS_PATH&previousCommitHash=PREVIOUS_COMMIT_HASH&repositoryRoot=REPOSITORY_ROOT'
             };
-            expect(uriService.convertToAnnotateFileAction(uri)).to.eql('URI');
+            strictEqual(uriService.convertToAnnotateFileAction(uri), 'URI');
             expect(Uri.parse).to.have.been.calledWith(
                 'annotator:annotate-file?path=PREVIOUS_PATH&commitHash=PREVIOUS_COMMIT_HASH&repositoryRoot=REPOSITORY_ROOT'
             );
@@ -46,7 +48,7 @@ suite('UriService', () => {
                 scheme: 'annotator',
                 query: 'path=PATH&commitHash=COMMIT_HASH&repositoryRoot=REPOSITORY_ROOT'
             };
-            expect(() => uriService.convertToAnnotateFileAction(uri)).to.throws(Error);
+            throws(() => uriService.convertToAnnotateFileAction(uri), Error);
         });
 
         test('it returns null if show-file action uri is given but previous commit is not available', () => {
@@ -58,7 +60,7 @@ suite('UriService', () => {
                 scheme: 'annotator',
                 query: 'path=PATH&commitHash=COMMIT_HASH&repositoryRoot=REPOSITORY_ROOT'
             };
-            expect(uriService.convertToAnnotateFileAction(uri)).to.eql(null);
+            strictEqual(uriService.convertToAnnotateFileAction(uri), null);
         });
 
         test('it returns null if show-file action uri is given but previous path is not available', () => {
@@ -76,7 +78,7 @@ suite('UriService', () => {
                 scheme: 'annotator',
                 query: querystring.stringify(queryParams)
             };
-            expect(uriService.convertToAnnotateFileAction(uri)).to.eql(null);
+            strictEqual(uriService.convertToAnnotateFileAction(uri), null);
         });
     });
 
@@ -91,7 +93,7 @@ suite('UriService', () => {
                 repositoryRoot: 'REPOSITORY_ROOT',
                 commitHash: 'COMMIT_HASH'
             };
-            expect(uriService.encodeShowFileAction(params)).to.eql('URI');
+            strictEqual(uriService.encodeShowFileAction(params), 'URI');
             expect(Uri.parse).to.have.been.calledWith(
                 'annotator:show-file/FILE.js?path=%2FDIR%2FFILE.js&repositoryRoot=REPOSITORY_ROOT&commitHash=COMMIT_HASH'
             );
@@ -105,7 +107,7 @@ suite('UriService', () => {
                 repositoryRoot: 'REPOSITORY_ROOT',
                 commitHash: 'COMMIT_HASH'
             };
-            expect(uriService.encodeShowFileAction(params)).to.eql('URI');
+            strictEqual(uriService.encodeShowFileAction(params), 'URI');
             expect(Uri.parse).to.have.been.calledWith(
                 'annotator:show-file?repositoryRoot=REPOSITORY_ROOT&commitHash=COMMIT_HASH'
             );
@@ -121,7 +123,7 @@ suite('UriService', () => {
                 scheme: 'annotator',
                 path: 'show-file/FILE.js'
             };
-            expect(uriService.getAction(uri)).to.eql('show-file');
+            strictEqual(uriService.getAction(uri), 'show-file');
         });
 
         test('it does not understand action if scheme of uri is not of this extension', () => {
@@ -131,7 +133,7 @@ suite('UriService', () => {
                 scheme: 'UNKNOWN_SCHEME',
                 path: 'show-file/FILE.js'
             };
-            expect(uriService.getAction(uri)).to.be.null;
+            strictEqual(uriService.getAction(uri), null);
         });
     });
 });
