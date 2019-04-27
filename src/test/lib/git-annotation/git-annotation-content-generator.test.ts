@@ -1,6 +1,7 @@
 import * as sinon from 'sinon';
 import {GitAnnotationContentGenerator} from '../../../lib/git-annotation/git-annotation-content-generator';
-import {expect, stubWithArgs} from '../../helper/assert';
+import {stubWithArgs} from '../../helper/assert';
+import {rejects, strictEqual} from 'assert';
 
 suite('GitAnnotationContentGenerator', () => {
 
@@ -22,7 +23,7 @@ suite('GitAnnotationContentGenerator', () => {
             repositoryRoot: 'REPOSITORY_ROOT'
         };
         return gitAnnotationContentGenerator.generate(params).then(document => {
-            expect(document).to.eql('ANNOTATION_DOCUMENT');
+            strictEqual(document, 'ANNOTATION_DOCUMENT');
         });
     });
 
@@ -44,7 +45,7 @@ suite('GitAnnotationContentGenerator', () => {
             commitHash: 'COMMIT_HASH'
         };
         return gitAnnotationContentGenerator.generate(params).then(document => {
-            expect(document).to.eql('ANNOTATION_DOCUMENT');
+            strictEqual(document, 'ANNOTATION_DOCUMENT');
         });
     });
 
@@ -57,12 +58,6 @@ suite('GitAnnotationContentGenerator', () => {
         const gitAnnotationContentGenerator = new GitAnnotationContentGenerator({gitService, gitBlameOutputParser});
 
         const params = {path: 'PATH'};
-        return gitAnnotationContentGenerator.generate(params).then(
-            () => { throw new Error('Should not have been called') },
-            e => {
-                expect(e).to.be.an('error');
-                expect(e.message).to.eql('BLAME_ERROR');
-            }
-        );
+        return rejects(gitAnnotationContentGenerator.generate(params), new Error('BLAME_ERROR'));
     });
 });

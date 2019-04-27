@@ -1,5 +1,5 @@
 import {CommitColorDesignator} from '../../../lib/git-annotation/commit-color-designator';
-import {expect} from '../../helper/assert';
+import {deepStrictEqual} from 'assert';
 
 suite('CommitColorDesignator', () => {
 
@@ -19,7 +19,7 @@ suite('CommitColorDesignator', () => {
             {commitHash: 'COMMIT_2', authorTime: 100},
             {commitHash: 'COMMIT_3', authorTime: 110}
         ];
-        expect(designator.designate(lineBlames)).to.eql({
+        deepStrictEqual(designator.designate(lineBlames), {
             COMMIT_1: '#FFFFFF',
             COMMIT_2: '#000000',
             COMMIT_3: '#808080'

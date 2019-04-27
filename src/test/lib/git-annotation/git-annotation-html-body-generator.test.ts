@@ -1,6 +1,7 @@
 import * as sinon from 'sinon';
 import {GitAnnotationHtmlBodyGenerator} from '../../../lib/git-annotation/git-annotation-html-body-generator';
 import {expect} from '../../helper/assert';
+import {strictEqual} from 'assert';
 
 suite('GitAnnotationHtmlBodyGenerator', () => {
 
@@ -17,7 +18,7 @@ suite('GitAnnotationHtmlBodyGenerator', () => {
             subject: 'SUBJECT'
         }];
 
-        expect(generator.generate(lines, 'REPOSITORY_ROOT')).to.eql('LINE_HTML');
+        strictEqual(generator.generate(lines, 'REPOSITORY_ROOT'), 'LINE_HTML');
         expect(gitAnnotationLineDirector.construct).to.have.been.calledWith({
             lineBlame: {
                 authorName: 'AUTHOR_NAME',

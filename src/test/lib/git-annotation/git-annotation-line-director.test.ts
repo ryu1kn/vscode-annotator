@@ -1,6 +1,7 @@
 import * as sinon from 'sinon';
 import {GitAnnotationLineDirector} from '../../../lib/git-annotation/git-annotation-line-director';
 import {expect} from '../../helper/assert';
+import {strictEqual} from 'assert';
 
 suite('GitAnnotationLineDirector', () => {
 
@@ -29,7 +30,7 @@ suite('GitAnnotationLineDirector', () => {
             lineNumberWidth: 3,
             repositoryRoot: 'REPOSITORY_ROOT'
         };
-        expect(director.construct(params)).to.be.eql('LINE_HTML');
+        strictEqual(director.construct(params), 'LINE_HTML');
         expect(builder.addDetails).to.have.been.calledWith('Commit: COMMIT_HASH\nAuthor: AUTHOR_NAME\nDate: 2016-06-12T09:51:05.000Z\n\nSUBJECT');
         expect(builder.addCaption).to.have.been.calledWith('  1  2016-06-12 AUTHOR_NAME');
         expect(builder.addCommitHash).to.have.been.calledWith('COMMIT_HASH');

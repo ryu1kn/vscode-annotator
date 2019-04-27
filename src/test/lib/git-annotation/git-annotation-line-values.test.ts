@@ -1,5 +1,5 @@
 import {GitAnnotationLineValues} from '../../../lib/git-annotation/git-annotation-line-values';
-import {expect} from '../../helper/assert';
+import {deepStrictEqual, strictEqual} from 'assert';
 
 suite('GitAnnotationLineValues', () => {
 
@@ -14,13 +14,13 @@ suite('GitAnnotationLineValues', () => {
             lineBlame,
             formatDateTime: date => date.toISOString()
         });
-        expect(line.details).to.eql('Commit: COMMIT_HASH\nAuthor: AUTHOR_NAME\nDate: 2016-06-12T09:51:05.000Z\n\nSUBJECT');
+        strictEqual(line.details, 'Commit: COMMIT_HASH\nAuthor: AUTHOR_NAME\nDate: 2016-06-12T09:51:05.000Z\n\nSUBJECT');
     });
 
     test('it indicates that the line is committed', () => {
         const lineBlame = {commitHash: '0000000000000000000000000000000000000000'};
         const line = new GitAnnotationLineValues({lineBlame});
-        expect(line.isCommitted).to.be.false;
+        strictEqual(line.isCommitted, false);
     });
 
     test('it composes the caption of the commit', () => {
@@ -34,7 +34,7 @@ suite('GitAnnotationLineValues', () => {
             lineNumberWidth: 1
         };
         const line = new GitAnnotationLineValues(params);
-        expect(line.caption).to.eql('1  2016-06-12 AUTHOR_NAME');
+        strictEqual(line.caption, '1  2016-06-12 AUTHOR_NAME');
     });
 
     test('it gives padding for the line number', () => {
@@ -48,7 +48,7 @@ suite('GitAnnotationLineValues', () => {
             lineNumberWidth: 3
         };
         const line = new GitAnnotationLineValues(params);
-        expect(line.caption).to.eql('  1  2016-06-12 AUTHOR_NAME');
+        strictEqual(line.caption, '  1  2016-06-12 AUTHOR_NAME');
     });
 
     test('it just gives padded line number if the line is not yet committed', () => {
@@ -59,13 +59,13 @@ suite('GitAnnotationLineValues', () => {
             lineNumberWidth: 3
         };
         const line = new GitAnnotationLineValues(params);
-        expect(line.caption).to.eql('  1');
+        strictEqual(line.caption, '  1');
     });
 
     test('it returns contents of the line of the commit', () => {
         const lineBlame = {lineContents: 'LINE_CONTENTS'};
         const line = new GitAnnotationLineValues({lineBlame});
-        expect(line.lineContents).to.eql('LINE_CONTENTS');
+        strictEqual(line.lineContents, 'LINE_CONTENTS');
     });
 
     test('it returns the command information for opening a diff', () => {
@@ -79,7 +79,7 @@ suite('GitAnnotationLineValues', () => {
             lineBlame,
             repositoryRoot: 'REPOSITORY_ROOT'
         });
-        expect(line.command).to.eql({
+        deepStrictEqual(line.command, {
             name: 'annotator.takeDiff',
             args: [
                 {
@@ -99,12 +99,12 @@ suite('GitAnnotationLineValues', () => {
             lineBlame,
             repositoryRoot: 'REPOSITORY_ROOT'
         });
-        expect(line.command).to.eql(null);
+        strictEqual(line.command, null);
     });
 
     test('it returns commit hash of the line of the commit', () => {
         const lineBlame = {commitHash: 'COMMIT_HASH'};
         const line = new GitAnnotationLineValues({lineBlame});
-        expect(line.commitHash).to.eql('COMMIT_HASH');
+        strictEqual(line.commitHash, 'COMMIT_HASH');
     });
 });

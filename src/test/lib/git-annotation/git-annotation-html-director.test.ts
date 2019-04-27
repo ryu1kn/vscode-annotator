@@ -1,6 +1,7 @@
 import * as sinon from 'sinon';
 import {GitAnnotationHtmlDirector} from '../../../lib/git-annotation/git-annotation-html-director';
 import {expect, stubWithArgs} from '../../helper/assert';
+import {strictEqual} from 'assert';
 
 suite('GitAnnotationHtmlDirector', () => {
 
@@ -25,7 +26,7 @@ suite('GitAnnotationHtmlDirector', () => {
             gitAnnotationHtmlBuilder
         });
 
-        expect(director.construct('LINE_BLAME', 'REPOSITORY_ROOT')).to.be.eql('HTML');
+        strictEqual(director.construct('LINE_BLAME', 'REPOSITORY_ROOT'), 'HTML');
         expect(gitAnnotationHtmlBuilder.addCss).to.have.been.calledWith('CSS');
         expect(gitAnnotationHtmlBuilder.addScript).to.have.been.calledWith('SCRIPT');
         expect(gitAnnotationHtmlBuilder.addSafeBody).to.have.been.calledWith('BODY');

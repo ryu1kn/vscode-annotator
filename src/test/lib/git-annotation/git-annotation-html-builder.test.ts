@@ -1,5 +1,5 @@
 import {GitAnnotationHtmlBuilder} from '../../../lib/git-annotation/git-annotation-html-builder';
-import {expect} from '../../helper/assert';
+import {strictEqual} from 'assert';
 
 suite('GitAnnotationHtmlBuilder', () => {
 
@@ -8,6 +8,6 @@ suite('GitAnnotationHtmlBuilder', () => {
         builder.addCss('CSS');
         builder.addScript('SCRIPT');
         builder.addSafeBody('BODY');
-        expect(builder.getHtml()).to.eql('<style>CSS</style><body>BODY<script type="text/javascript">SCRIPT</script></body>');
+        strictEqual(builder.getHtml(), '<style>CSS</style><body>BODY<script type="text/javascript">SCRIPT</script></body>');
     });
 });
