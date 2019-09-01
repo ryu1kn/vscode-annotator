@@ -105,10 +105,10 @@
     "watch": "tsc -watch -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install",
     "check": "yarn run compile && yarn run lint && yarn test",
-    "coverage": "nyc yarn test",
+    "coverage": "nyc mocha --opts cli-test-mocha.opts",
     "lint": "# tslint -p .",
-    "test": "mocha --require ts-node/register --ui tdd --recursive src/test/**/*.ts",
-    "test-mode": "mocha --require ts-node/register --ui tdd --recursive src/test/**/*.ts --watch",
+    "test": "mocha --opts cli-test-mocha.opts",
+    "test-mode": "mocha --opts cli-test-mocha.opts --watch",
     "vscode:prepublish": "yarn run compile",
     "vscode:postpublish": "./tag-release.sh"
   },

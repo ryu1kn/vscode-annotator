@@ -1,8 +1,16 @@
 {
+  "extension": [
+    ".ts"
+  ],
+  "exclude": [
+    "coverage",
+    "src/test",
+    "**/*.d.ts"
+  ],
+  "all": true,
   "reporter": [
     "lcov",
     "text-summary"
   ],
-  "all": true,
   "report-dir": "./coverage"
 }

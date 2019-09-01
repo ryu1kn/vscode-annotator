@@ -17,6 +17,7 @@ __*/**/*
 .nycrc
 .codeclimate.yml
 .travis.yml
+cli-test-mocha.opts
 jsconfig.json
 package-lock.json
 tag-release.sh
