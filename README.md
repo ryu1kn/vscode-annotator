@@ -12,19 +12,21 @@
 * The vertical colour bar is coloured darker for older commits and lighter for more recent commits (or the other way around, depending on the colours you specified).
 * Highlight the annotations with same commit hash when hovering over them.
 
-Blame the current file and open the diff of a particular commit
+Blame the current file and open the diff of a particular commit:
 
 ![Annotate and view diff](https://raw.githubusercontent.com/ryu1kn/vscode-annotator/master/images/animations/annotate-code.gif)
 
-From the commit diff, annotate the contents of the left side of the diff view
+The annotation is opened in a separate tab; simply close that tab when you are done with it.
+
+From the commit diff, annotate the contents of the left side of the diff view:
 
 ![Annotate the file contents before the commit](https://raw.githubusercontent.com/ryu1kn/vscode-annotator/master/images/animations/annotate-contents-of-before-selected-commit.gif)
 
-From the commit diff, open the diff of another file in the same commit
+From the commit diff, open the diff of another file in the same commit:
 
 ![Open the diff of another file in the same commit](https://raw.githubusercontent.com/ryu1kn/vscode-annotator/master/images/animations/open-diff-of-another-file.gif)
 
-Annotation with different colour settings, etc.
+Annotation with different colour settings, etc.:
 
 ![Annotation with different colour settings](https://raw.githubusercontent.com/ryu1kn/vscode-annotator/master/images/screencaptures/light-theme.png)
 
