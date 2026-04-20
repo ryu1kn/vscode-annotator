@@ -90,7 +90,7 @@
     "commands": [
       {
         "command": "annotator.annotate",
-        "title": "Annotate the Current File or the File Before the Commit (if on Commit Diff)",
+        "title": "Annotate (Blame) the Current File or the File Before the Commit (if on Commit Diff)",
         "category": "Annotator"
       },
       {
